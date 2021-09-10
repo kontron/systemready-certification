@@ -1,0 +1,44 @@
+From 72904f59744d6ce54cd60e1eb05176ea120c27b6 Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Wed, 8 Sep 2021 15:09:22 +0200
+Subject: [PATCH 3/3] arm: imx: imx8mq: add support to get values for more
+ clocks
+
+Return the root clock values for MXC_CSPI_CLK, MXC_I2C_CLK,
+MXC_UART_CLK and MXC_QSPI_CLK.
+
+At least for the I2C clock the missing support leads to a wrong
+configured I2C frequency. The expected value is 100kHz but the resulting
+value is about 1MHz.
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ arch/arm/mach-imx/imx8m/clock_imx8mq.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/mach-imx/imx8m/clock_imx8mq.c b/arch/arm/mach-imx/imx8m/clock_imx8mq.c
+index 60e2218a3c..9db62b944e 100644
+--- a/arch/arm/mach-imx/imx8m/clock_imx8mq.c
++++ b/arch/arm/mach-imx/imx8m/clock_imx8mq.c
+@@ -359,10 +359,18 @@ unsigned int mxc_get_clock(enum mxc_clock clk)
+ 		clock_get_target_val(IPG_CLK_ROOT, &val);
+ 		val = val & 0x3;
+ 		return get_root_clk(AHB_CLK_ROOT) / (val + 1);
++	case MXC_CSPI_CLK:
++		return get_root_clk(ECSPI1_CLK_ROOT);
+ 	case MXC_ESDHC_CLK:
+ 		return get_root_clk(USDHC1_CLK_ROOT);
+ 	case MXC_ESDHC2_CLK:
+ 		return get_root_clk(USDHC2_CLK_ROOT);
++	case MXC_I2C_CLK:
++		return get_root_clk(I2C1_CLK_ROOT);
++	case MXC_UART_CLK:
++		return get_root_clk(UART1_CLK_ROOT);
++	case MXC_QSPI_CLK:
++		return get_root_clk(QSPI_CLK_ROOT);
+ 	default:
+ 		return get_root_clk(clk);
+ 	}
+-- 
+2.30.0
+

@@ -4,3 +4,9 @@
 [submodule "sl28/arm-trusted-firmware"]
 	path = sl28/arm-trusted-firmware
 	url = https://github.com/kontron/arm-trusted-firmware-smarc-sal28.git
+[submodule "pitx-imx8m/u-boot"]
+	path = pitx-imx8m/u-boot
+	url = https://github.com/u-boot/u-boot.git
+[submodule "pitx-imx8m/arm-trusted-firmware"]
+	path = pitx-imx8m/arm-trusted-firmware
+	url = https://github.com/ARM-software/arm-trusted-firmware.git
