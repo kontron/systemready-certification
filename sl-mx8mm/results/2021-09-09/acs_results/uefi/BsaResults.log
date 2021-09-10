@@ -1,0 +1,136 @@
+ PE_INFO: Number of PE detected       :    4 
+ GIC_INFO: Number of GICD             :    1 
+ GIC_INFO: Number of ITS              :    0 
+ TIMER_INFO: Number of system timers  :    0 
+ WATCHDOG_INFO: Number of Watchdogs   :    0 
+ PCIE_INFO: Number of ECAM regions    :    0 
+ SMMU_INFO: Number of SMMU CTRL       :    0 
+ Peripheral: Num of USB controllers   :    0 
+ Peripheral: Num of SATA controllers  :    0 
+ Peripheral: Num of UART controllers  :    0 
+
+Operating System View:
+   1 : Check Arch symmetry across PE              : Result:  PASS 
+   2 : Check for number of PE                     : Result:  PASS 
+   3 : Check for AdvSIMD and FP support           : Result:  PASS 
+   4 : Check PE 4KB Granule Support               : Result:  PASS 
+   5 : Check HW Coherence support                 : Result:  PASS 
+   6 : Check Cryptographic extensions             : Result:  PASS 
+   7 : Check Little Endian support                : Result:  PASS 
+   8 : Check EL1 and EL0 implementation           : Result:  PASS 
+   9 : Check for PMU and PMU counters             : Result:  PASS 
+  10 : Check PMU Overflow signal                  : Result:  PASS 
+  11 : Check num of Breakpoints and type          : Result:  PASS 
+  12 : Check Synchronous Watchpoints              : Result:  PASS 
+  13 : Check CRC32 instruction support            : Result:  PASS 
+  14 : Check PAuth if implementation         
+       B_PE_15
+       Checkpoint --  1                           : Result:  SKIPPED 
+  15 : Check SPE if implemented              
+       B_PE_17
+       Checkpoint --  1                           : Result:  SKIPPED 
+  16 : Check Speculation Restriction         
+       Failed on PE -    0
+       B_SEC_01
+       Checkpoint --  1                           : Result:  FAIL 
+  17 : Check Speculative Str Bypass Safe     
+       Failed on PE -    0
+       B_SEC_02
+       Checkpoint --  1                           : Result:  FAIL 
+  18 : Check PEs Impl CSDB,SSBB,PSSBB        
+       Failed on PE -    0
+       B_SEC_03
+       Checkpoint --  1                           : Result:  FAIL 
+  19 : Check PEs Implement SB Barrier        
+       Failed on PE -    0
+       B_SEC_04
+       Checkpoint --  1                           : Result:  FAIL 
+  20 : Check PE Impl CFP,DVP,CPP RCTX        
+       Failed on PE -    0
+       B_SEC_05
+       Checkpoint --  1                           : Result:  FAIL 
+
+      *** One or more tests have Failed/Skipped.*** 
+
+Operating System View:
+ 102 : Mem Access Response in finite time         : Result:  PASS 
+ 103 : PE must access all NS addr space           : Result:  PASS 
+
+      All Memory tests have passed!! 
+
+Operating System View:
+ 201 : Check GIC version                          : Result:  PASS 
+ 202 : Check GICv2 Valid Configuration       
+       B_GIC_02
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 203 : If PCIe, GICv3 then ITS, LPI          
+       B_GIC_03
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 204 : Check GICv3 Security States                : Result:  PASS 
+ 205 : Non-secure SGIs are implemented            : Result:  PASS 
+ 206 : Check PPI Assignments for OS               : Result:  PASS 
+
+      No GICv2m, Skipping all GICv2m tests 
+
+      No ITS, Skipping all ITS tests 
+
+      *** One or more tests have Failed/Skipped.*** 
+
+     No SMMU Controller Found, Skipping SMMU tests...
+
+Operating System View:
+ 401 : Check Counter Frequency               
+      Counter frequency is 7A1200     
+       Failed on PE -    0
+       B_TIME_01, B_TIME_02
+       Checkpoint --  1                           : Result:  FAIL 
+ 402 : SYS Timer if PE Timer not ON          
+       PE Timers are not always-on 
+&       No system wake up timer
+       Failed on PE -    0
+       B_TIME_06
+       Checkpoint --  1                           : Result:  FAIL 
+ 403 : Memory mapped timer check             
+       B_TIME_07, B_TIME_10
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 404 : Generate Mem Mapped SYS Timer Intr    
+       B_TIME_08
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 405 : Restore PE timer on PE wake up        
+       B_TIME_09
+       Checkpoint --  1                           : Result:  SKIPPED 
+
+      *** One or more tests have Failed/Skipped.*** 
+
+Operating System View:
+ 501 : Wake from Watchdog WS0 Int            
+       B_WAK_01, B_WAK_02-07, B_WAK_10-11
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 502 : Wake from System Timer Int            
+       B_WAK_01, B_WAK_02-07, B_WAK_10-11
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 503 : Wake from EL0 PHY Timer Int                : Result:  PASS 
+ 504 : Wake from EL0 VIR Timer Int                : Result:  PASS 
+ 505 : Wake from EL2 PHY Timer Int                : Result:  PASS 
+
+      *** One or more tests have Failed/Skipped.*** 
+
+Operating System View:
+ 603 : Check Arm BSA UART register offsets   
+        No UART defined by Platform      
+       B_PER_05
+       Checkpoint --  1                           : Result:  SKIPPED 
+ 606 : 16550 compatible UART                 
+       B_PER_06
+       Checkpoint --  1                           : Result:  SKIPPED 
+
+      *** One or more tests have Failed/Skipped.*** 
+
+     *** No ECAM region found, Skipping PCIE tests *** 
+
+       No ECAMs discovered              
+     Create BDF Table Failed, Skipping Exerciser tests...
+
+     ------------------------------------------------------- 
+     Total Tests run  =   40;  Tests Passed  =   22  Tests Failed =    7
+     --------------------------------------------------------- 
