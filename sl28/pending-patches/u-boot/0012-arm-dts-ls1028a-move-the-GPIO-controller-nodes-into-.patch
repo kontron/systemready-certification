@@ -1,0 +1,100 @@
+From 4986c98e957170379082d879e1e83ebe04895c3d Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 14:40:47 +0200
+Subject: [PATCH 12/32] arm: dts: ls1028a: move the GPIO controller nodes into
+ /soc
+
+While inserting them into the new location, keep them sorted by the
+register base offset just like in the linux kernel device tree.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 66 +++++++++++++++++------------------
+ 1 file changed, 33 insertions(+), 33 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 349c4bf862..9f466554e9 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -190,39 +190,6 @@
+ 		status = "disabled";
+ 	};
+ 
+-	gpio0: gpio@2300000 {
+-		compatible = "fsl,ls1028a-gpio","fsl,qoriq-gpio";
+-		reg = <0x0 0x2300000 0x0 0x10000>;
+-		interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		little-endian;
+-	};
+-
+-	gpio1: gpio@2310000 {
+-		compatible = "fsl,ls1028a-gpio","fsl,qoriq-gpio";
+-		reg = <0x0 0x2310000 0x0 0x10000>;
+-		interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		little-endian;
+-	};
+-
+-	gpio2: gpio@2320000 {
+-		compatible = "fsl,ls1028a-gpio","fsl,qoriq-gpio";
+-		reg = <0x0 0x2320000 0x0 0x10000>;
+-		interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		little-endian;
+-	};
+-
+ 	sata: sata@3200000 {
+ 		compatible = "fsl,ls1028a-ahci";
+ 		reg = <0x0 0x3200000 0x0 0x10000	/* ccsr sata base */
+@@ -484,5 +451,38 @@
+ 			little-endian;
+ 			status = "disabled";
+ 		};
++
++		gpio0: gpio@2300000 {
++			compatible = "fsl,ls1028a-gpio","fsl,qoriq-gpio";
++			reg = <0x0 0x2300000 0x0 0x10000>;
++			interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
++			gpio-controller;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++			little-endian;
++		};
++
++		gpio1: gpio@2310000 {
++			compatible = "fsl,ls1028a-gpio","fsl,qoriq-gpio";
++			reg = <0x0 0x2310000 0x0 0x10000>;
++			interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
++			gpio-controller;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++			little-endian;
++		};
++
++		gpio2: gpio@2320000 {
++			compatible = "fsl,ls1028a-gpio","fsl,qoriq-gpio";
++			reg = <0x0 0x2320000 0x0 0x10000>;
++			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
++			gpio-controller;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++			little-endian;
++		};
+ 	};
+ };
+-- 
+2.30.2
+

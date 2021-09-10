@@ -1,0 +1,84 @@
+From 5197aaaa153287f9dfda1bc46c8cbbf0bcb16144 Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 14:41:59 +0200
+Subject: [PATCH 13/32] arm: dts: ls1028a: move SATA and USB controller nodes
+ into /soc
+
+While inserting them into the new location, keep them sorted by the
+register base offset just like in the linux kernel device tree.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 50 +++++++++++++++++------------------
+ 1 file changed, 25 insertions(+), 25 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 9f466554e9..7d18085615 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -174,31 +174,6 @@
+ 		};
+ 	};
+ 
+-	usb1: usb3@3100000 {
+-		compatible = "fsl,layerscape-dwc3";
+-		reg = <0x0 0x3100000 0x0 0x10000>;
+-		interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
+-		dr_mode = "host";
+-		status = "disabled";
+-	};
+-
+-	usb2: usb3@3110000 {
+-		compatible = "fsl,layerscape-dwc3";
+-		reg = <0x0 0x3110000 0x0 0x10000>;
+-		interrupts = <GIC_SPI 81 IRQ_TYPE_LEVEL_HIGH>;
+-		dr_mode = "host";
+-		status = "disabled";
+-	};
+-
+-	sata: sata@3200000 {
+-		compatible = "fsl,ls1028a-ahci";
+-		reg = <0x0 0x3200000 0x0 0x10000	/* ccsr sata base */
+-		       0x7 0x100520  0x0 0x4>;		/* ecc sata addr*/
+-		reg-names = "sata-base", "ecc-addr";
+-		interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
+-		status = "disabled";
+-	};
+-
+ 	cluster1_core0_watchdog: wdt@c000000 {
+ 		compatible = "arm,sp805-wdt";
+ 		reg = <0x0 0xc000000 0x0 0x1000>;
+@@ -484,5 +459,30 @@
+ 			#interrupt-cells = <2>;
+ 			little-endian;
+ 		};
++
++		usb1: usb3@3100000 {
++			compatible = "fsl,layerscape-dwc3";
++			reg = <0x0 0x3100000 0x0 0x10000>;
++			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
++			dr_mode = "host";
++			status = "disabled";
++		};
++
++		usb2: usb3@3110000 {
++			compatible = "fsl,layerscape-dwc3";
++			reg = <0x0 0x3110000 0x0 0x10000>;
++			interrupts = <GIC_SPI 81 IRQ_TYPE_LEVEL_HIGH>;
++			dr_mode = "host";
++			status = "disabled";
++		};
++
++		sata: sata@3200000 {
++			compatible = "fsl,ls1028a-ahci";
++			reg = <0x0 0x3200000 0x0 0x10000	/* ccsr sata base */
++			       0x7 0x100520  0x0 0x4>;		/* ecc sata addr*/
++			reg-names = "sata-base", "ecc-addr";
++			interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
++			status = "disabled";
++		};
+ 	};
+ };
+-- 
+2.30.2
+

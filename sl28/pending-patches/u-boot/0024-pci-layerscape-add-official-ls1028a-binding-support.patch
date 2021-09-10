@@ -1,0 +1,171 @@
+From 2a7a1808cbfc2a3a29a11bad4f38cca75e0847d9 Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Thu, 2 Sep 2021 11:43:57 +0200
+Subject: [PATCH 24/32] pci: layerscape: add official ls1028a binding support
+
+The official bindind of the PCIe controller of the ls1028a has the
+following compatible string:
+  compatible = "fsl,ls1028a-pcie";
+
+Additionally, the resource names and count are different. Update the
+driver to support this binding and change the entry in the ls1028a
+device tree.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi    | 20 +++++------
+ drivers/pci/pcie_layerscape_rc.c | 61 +++++++++++++++++++++++---------
+ 2 files changed, 53 insertions(+), 28 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index cc055e65e5..435b965d00 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -344,12 +344,10 @@
+ 		};
+ 
+ 		pcie1: pcie@3400000 {
+-			compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
+-			reg = <0x00 0x03400000 0x0 0x80000
+-			       0x00 0x03480000 0x0 0x40000   /* lut registers */
+-			       0x00 0x034c0000 0x0 0x40000   /* pf controls registers */
+-			       0x80 0x00000000 0x0 0x20000>; /* configuration space */
+-			reg-names = "dbi", "lut", "ctrl", "config";
++			compatible = "fsl,ls1028a-pcie";
++			reg = <0x00 0x03400000 0x0 0x00100000>, /* controller registers */
++			      <0x80 0x00000000 0x0 0x00002000>; /* configuration space */
++			reg-names = "regs", "config";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			device_type = "pci";
+@@ -360,12 +358,10 @@
+ 		};
+ 
+ 		pcie2: pcie@3500000 {
+-			compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
+-			reg = <0x00 0x03500000 0x0 0x80000
+-			       0x00 0x03580000 0x0 0x40000   /* lut registers */
+-			       0x00 0x035c0000 0x0 0x40000   /* pf controls registers */
+-			       0x88 0x00000000 0x0 0x20000>; /* configuration space */
+-			reg-names = "dbi", "lut", "ctrl", "config";
++			compatible = "fsl,ls1028a-pcie";
++			reg = <0x00 0x03500000 0x0 0x00100000>, /* controller registers */
++			      <0x88 0x00000000 0x0 0x00002000>; /* configuration space */
++			reg-names = "regs", "config";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			device_type = "pci";
+diff --git a/drivers/pci/pcie_layerscape_rc.c b/drivers/pci/pcie_layerscape_rc.c
+index bd2c19f7f0..c9fd68524d 100644
+--- a/drivers/pci/pcie_layerscape_rc.c
++++ b/drivers/pci/pcie_layerscape_rc.c
+@@ -21,6 +21,12 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++struct ls_pcie_drvdata {
++	u32 lut_offset;
++	u32 ctrl_offset;
++	bool big_endian;
++};
++
+ static void ls_pcie_cfg0_set_busdev(struct ls_pcie_rc *pcie_rc, u32 busdev)
+ {
+ 	struct ls_pcie *pcie = pcie_rc->pcie;
+@@ -243,6 +249,7 @@ static void ls_pcie_setup_ctrl(struct ls_pcie_rc *pcie_rc)
+ 
+ static int ls_pcie_probe(struct udevice *dev)
+ {
++	const struct ls_pcie_drvdata *drvdata = (void *)dev_get_driver_data(dev);
+ 	struct ls_pcie_rc *pcie_rc = dev_get_priv(dev);
+ 	const void *fdt = gd->fdt_blob;
+ 	int node = dev_of_offset(dev);
+@@ -260,8 +267,12 @@ static int ls_pcie_probe(struct udevice *dev)
+ 
+ 	pcie_rc->pcie = pcie;
+ 
++	/* try resource name of the official binding first */
+ 	ret = fdt_get_named_resource(fdt, node, "reg", "reg-names",
+-				     "dbi", &pcie_rc->dbi_res);
++				     "regs", &pcie_rc->dbi_res);
++	if (ret)
++		ret = fdt_get_named_resource(fdt, node, "reg", "reg-names",
++					     "dbi", &pcie_rc->dbi_res);
+ 	if (ret) {
+ 		printf("ls-pcie: resource \"dbi\" not found\n");
+ 		return ret;
+@@ -287,21 +298,29 @@ static int ls_pcie_probe(struct udevice *dev)
+ 	if (pcie->mode == PCI_HEADER_TYPE_NORMAL)
+ 		return 0;
+ 
+-	ret = fdt_get_named_resource(fdt, node, "reg", "reg-names",
+-				     "lut", &pcie_rc->lut_res);
+-	if (!ret)
+-		pcie->lut = map_physmem(pcie_rc->lut_res.start,
+-					fdt_resource_size(&pcie_rc->lut_res),
+-					MAP_NOCACHE);
++	if (drvdata) {
++		pcie->lut = pcie->dbi + drvdata->lut_offset;
++	} else {
++		ret = fdt_get_named_resource(fdt, node, "reg", "reg-names",
++					     "lut", &pcie_rc->lut_res);
++		if (!ret)
++			pcie->lut = map_physmem(pcie_rc->lut_res.start,
++						fdt_resource_size(&pcie_rc->lut_res),
++						MAP_NOCACHE);
++	}
+ 
+-	ret = fdt_get_named_resource(fdt, node, "reg", "reg-names",
+-				     "ctrl", &pcie_rc->ctrl_res);
+-	if (!ret)
+-		pcie->ctrl = map_physmem(pcie_rc->ctrl_res.start,
+-					 fdt_resource_size(&pcie_rc->ctrl_res),
+-					 MAP_NOCACHE);
+-	if (!pcie->ctrl)
+-		pcie->ctrl = pcie->lut;
++	if (drvdata) {
++		pcie->ctrl = pcie->lut + drvdata->ctrl_offset;
++	} else {
++		ret = fdt_get_named_resource(fdt, node, "reg", "reg-names",
++					     "ctrl", &pcie_rc->ctrl_res);
++		if (!ret)
++			pcie->ctrl = map_physmem(pcie_rc->ctrl_res.start,
++						 fdt_resource_size(&pcie_rc->ctrl_res),
++						 MAP_NOCACHE);
++		if (!pcie->ctrl)
++			pcie->ctrl = pcie->lut;
++	}
+ 
+ 	if (!pcie->ctrl) {
+ 		printf("%s: NOT find CTRL\n", dev->name);
+@@ -343,7 +362,10 @@ static int ls_pcie_probe(struct udevice *dev)
+ 	pcie_rc->cfg1 = pcie_rc->cfg0 +
+ 			fdt_resource_size(&pcie_rc->cfg_res) / 2;
+ 
+-	pcie->big_endian = fdtdec_get_bool(fdt, node, "big-endian");
++	if (drvdata)
++		pcie->big_endian = drvdata->big_endian;
++	else
++		pcie->big_endian = fdtdec_get_bool(fdt, node, "big-endian");
+ 
+ 	debug("%s dbi:%lx lut:%lx ctrl:0x%lx cfg0:0x%lx, big-endian:%d\n",
+ 	      dev->name, (unsigned long)pcie->dbi, (unsigned long)pcie->lut,
+@@ -373,8 +395,15 @@ static const struct dm_pci_ops ls_pcie_ops = {
+ 	.write_config	= ls_pcie_write_config,
+ };
+ 
++static const struct ls_pcie_drvdata ls1028a_drvdata = {
++	.lut_offset = 0x80000,
++	.ctrl_offset = 0x40000,
++	.big_endian = false,
++};
++
+ static const struct udevice_id ls_pcie_ids[] = {
+ 	{ .compatible = "fsl,ls-pcie" },
++	{ .compatible = "fsl,ls1028a-pcie", .data = (ulong)&ls1028a_drvdata },
+ 	{ }
+ };
+ 
+-- 
+2.30.2
+

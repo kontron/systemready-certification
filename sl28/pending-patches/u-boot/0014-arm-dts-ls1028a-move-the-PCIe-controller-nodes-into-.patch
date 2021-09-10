@@ -1,0 +1,100 @@
+From f104f251c24f040ec85345ea6a069a3fbb0b6f5b Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 14:49:25 +0200
+Subject: [PATCH 14/32] arm: dts: ls1028a: move the PCIe controller nodes into
+ /soc
+
+While inserting them into the new location, keep them sorted by the
+register base offset just like in the linux kernel device tree.
+
+While at it fix the indentation.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 64 +++++++++++++++++------------------
+ 1 file changed, 32 insertions(+), 32 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 7d18085615..d0f90941b9 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -43,38 +43,6 @@
+ 					  IRQ_TYPE_LEVEL_LOW)>;
+ 	};
+ 
+-	pcie1: pcie@3400000 {
+-	       compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
+-	       reg = <0x00 0x03400000 0x0 0x80000
+-		       0x00 0x03480000 0x0 0x40000   /* lut registers */
+-		       0x00 0x034c0000 0x0 0x40000  /* pf controls registers */
+-		       0x80 0x00000000 0x0 0x20000>; /* configuration space */
+-	       reg-names = "dbi", "lut", "ctrl", "config";
+-	       #address-cells = <3>;
+-	       #size-cells = <2>;
+-	       device_type = "pci";
+-	       num-lanes = <4>;
+-	       bus-range = <0x0 0xff>;
+-	       ranges = <0x81000000 0x0 0x00000000 0x80 0x00020000 0x0 0x00010000   /* downstream I/O */
+-		       0x82000000 0x0 0x40000000 0x80 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
+-	};
+-
+-	pcie2: pcie@3500000 {
+-	       compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
+-	       reg = <0x00 0x03500000 0x0 0x80000
+-		       0x00 0x03580000 0x0 0x40000   /* lut registers */
+-		       0x00 0x035c0000 0x0 0x40000  /* pf controls registers */
+-		       0x88 0x00000000 0x0 0x20000>; /* configuration space */
+-	       reg-names = "dbi", "lut", "ctrl", "config";
+-	       #address-cells = <3>;
+-	       #size-cells = <2>;
+-	       device_type = "pci";
+-	       num-lanes = <4>;
+-	       bus-range = <0x0 0xff>;
+-	       ranges = <0x81000000 0x0 0x00000000 0x88 0x00020000 0x0 0x00010000   /* downstream I/O */
+-		       0x82000000 0x0 0x40000000 0x88 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
+-	};
+-
+ 	pcie@1f0000000 {
+ 		compatible = "pci-host-ecam-generic";
+ 		/* ECAM bus 0, HW has more space reserved but not populated */
+@@ -484,5 +452,37 @@
+ 			interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
+ 			status = "disabled";
+ 		};
++
++		pcie1: pcie@3400000 {
++			compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
++			reg = <0x00 0x03400000 0x0 0x80000
++			       0x00 0x03480000 0x0 0x40000   /* lut registers */
++			       0x00 0x034c0000 0x0 0x40000   /* pf controls registers */
++			       0x80 0x00000000 0x0 0x20000>; /* configuration space */
++			reg-names = "dbi", "lut", "ctrl", "config";
++			#address-cells = <3>;
++			#size-cells = <2>;
++			device_type = "pci";
++			num-lanes = <4>;
++			bus-range = <0x0 0xff>;
++			ranges = <0x81000000 0x0 0x00000000 0x80 0x00020000 0x0 0x00010000   /* downstream I/O */
++				  0x82000000 0x0 0x40000000 0x80 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
++		};
++
++		pcie2: pcie@3500000 {
++			compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
++			reg = <0x00 0x03500000 0x0 0x80000
++			       0x00 0x03580000 0x0 0x40000   /* lut registers */
++			       0x00 0x035c0000 0x0 0x40000   /* pf controls registers */
++			       0x88 0x00000000 0x0 0x20000>; /* configuration space */
++			reg-names = "dbi", "lut", "ctrl", "config";
++			#address-cells = <3>;
++			#size-cells = <2>;
++			device_type = "pci";
++			num-lanes = <4>;
++			bus-range = <0x0 0xff>;
++			ranges = <0x81000000 0x0 0x00000000 0x88 0x00020000 0x0 0x00010000   /* downstream I/O */
++				  0x82000000 0x0 0x40000000 0x88 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
++		};
+ 	};
+ };
+-- 
+2.30.2
+

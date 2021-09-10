@@ -1,0 +1,42 @@
+From ca7a5a41622bde05a18dec9cbb5ac903ad496feb Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 17:06:34 +0200
+Subject: [PATCH 26/32] arm: dts: ls1028a: move the PCI I/O window to match
+
+To make the synchronization of the u-boot device tree with the one from
+linux easier, move the I/O window to the one which is specified in the
+linux device tree. The actual value shouldn't matter as long as it
+mapped to the corresponding memory window of the PCIe controller which
+is a 32GiB window at 80_0000_0000h (first controller) or 88_0000_0000h
+(second controller).
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 3ef710bb3d..f11e75032b 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -352,7 +352,7 @@
+ 			#size-cells = <2>;
+ 			device_type = "pci";
+ 			bus-range = <0x0 0xff>;
+-			ranges = <0x81000000 0x0 0x00000000 0x80 0x00020000 0x0 0x00010000   /* downstream I/O */
++			ranges = <0x81000000 0x0 0x00000000 0x80 0x00010000 0x0 0x00010000   /* downstream I/O */
+ 				  0x82000000 0x0 0x40000000 0x80 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
+ 		};
+ 
+@@ -365,7 +365,7 @@
+ 			#size-cells = <2>;
+ 			device_type = "pci";
+ 			bus-range = <0x0 0xff>;
+-			ranges = <0x81000000 0x0 0x00000000 0x88 0x00020000 0x0 0x00010000   /* downstream I/O */
++			ranges = <0x81000000 0x0 0x00000000 0x88 0x00010000 0x0 0x00010000   /* downstream I/O */
+ 				  0x82000000 0x0 0x40000000 0x88 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
+ 		};
+ 
+-- 
+2.30.2
+

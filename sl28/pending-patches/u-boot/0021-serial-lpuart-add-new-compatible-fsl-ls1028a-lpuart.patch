@@ -1,0 +1,107 @@
+From d00a64d2b0f91f88a9592cce2d1862f44182ed0e Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Thu, 26 Aug 2021 15:41:57 +0200
+Subject: [PATCH 21/32] serial: lpuart: add new compatible fsl,ls1028a-lpuart
+
+The official ls1028a binding of the driver uses the following as
+compatibles:
+  compatible = "fsl,ls1028a-lpuart";
+
+Add the missing compatible to the driver and update the device tree.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi  | 18 ++++++------------
+ drivers/serial/serial_lpuart.c |  2 ++
+ 2 files changed, 8 insertions(+), 12 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 7da32561a4..cf381a0856 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -232,62 +232,56 @@
+ 		};
+ 
+ 		lpuart0: serial@2260000 {
+-			compatible = "fsl,ls1021a-lpuart";
++			compatible = "fsl,ls1028a-lpuart";
+ 			reg = <0x0 0x2260000 0x0 0x1000>;
+ 			interrupts = <0 232 0x4>;
+ 			clocks = <&sysclk>;
+ 			clock-names = "ipg";
+-			little-endian;
+ 			status = "disabled";
+ 		};
+ 
+ 		lpuart1: serial@2270000 {
+-			compatible = "fsl,ls1021a-lpuart";
++			compatible = "fsl,ls1028a-lpuart";
+ 			reg = <0x0 0x2270000 0x0 0x1000>;
+ 			interrupts = <0 233 0x4>;
+ 			clocks = <&sysclk>;
+ 			clock-names = "ipg";
+-			little-endian;
+ 			status = "disabled";
+ 		};
+ 
+ 		lpuart2: serial@2280000 {
+-			compatible = "fsl,ls1021a-lpuart";
++			compatible = "fsl,ls1028a-lpuart";
+ 			reg = <0x0 0x2280000 0x0 0x1000>;
+ 			interrupts = <0 234 0x4>;
+ 			clocks = <&sysclk>;
+ 			clock-names = "ipg";
+-			little-endian;
+ 			status = "disabled";
+ 		};
+ 
+ 		lpuart3: serial@2290000 {
+-			compatible = "fsl,ls1021a-lpuart";
++			compatible = "fsl,ls1028a-lpuart";
+ 			reg = <0x0 0x2290000 0x0 0x1000>;
+ 			interrupts = <0 235 0x4>;
+ 			clocks = <&sysclk>;
+ 			clock-names = "ipg";
+-			little-endian;
+ 			status = "disabled";
+ 		};
+ 
+ 		lpuart4: serial@22a0000 {
+-			compatible = "fsl,ls1021a-lpuart";
++			compatible = "fsl,ls1028a-lpuart";
+ 			reg = <0x0 0x22a0000 0x0 0x1000>;
+ 			interrupts = <0 236 0x4>;
+ 			clocks = <&sysclk>;
+ 			clock-names = "ipg";
+-			little-endian;
+ 			status = "disabled";
+ 		};
+ 
+ 		lpuart5: serial@22b0000 {
+-			compatible = "fsl,ls1021a-lpuart";
++			compatible = "fsl,ls1028a-lpuart";
+ 			reg = <0x0 0x22b0000 0x0 0x1000>;
+ 			interrupts = <0 237 0x4>;
+ 			clocks = <&sysclk>;
+ 			clock-names = "ipg";
+-			little-endian;
+ 			status = "disabled";
+ 		};
+ 
+diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
+index 2b473d70f6..3c9a69598a 100644
+--- a/drivers/serial/serial_lpuart.c
++++ b/drivers/serial/serial_lpuart.c
+@@ -553,6 +553,8 @@ static const struct dm_serial_ops lpuart_serial_ops = {
+ static const struct udevice_id lpuart_serial_ids[] = {
+ 	{ .compatible = "fsl,ls1021a-lpuart", .data =
+ 		LPUART_FLAG_REGMAP_32BIT_REG | LPUART_FLAG_REGMAP_ENDIAN_BIG },
++	{ .compatible = "fsl,ls1028a-lpuart",
++		.data = LPUART_FLAG_REGMAP_32BIT_REG },
+ 	{ .compatible = "fsl,imx7ulp-lpuart",
+ 		.data = LPUART_FLAG_REGMAP_32BIT_REG },
+ 	{ .compatible = "fsl,vf610-lpuart"},
+-- 
+2.30.2
+

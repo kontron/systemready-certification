@@ -1,0 +1,124 @@
+From 66ddbe0d69cbcdb821366418995f5da19f68a747 Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 16:50:03 +0200
+Subject: [PATCH 22/32] scsi: ceva: rename the resource name to match the linux
+ kernel one
+
+The driver will look for a named resource "ecc-addr", but this isn't the
+official binding. In fact, the official device tree binding
+documentation doesn't mention any resource names at all. But it is safe
+to assume that it's the linux ones we have to use if we want to be
+compatible with the linux device tree. Thus rename "ecc-addr" to
+"sata-ecc" and convert all the users in u-boot.
+
+While at it, also rename "sata-base" to "ahci" although its not used at
+all.
+
+This change doesn't affect the SATA controller on the ZynqMP.
+
+Cc: Michal Simek <monstr@monstr.eu>
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1012a.dtsi | 2 +-
+ arch/arm/dts/fsl-ls1028a.dtsi | 2 +-
+ arch/arm/dts/fsl-ls1043a.dtsi | 2 +-
+ arch/arm/dts/fsl-ls1046a.dtsi | 2 +-
+ arch/arm/dts/fsl-ls1088a.dtsi | 2 +-
+ arch/arm/dts/ls1021a.dtsi     | 2 +-
+ drivers/ata/sata_ceva.c       | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1012a.dtsi b/arch/arm/dts/fsl-ls1012a.dtsi
+index dcdcd444b3..0ea899c7d7 100644
+--- a/arch/arm/dts/fsl-ls1012a.dtsi
++++ b/arch/arm/dts/fsl-ls1012a.dtsi
+@@ -157,7 +157,7 @@
+ 			compatible = "fsl,ls1012a-ahci";
+ 			reg = <0x0 0x3200000 0x0 0x10000 /* ccsr sata base */
+ 			       0x0 0x20140520 0x0 0x4>;	 /* ecc sata addr */
+-			reg-names = "sata-base", "ecc-addr";
++			reg-names = "ahci", "sata-ecc";
+ 			interrupts = <0 69 4>;
+ 			clocks = <&clockgen 4 0>;
+ 			status = "disabled";
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index cf381a0856..34aad526fe 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -338,7 +338,7 @@
+ 			compatible = "fsl,ls1028a-ahci";
+ 			reg = <0x0 0x3200000 0x0 0x10000	/* ccsr sata base */
+ 			       0x7 0x100520  0x0 0x4>;		/* ecc sata addr*/
+-			reg-names = "sata-base", "ecc-addr";
++			reg-names = "ahci", "sata-ecc";
+ 			interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
+ 			status = "disabled";
+ 		};
+diff --git a/arch/arm/dts/fsl-ls1043a.dtsi b/arch/arm/dts/fsl-ls1043a.dtsi
+index 3aaec8b6af..52dc5a9638 100644
+--- a/arch/arm/dts/fsl-ls1043a.dtsi
++++ b/arch/arm/dts/fsl-ls1043a.dtsi
+@@ -331,7 +331,7 @@
+ 			compatible = "fsl,ls1043a-ahci";
+ 			reg = <0x0 0x3200000 0x0 0x10000 /* ccsr sata base */
+ 			       0x0 0x20140520 0x0 0x4>;  /* ecc sata addr*/
+-			reg-names = "sata-base", "ecc-addr";
++			reg-names = "ahci", "sata-ecc";
+ 			interrupts = <0 69 4>;
+ 			clocks = <&clockgen 4 0>;
+ 			status = "disabled";
+diff --git a/arch/arm/dts/fsl-ls1046a.dtsi b/arch/arm/dts/fsl-ls1046a.dtsi
+index 6a205cd3df..a60cbf11fc 100644
+--- a/arch/arm/dts/fsl-ls1046a.dtsi
++++ b/arch/arm/dts/fsl-ls1046a.dtsi
+@@ -367,7 +367,7 @@
+ 			compatible = "fsl,ls1046a-ahci";
+ 			reg = <0x0 0x3200000 0x0 0x10000 /* ccsr sata base */
+ 			       0x0 0x20140520 0x0 0x4>;	 /* ecc sata addr*/
+-			reg-names = "sata-base", "ecc-addr";
++			reg-names = "ahci", "sata-ecc";
+ 			interrupts = <0 69 4>;
+ 			clocks = <&clockgen 4 1>;
+ 			status = "disabled";
+diff --git a/arch/arm/dts/fsl-ls1088a.dtsi b/arch/arm/dts/fsl-ls1088a.dtsi
+index 9e48a3ab94..ee0e3b367d 100644
+--- a/arch/arm/dts/fsl-ls1088a.dtsi
++++ b/arch/arm/dts/fsl-ls1088a.dtsi
+@@ -226,7 +226,7 @@
+ 		compatible = "fsl,ls1088a-ahci";
+ 		reg = <0x0 0x3200000 0x0 0x10000 /* ccsr sata base */
+ 		       0x7 0x100520  0x0 0x4>;	 /* ecc sata addr*/
+-		reg-names = "sata-base", "ecc-addr";
++		reg-names = "ahci", "sata-ecc";
+ 		interrupts = <0 133 4>;
+ 		status = "disabled";
+ 	};
+diff --git a/arch/arm/dts/ls1021a.dtsi b/arch/arm/dts/ls1021a.dtsi
+index 8aefc82f87..86192cbb7f 100644
+--- a/arch/arm/dts/ls1021a.dtsi
++++ b/arch/arm/dts/ls1021a.dtsi
+@@ -469,7 +469,7 @@
+ 		sata: sata@3200000 {
+ 			compatible = "fsl,ls1021a-ahci";
+ 			reg = <0x3200000 0x10000 0x20220520 0x4>;
+-			reg-names = "sata-base", "ecc-addr";
++			reg-names = "ahci", "sata-ecc";
+ 			interrupts = <0 101 4>;
+ 			status = "disabled";
+ 		};
+diff --git a/drivers/ata/sata_ceva.c b/drivers/ata/sata_ceva.c
+index 87e6a90f74..b71f10223d 100644
+--- a/drivers/ata/sata_ceva.c
++++ b/drivers/ata/sata_ceva.c
+@@ -212,7 +212,7 @@ static int sata_ceva_of_to_plat(struct udevice *dev)
+ 	if (priv->base == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+ 
+-	ret = dev_read_resource_byname(dev, "ecc-addr", &res_regs);
++	ret = dev_read_resource_byname(dev, "sata-ecc", &res_regs);
+ 	if (ret)
+ 		priv->ecc_base = 0;
+ 	else
+-- 
+2.30.2
+

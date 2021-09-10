@@ -1,0 +1,36 @@
+From 5bf5d4f620da667ae6ea0583e3658bcebe6a08ec Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 25 Aug 2021 21:30:27 +0200
+Subject: [PATCH 03/32] arm: dts: ls1028a: remove /memory node
+
+This node is some hodgepodge between the ddr controller node at SoC
+offset 0x1080000 and some static memory size of 2GiB. Remove this bogus
+node because it doesn't seem to be used at all.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
+Tested-by: Vladimir Oltean <vladimir.oltean@nxp.com>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 53b052ed32..48f70c10d9 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -28,12 +28,6 @@
+ 		clocks = <&sysclk>;
+ 	};
+ 
+-	memory@01080000 {
+-		device_type = "memory";
+-		reg = <0x00000000 0x01080000 0 0x80000000>;
+-		      /* DRAM space - 1, size : 2 GB DRAM */
+-	};
+-
+ 	gic: interrupt-controller@6000000 {
+ 		compatible = "arm,gic-v3";
+ 		reg = <0x0 0x06000000 0 0x10000>, /* GIC Dist */
+-- 
+2.30.2
+

@@ -1,0 +1,6 @@
+[submodule "sl28/u-boot"]
+	path = sl28/u-boot
+	url = https://github.com/u-boot/u-boot.git
+[submodule "sl28/arm-trusted-firmware"]
+	path = sl28/arm-trusted-firmware
+	url = https://github.com/kontron/arm-trusted-firmware-smarc-sal28.git

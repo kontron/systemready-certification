@@ -1,0 +1,123 @@
+From 1b5f0d78580d794c8b807f86819a820aeeac389c Mon Sep 17 00:00:00 2001
+From: Tom Rini <trini@konsulko.com>
+Date: Wed, 25 Aug 2021 17:05:10 -0400
+Subject: [PATCH 01/32] Revert "arm64: Layerscape: Survive LPI one-way reset
+ workaround"
+
+Ad-hoc bindings that are not part of the upstream device tree / bindings
+are not allowed in-tree.  Only bindings that are in-progress with
+upstream and then re-synced once agreed upon are.
+
+This reverts commit af288cb291da3abef6be0875527729296f7de7a0.
+
+Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+Cc: Priyanka Jain <priyanka.jain@nxp.com>
+Reported-by: Michael Walle <michael@walle.cc>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ arch/arm/cpu/armv8/fsl-layerscape/soc.c | 17 +----------------
+ arch/arm/dts/fsl-ls1028a.dtsi           |  6 ------
+ arch/arm/dts/fsl-ls1088a.dtsi           |  6 ------
+ arch/arm/dts/fsl-ls2080a.dtsi           |  6 ------
+ arch/arm/dts/fsl-lx2160a.dtsi           |  6 ------
+ 5 files changed, 1 insertion(+), 40 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/soc.c b/arch/arm/cpu/armv8/fsl-layerscape/soc.c
+index 42a0968546..166662a64b 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/soc.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/soc.c
+@@ -43,22 +43,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ #ifdef CONFIG_GIC_V3_ITS
+ int ls_gic_rd_tables_init(void *blob)
+ {
+-	struct fdt_memory lpi_base;
+-	fdt_addr_t addr;
+-	fdt_size_t size;
+-	int offset, ret;
+-
+-	offset = fdt_path_offset(gd->fdt_blob, "/syscon@0x80000000");
+-	addr = fdtdec_get_addr_size_auto_noparent(gd->fdt_blob, offset, "reg",
+-						  0, &size, false);
+-
+-	lpi_base.start = addr;
+-	lpi_base.end = addr + size - 1;
+-	ret = fdtdec_add_reserved_memory(blob, "lpi_rd_table", &lpi_base, NULL, false);
+-	if (ret) {
+-		debug("%s: failed to add reserved memory\n", __func__);
+-		return ret;
+-	}
++	int ret;
+ 
+ 	ret = gic_lpi_tables_init();
+ 	if (ret)
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 50f9b527cd..53b052ed32 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -44,12 +44,6 @@
+ 					 IRQ_TYPE_LEVEL_LOW)>;
+ 	};
+ 
+-	gic_lpi_base: syscon@0x80000000 {
+-		compatible = "gic-lpi-base";
+-		reg = <0x0 0x80000000 0x0 0x100000>;
+-		max-gic-redistributors = <2>;
+-	};
+-
+ 	timer {
+ 		compatible = "arm,armv8-timer";
+ 		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(2) |
+diff --git a/arch/arm/dts/fsl-ls1088a.dtsi b/arch/arm/dts/fsl-ls1088a.dtsi
+index 64caa600ad..3a5a50fb83 100644
+--- a/arch/arm/dts/fsl-ls1088a.dtsi
++++ b/arch/arm/dts/fsl-ls1088a.dtsi
+@@ -27,12 +27,6 @@
+ 		interrupts = <1 9 0x4>;
+ 	};
+ 
+-	gic_lpi_base: syscon@0x80000000 {
+-		compatible = "gic-lpi-base";
+-		reg = <0x0 0x80000000 0x0 0x100000>;
+-		max-gic-redistributors = <8>;
+-	};
+-
+ 	timer {
+ 		compatible = "arm,armv8-timer";
+ 		interrupts = <1 13 0x8>, /* Physical Secure PPI, active-low */
+diff --git a/arch/arm/dts/fsl-ls2080a.dtsi b/arch/arm/dts/fsl-ls2080a.dtsi
+index 7374d580e0..278daeeb6e 100644
+--- a/arch/arm/dts/fsl-ls2080a.dtsi
++++ b/arch/arm/dts/fsl-ls2080a.dtsi
+@@ -27,12 +27,6 @@
+ 		interrupts = <1 9 0x4>;
+ 	};
+ 
+-	gic_lpi_base: syscon@0x80000000 {
+-		compatible = "gic-lpi-base";
+-		reg = <0x0 0x80000000 0x0 0x100000>;
+-		max-gic-redistributors = <8>;
+-	};
+-
+ 	timer {
+ 		compatible = "arm,armv8-timer";
+ 		interrupts = <1 13 0x8>, /* Physical Secure PPI, active-low */
+diff --git a/arch/arm/dts/fsl-lx2160a.dtsi b/arch/arm/dts/fsl-lx2160a.dtsi
+index a6f0e9bc56..3b5f0d119e 100644
+--- a/arch/arm/dts/fsl-lx2160a.dtsi
++++ b/arch/arm/dts/fsl-lx2160a.dtsi
+@@ -43,12 +43,6 @@
+ 		interrupts = <1 9 0x4>;
+ 	};
+ 
+-	gic_lpi_base: syscon@0x80000000 {
+-		compatible = "gic-lpi-base";
+-		reg = <0x0 0x80000000 0x0 0x200000>;
+-		max-gic-redistributors = <16>;
+-	};
+-
+ 	timer {
+ 		compatible = "arm,armv8-timer";
+ 		interrupts = <1 13 0x8>, /* Physical Secure PPI, active-low */
+-- 
+2.30.2
+

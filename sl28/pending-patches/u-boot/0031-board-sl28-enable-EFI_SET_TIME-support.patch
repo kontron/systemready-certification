@@ -1,0 +1,24 @@
+From eee9aa6ccb85daa002bd101f521046470326be4f Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Tue, 7 Sep 2021 13:40:41 +0200
+Subject: [PATCH 31/32] board: sl28: enable EFI_SET_TIME support
+
+Allow EFI to actually set the time before ExitBootServices().
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ configs/kontron_sl28_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
+index e15928bead..8bd7d5be4b 100644
+--- a/configs/kontron_sl28_defconfig
++++ b/configs/kontron_sl28_defconfig
+@@ -92,3 +92,4 @@ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_OF_LIBFDT_ASSUME_MASK=0x0
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_EFI_SET_TIME=y
+-- 
+2.30.2
+

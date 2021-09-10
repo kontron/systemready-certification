@@ -1,0 +1,42 @@
+From 2979ac548d55c34afa892ab379f47aef0a1565b6 Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 13:40:54 +0200
+Subject: [PATCH 04/32] arm: dts: ls1028a-{rdb,qds}: remove dm-pre-reloc
+ property
+
+Nowadays, both boards boot using the TF-A BL1/BL2 and SPL isn't used at
+all. The property is not needed, remove it.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a-qds.dtsi | 1 -
+ arch/arm/dts/fsl-ls1028a-rdb.dts  | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a-qds.dtsi b/arch/arm/dts/fsl-ls1028a-qds.dtsi
+index 69632fa796..335d7b1e4c 100644
+--- a/arch/arm/dts/fsl-ls1028a-qds.dtsi
++++ b/arch/arm/dts/fsl-ls1028a-qds.dtsi
+@@ -130,7 +130,6 @@
+ 
+ &i2c0 {
+ 	status = "okay";
+-	u-boot,dm-pre-reloc;
+ 
+ 	fpga@66 {
+ 		#address-cells = <1>;
+diff --git a/arch/arm/dts/fsl-ls1028a-rdb.dts b/arch/arm/dts/fsl-ls1028a-rdb.dts
+index 82a8c0a0cd..708182f65c 100644
+--- a/arch/arm/dts/fsl-ls1028a-rdb.dts
++++ b/arch/arm/dts/fsl-ls1028a-rdb.dts
+@@ -61,7 +61,6 @@
+ 
+ &i2c0 {
+ 	status = "okay";
+-	u-boot,dm-pre-reloc;
+ 
+ 	 i2c-mux@77 {
+ 
+-- 
+2.30.2
+

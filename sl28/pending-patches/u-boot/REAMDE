@@ -1,0 +1,3 @@
+0001-0030 are just to sync device trees between u-boot and linux 5.14
+0031 is to enable EFI_RTC_SET
+0032 is to speed up EFI block transfer (optional)
