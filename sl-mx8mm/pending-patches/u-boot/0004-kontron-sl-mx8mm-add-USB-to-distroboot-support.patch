@@ -1,0 +1,25 @@
+From cf6fbfe86c9aed0fb0e5bb6ccf74371e9b5239eb Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Thu, 2 Sep 2021 10:44:24 +0200
+Subject: [PATCH] kontron-sl-mx8mm: add USB to distroboot support
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ include/configs/kontron-sl-mx8mm.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/configs/kontron-sl-mx8mm.h b/include/configs/kontron-sl-mx8mm.h
+index 9796a5dbac..8c2e681f20 100644
+--- a/include/configs/kontron-sl-mx8mm.h
++++ b/include/configs/kontron-sl-mx8mm.h
+@@ -45,6 +45,7 @@
+ #define BOOT_TARGET_DEVICES(func) \
+ 	func(MMC, mmc, 1) \
+ 	func(MMC, mmc, 0) \
++	func(USB, usb, 0) \
+ 	func(PXE, pxe, na)
+ #include <config_distro_bootcmd.h>
+ /* Do not try to probe USB net adapters for net boot */
+-- 
+2.30.0
+

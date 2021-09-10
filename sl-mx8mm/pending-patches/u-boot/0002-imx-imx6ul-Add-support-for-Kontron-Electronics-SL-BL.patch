@@ -1,0 +1,2058 @@
+From 6c84d79ade1926ce4db24ee67d1e82625a9bf8da Mon Sep 17 00:00:00 2001
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+Date: Mon, 23 Aug 2021 16:26:17 +0200
+Subject: [PATCH] imx: imx6ul: Add support for Kontron Electronics SL/BL
+ i.MX6UL/ULL boards (N63xx/N64xx)
+
+This adds support for i.MX6UL/ULL-based evaluation kits with SoMs by
+Kontron Electronics GmbH.
+
+Currently there are the following SoM flavors (SoM-Line):
+  * N6310: SOM with i.MX6UL-2, 256MB RAM, 256MB SPI NAND
+  * N6311: SOM with i.MX6UL-2, 512MB RAM, 512MB SPI NAND
+  * N6411: SOM with i.MX6ULL, 512MB RAM, 512MB SPI NAND
+
+And the according evaluation boards (Board-Line):
+  * N6310-S: Baseboard with SOM N6310, eMMC, display (optional), ...
+  * N6311-S: Baseboard with SOM N6311, eMMC, display (optional), ...
+  * N6411-S: Baseboard with SOM N6411, eMMC, display (optional), ...
+
+Currently U-Boot describes i.MX6UL and i.MX6ULL through separate config
+options at compile-time. Though the differences are so minor, that for
+the scope of these SoMs we just use a single defconfig that is compatible
+with both SoCs.
+
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+Reviewed-by: Stefano Babic <sbabic@denx.de>
+---
+ arch/arm/dts/Makefile                         |   4 +-
+ .../dts/imx6ul-kontron-n631x-s-u-boot.dtsi    |   7 +
+ arch/arm/dts/imx6ul-kontron-n631x-s.dts       |  17 +
+ arch/arm/dts/imx6ul-kontron-n631x-som.dtsi    |  14 +
+ .../dts/imx6ul-kontron-n6x1x-s-u-boot.dtsi    |  63 +++
+ arch/arm/dts/imx6ul-kontron-n6x1x-s.dts       | 423 ++++++++++++++++++
+ arch/arm/dts/imx6ul-kontron-n6x1x-s.dtsi      | 420 +++++++++++++++++
+ .../dts/imx6ul-kontron-n6x1x-som-common.dtsi  | 124 +++++
+ .../dts/imx6ull-kontron-n641x-s-u-boot.dtsi   |   7 +
+ arch/arm/dts/imx6ull-kontron-n641x-s.dts      |  16 +
+ arch/arm/dts/imx6ull-kontron-n641x-som.dtsi   |  13 +
+ arch/arm/mach-imx/mx6/Kconfig                 |  10 +
+ board/kontron/sl-mx6ul/Kconfig                |  15 +
+ board/kontron/sl-mx6ul/MAINTAINERS            |   9 +
+ board/kontron/sl-mx6ul/Makefile               |   8 +
+ board/kontron/sl-mx6ul/sl-mx6ul.c             |  85 ++++
+ board/kontron/sl-mx6ul/spl.c                  | 377 ++++++++++++++++
+ configs/kontron-sl-mx6ul_defconfig            | 108 +++++
+ doc/board/kontron/index.rst                   |   1 +
+ doc/board/kontron/sl-mx6ul.rst                |  43 ++
+ include/configs/kontron-sl-mx6ul.h            |  78 ++++
+ 21 files changed, 1841 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n631x-s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n631x-s.dts
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n631x-som.dtsi
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n6x1x-s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n6x1x-s.dts
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n6x1x-s.dtsi
+ create mode 100644 arch/arm/dts/imx6ul-kontron-n6x1x-som-common.dtsi
+ create mode 100644 arch/arm/dts/imx6ull-kontron-n641x-s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6ull-kontron-n641x-s.dts
+ create mode 100644 arch/arm/dts/imx6ull-kontron-n641x-som.dtsi
+ create mode 100644 board/kontron/sl-mx6ul/Kconfig
+ create mode 100644 board/kontron/sl-mx6ul/MAINTAINERS
+ create mode 100644 board/kontron/sl-mx6ul/Makefile
+ create mode 100644 board/kontron/sl-mx6ul/sl-mx6ul.c
+ create mode 100644 board/kontron/sl-mx6ul/spl.c
+ create mode 100644 configs/kontron-sl-mx6ul_defconfig
+ create mode 100644 doc/board/kontron/sl-mx6ul.rst
+ create mode 100644 include/configs/kontron-sl-mx6ul.h
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index fc16a57e60..d3454726f5 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -815,7 +815,9 @@ dtb-$(CONFIG_MX6UL) += \
+ 	imx6ul-liteboard.dtb \
+ 	imx6ul-phytec-segin-ff-rdk-nand.dtb \
+ 	imx6ul-pico-hobbit.dtb \
+-	imx6ul-pico-pi.dtb
++	imx6ul-pico-pi.dtb \
++	imx6ul-kontron-n631x-s.dtb \
++	imx6ull-kontron-n641x-s.dtb
+ 
+ dtb-$(CONFIG_MX6ULL) += \
+ 	imx6ull-14x14-evk.dtb \
+diff --git a/arch/arm/dts/imx6ul-kontron-n631x-s-u-boot.dtsi b/arch/arm/dts/imx6ul-kontron-n631x-s-u-boot.dtsi
+new file mode 100644
+index 0000000000..d3f013c58c
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n631x-s-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ */
++
++#include "imx6ul-kontron-n6x1x-s-u-boot.dtsi"
+diff --git a/arch/arm/dts/imx6ul-kontron-n631x-s.dts b/arch/arm/dts/imx6ul-kontron-n631x-s.dts
+new file mode 100644
+index 0000000000..407d2b1dab
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n631x-s.dts
+@@ -0,0 +1,17 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ * Copyright (c) 2019 Krzysztof Kozlowski <krzk@kernel.org>
++ */
++
++/dts-v1/;
++
++#include "imx6ul-kontron-n631x-som.dtsi"
++#include "imx6ul-kontron-n6x1x-s.dtsi"
++
++/ {
++	model = "Kontron N631X S";
++	compatible = "kontron,imx6ul-n631x-s", "kontron,imx6ul-n631x-som",
++		     "fsl,imx6ul";
++};
+diff --git a/arch/arm/dts/imx6ul-kontron-n631x-som.dtsi b/arch/arm/dts/imx6ul-kontron-n631x-som.dtsi
+new file mode 100644
+index 0000000000..9a1179814b
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n631x-som.dtsi
+@@ -0,0 +1,14 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ * Copyright (c) 2019 Krzysztof Kozlowski <krzk@kernel.org>
++ */
++
++#include "imx6ul.dtsi"
++#include "imx6ul-kontron-n6x1x-som-common.dtsi"
++
++/ {
++	model = "Kontron N631X SOM";
++	compatible = "kontron,imx6ul-n631x-som", "fsl,imx6ul";
++};
+diff --git a/arch/arm/dts/imx6ul-kontron-n6x1x-s-u-boot.dtsi b/arch/arm/dts/imx6ul-kontron-n6x1x-s-u-boot.dtsi
+new file mode 100644
+index 0000000000..39cc6d05d3
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n6x1x-s-u-boot.dtsi
+@@ -0,0 +1,63 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ */
++
++#if defined(CONFIG_FIT)
++
++/ {
++	binman: binman {
++		filename = "flash.bin";
++		pad-byte = <0x00>;
++
++		spl: blob-ext@1 {
++			offset = <0x0>;
++			filename = "SPL";
++		};
++
++		uboot: blob-ext@2 {
++			offset = <0x11000>;
++			filename = "u-boot.img";
++		};
++	};
++};
++
++#endif /* CONFIG_FIT */
++
++/*
++ * To make the PHYs work, we need to set the reset pin once. Afterwards
++ * in Linux we can't assign the shared reset GPIO to the PHYs, as this
++ * would cause Linux to reset both PHYs every time one of them gets
++ * reinitialized.
++ *
++ * Also we disable the second ethernet as it currently doesn't work with
++ * the devicetree setup in U-Boot.
++ */
++
++&fec1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet1 &pinctrl_enet1_mdio>;
++	phy-mode = "rmii";
++	phy-handle = <&ethphy1>;
++	phy-reset-gpios = <&gpio5 9 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy1: ethernet-phy@1 {
++			reg = <1>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET_REF>;
++			clock-names = "rmii-ref";
++		};
++	};
++};
++
++&fec2 {
++	status = "disabled";
++	/delete-property/ phy-handle;
++	/delete-node/ mdio;
++};
+diff --git a/arch/arm/dts/imx6ul-kontron-n6x1x-s.dts b/arch/arm/dts/imx6ul-kontron-n6x1x-s.dts
+new file mode 100644
+index 0000000000..84d8a717ab
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n6x1x-s.dts
+@@ -0,0 +1,423 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ * Copyright (c) 2019 Krzysztof Kozlowski <krzk@kernel.org>
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include "imx6ul-kontron-n6x1x-som.dtsi"
++
++/ {
++	gpio-leds {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_gpio_leds>;
++
++		led1 {
++			label = "debug-led1";
++			gpios = <&gpio1 30 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "heartbeat";
++		};
++
++		led2 {
++			label = "debug-led2";
++			gpios = <&gpio5 3 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led3 {
++			label = "debug-led3";
++			gpios = <&gpio5 2 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++	};
++
++	pwm-beeper {
++		compatible = "pwm-beeper";
++		pwms = <&pwm8 0 5000>;
++	};
++
++	reg_3v3: regulator-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++	};
++
++	reg_5v: regulator-5v {
++		compatible = "regulator-fixed";
++		regulator-name = "5v";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++	};
++
++	reg_usb_otg1_vbus: regulator-usb-otg1-vbus {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_otg1_vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpio = <&gpio1 4 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	reg_vref_adc: regulator-vref-adc {
++		compatible = "regulator-fixed";
++		regulator-name = "vref-adc";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++	};
++};
++
++&adc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_adc1>;
++	num-channels = <3>;
++	vref-supply = <&reg_vref_adc>;
++	status = "okay";
++};
++
++&can2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexcan2>;
++	status = "okay";
++};
++
++&ecspi1 {
++	cs-gpios = <&gpio4 26 GPIO_ACTIVE_HIGH>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_ecspi1>;
++	status = "okay";
++
++	eeprom@0 {
++		compatible = "anvo,anv32e61w", "atmel,at25";
++		reg = <0>;
++		spi-max-frequency = <20000000>;
++		spi-cpha;
++		spi-cpol;
++		pagesize = <1>;
++		size = <8192>;
++		address-width = <16>;
++	};
++};
++
++&fec1 {
++	pinctrl-0 = <&pinctrl_enet1>;
++	/delete-node/ mdio;
++};
++
++&fec2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet2 &pinctrl_enet2_mdio>;
++	phy-mode = "rmii";
++	phy-handle = <&ethphy2>;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy1: ethernet-phy@1 {
++			reg = <1>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET_REF>;
++			clock-names = "rmii-ref";
++		};
++
++		ethphy2: ethernet-phy@2 {
++			reg = <2>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET2_REF>;
++			clock-names = "rmii-ref";
++		};
++	};
++};
++
++&i2c1 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c1>;
++	status = "okay";
++};
++
++&i2c4 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c4>;
++	status = "okay";
++
++	rtc@32 {
++		compatible = "epson,rx8900";
++		reg = <0x32>;
++	};
++};
++
++&pwm8 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm8>;
++	status = "okay";
++};
++
++&uart1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1>;
++	status = "okay";
++};
++
++&uart2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart2>;
++	linux,rs485-enabled-at-boot-time;
++	rs485-rx-during-tx;
++	rs485-rts-active-low;
++	uart-has-rtscts;
++	status = "okay";
++};
++
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart3>;
++	fsl,uart-has-rtscts;
++	status = "okay";
++};
++
++&uart4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart4>;
++	status = "okay";
++};
++
++&usbotg1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usbotg1>;
++	dr_mode = "otg";
++	srp-disable;
++	hnp-disable;
++	adp-disable;
++	over-current-active-low;
++	vbus-supply = <&reg_usb_otg1_vbus>;
++	status = "okay";
++};
++
++&usbotg2 {
++	dr_mode = "host";
++	disable-over-current;
++	vbus-supply = <&reg_5v>;
++	status = "okay";
++};
++
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	cd-gpios = <&gpio1 19 GPIO_ACTIVE_LOW>;
++	keep-power-in-suspend;
++	wakeup-source;
++	vmmc-supply = <&reg_3v3>;
++	voltage-ranges = <3300 3300>;
++	bus-width = <4>;
++	no-1-8-v;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc2>;
++	pinctrl-1 = <&pinctrl_usdhc2_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc2_200mhz>;
++	non-removable;
++	keep-power-in-suspend;
++	wakeup-source;
++	vmmc-supply = <&reg_3v3>;
++	voltage-ranges = <3300 3300>;
++	bus-width = <4>;
++	no-1-8-v;
++	status = "okay";
++};
++
++&wdog1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_wdog>;
++	fsl,ext-reset-output;
++	status = "okay";
++};
++
++&iomuxc {
++	pinctrl-0 = <&pinctrl_reset_out &pinctrl_gpio>;
++
++	pinctrl_adc1: adc1grp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0xb0
++			MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0
++			MX6UL_PAD_GPIO1_IO08__GPIO1_IO08	0xb0
++		>;
++	};
++
++	pinctrl_ecspi1: ecspi1grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_DATA07__ECSPI1_MISO	0x100b1
++			MX6UL_PAD_CSI_DATA06__ECSPI1_MOSI	0x100b1
++			MX6UL_PAD_CSI_DATA04__ECSPI1_SCLK	0x100b1
++			MX6UL_PAD_CSI_DATA05__GPIO4_IO26	0x100b1	/* ECSPI1-CS1 */
++		>;
++	};
++
++	pinctrl_enet2: enet2grp {
++		fsl,pins = <
++			MX6UL_PAD_ENET2_RX_EN__ENET2_RX_EN	0x1b0b0
++			MX6UL_PAD_ENET2_RX_ER__ENET2_RX_ER	0x1b0b0
++			MX6UL_PAD_ENET2_RX_DATA0__ENET2_RDATA00	0x1b0b0
++			MX6UL_PAD_ENET2_RX_DATA1__ENET2_RDATA01	0x1b0b0
++			MX6UL_PAD_ENET2_TX_EN__ENET2_TX_EN	0x1b0b0
++			MX6UL_PAD_ENET2_TX_DATA0__ENET2_TDATA00	0x1b0b0
++			MX6UL_PAD_ENET2_TX_DATA1__ENET2_TDATA01	0x1b0b0
++			MX6UL_PAD_ENET2_TX_CLK__ENET2_REF_CLK2	0x4001b009
++		>;
++	};
++
++	pinctrl_enet2_mdio: enet2mdiogrp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO07__ENET2_MDC		0x1b0b0
++			MX6UL_PAD_GPIO1_IO06__ENET2_MDIO	0x1b0b0
++		>;
++	};
++
++	pinctrl_flexcan2: flexcan2grp{
++		fsl,pins = <
++			MX6UL_PAD_UART2_RTS_B__FLEXCAN2_RX	0x1b020
++			MX6UL_PAD_UART2_CTS_B__FLEXCAN2_TX	0x1b020
++		>;
++	};
++
++	pinctrl_gpio: gpiogrp {
++		fsl,pins = <
++			MX6UL_PAD_SNVS_TAMPER5__GPIO5_IO05	0x1b0b0	/* DOUT1 */
++			MX6UL_PAD_SNVS_TAMPER4__GPIO5_IO04	0x1b0b0	/* DIN1 */
++			MX6UL_PAD_SNVS_TAMPER1__GPIO5_IO01	0x1b0b0	/* DOUT2 */
++			MX6UL_PAD_SNVS_TAMPER0__GPIO5_IO00	0x1b0b0	/* DIN2 */
++		>;
++	};
++
++	pinctrl_gpio_leds: gpioledsgrp {
++		fsl,pins = <
++			MX6UL_PAD_UART5_TX_DATA__GPIO1_IO30	0x1b0b0	/* LED H14 */
++			MX6UL_PAD_SNVS_TAMPER3__GPIO5_IO03	0x1b0b0	/* LED H15 */
++			MX6UL_PAD_SNVS_TAMPER2__GPIO5_IO02	0x1b0b0	/* LED H16 */
++		>;
++	};
++
++	pinctrl_i2c1: i2c1grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_PIXCLK__I2C1_SCL		0x4001b8b0
++			MX6UL_PAD_CSI_MCLK__I2C1_SDA		0x4001b8b0
++		>;
++	};
++
++	pinctrl_i2c4: i2c4grp {
++		fsl,pins = <
++			MX6UL_PAD_UART2_TX_DATA__I2C4_SCL	0x4001f8b0
++			MX6UL_PAD_UART2_RX_DATA__I2C4_SDA	0x4001f8b0
++		>;
++	};
++
++	pinctrl_pwm8: pwm8grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_HSYNC__PWM8_OUT		0x110b0
++		>;
++	};
++
++	pinctrl_uart1: uart1grp {
++		fsl,pins = <
++			MX6UL_PAD_UART1_TX_DATA__UART1_DCE_TX	0x1b0b1
++			MX6UL_PAD_UART1_RX_DATA__UART1_DCE_RX	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart2: uart2grp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_DATA04__UART2_DCE_TX	0x1b0b1
++			MX6UL_PAD_NAND_DATA05__UART2_DCE_RX	0x1b0b1
++			MX6UL_PAD_NAND_DATA06__UART2_DCE_CTS	0x1b0b1
++			/*
++			 * mux unused RTS to make sure it doesn't cause
++			 * any interrupts when it is undefined
++			 */
++			MX6UL_PAD_NAND_DATA07__UART2_DCE_RTS	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart3: uart3grp {
++		fsl,pins = <
++			MX6UL_PAD_UART3_TX_DATA__UART3_DCE_TX	0x1b0b1
++			MX6UL_PAD_UART3_RX_DATA__UART3_DCE_RX	0x1b0b1
++			MX6UL_PAD_UART3_CTS_B__UART3_DCE_CTS	0x1b0b1
++			MX6UL_PAD_UART3_RTS_B__UART3_DCE_RTS	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart4: uart4grp {
++		fsl,pins = <
++			MX6UL_PAD_UART4_TX_DATA__UART4_DCE_TX	0x1b0b1
++			MX6UL_PAD_UART4_RX_DATA__UART4_DCE_RX	0x1b0b1
++		>;
++	};
++
++	pinctrl_usbotg1: usbotg1 {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0x1b0b0
++		>;
++	};
++
++	pinctrl_usdhc1: usdhc1grp {
++		fsl,pins = <
++			MX6UL_PAD_SD1_CMD__USDHC1_CMD		0x17059
++			MX6UL_PAD_SD1_CLK__USDHC1_CLK		0x10059
++			MX6UL_PAD_SD1_DATA0__USDHC1_DATA0	0x17059
++			MX6UL_PAD_SD1_DATA1__USDHC1_DATA1	0x17059
++			MX6UL_PAD_SD1_DATA2__USDHC1_DATA2	0x17059
++			MX6UL_PAD_SD1_DATA3__USDHC1_DATA3	0x17059
++			MX6UL_PAD_UART1_RTS_B__GPIO1_IO19	0x100b1	/* SD1_CD */
++		>;
++	};
++
++	pinctrl_usdhc2: usdhc2grp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_RE_B__USDHC2_CLK		0x10059
++			MX6UL_PAD_NAND_WE_B__USDHC2_CMD		0x17059
++			MX6UL_PAD_NAND_DATA00__USDHC2_DATA0	0x17059
++			MX6UL_PAD_NAND_DATA01__USDHC2_DATA1	0x17059
++			MX6UL_PAD_NAND_DATA02__USDHC2_DATA2	0x17059
++			MX6UL_PAD_NAND_DATA03__USDHC2_DATA3	0x17059
++		>;
++	};
++
++	pinctrl_usdhc2_100mhz: usdhc2-100mhzgrp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_RE_B__USDHC2_CLK		0x100b9
++			MX6UL_PAD_NAND_WE_B__USDHC2_CMD		0x170b9
++			MX6UL_PAD_NAND_DATA00__USDHC2_DATA0	0x170b9
++			MX6UL_PAD_NAND_DATA01__USDHC2_DATA1	0x170b9
++			MX6UL_PAD_NAND_DATA02__USDHC2_DATA2	0x170b9
++			MX6UL_PAD_NAND_DATA03__USDHC2_DATA3	0x170b9
++		>;
++	};
++
++	pinctrl_usdhc2_200mhz: usdhc2-200mhzgrp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_RE_B__USDHC2_CLK		0x100f9
++			MX6UL_PAD_NAND_WE_B__USDHC2_CMD		0x170f9
++			MX6UL_PAD_NAND_DATA00__USDHC2_DATA0	0x170f9
++			MX6UL_PAD_NAND_DATA01__USDHC2_DATA1	0x170f9
++			MX6UL_PAD_NAND_DATA02__USDHC2_DATA2	0x170f9
++			MX6UL_PAD_NAND_DATA03__USDHC2_DATA3	0x170f9
++		>;
++	};
++
++	pinctrl_wdog: wdoggrp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO09__WDOG1_WDOG_ANY	0x30b0
++		>;
++	};
++};
+diff --git a/arch/arm/dts/imx6ul-kontron-n6x1x-s.dtsi b/arch/arm/dts/imx6ul-kontron-n6x1x-s.dtsi
+new file mode 100644
+index 0000000000..4682a79f5b
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n6x1x-s.dtsi
+@@ -0,0 +1,420 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ * Copyright (c) 2019 Krzysztof Kozlowski <krzk@kernel.org>
++ */
++
++#include <dt-bindings/gpio/gpio.h>
++
++/ {
++	gpio-leds {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_gpio_leds>;
++
++		led1 {
++			label = "debug-led1";
++			gpios = <&gpio1 30 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "heartbeat";
++		};
++
++		led2 {
++			label = "debug-led2";
++			gpios = <&gpio5 3 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led3 {
++			label = "debug-led3";
++			gpios = <&gpio5 2 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++	};
++
++	pwm-beeper {
++		compatible = "pwm-beeper";
++		pwms = <&pwm8 0 5000>;
++	};
++
++	reg_3v3: regulator-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++	};
++
++	reg_5v: regulator-5v {
++		compatible = "regulator-fixed";
++		regulator-name = "5v";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++	};
++
++	reg_usb_otg1_vbus: regulator-usb-otg1-vbus {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_otg1_vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpio = <&gpio1 4 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	reg_vref_adc: regulator-vref-adc {
++		compatible = "regulator-fixed";
++		regulator-name = "vref-adc";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++	};
++};
++
++&adc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_adc1>;
++	num-channels = <3>;
++	vref-supply = <&reg_vref_adc>;
++	status = "okay";
++};
++
++&can2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexcan2>;
++	status = "okay";
++};
++
++&ecspi1 {
++	cs-gpios = <&gpio4 26 GPIO_ACTIVE_HIGH>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_ecspi1>;
++	status = "okay";
++
++	eeprom@0 {
++		compatible = "anvo,anv32e61w", "atmel,at25";
++		reg = <0>;
++		spi-max-frequency = <20000000>;
++		spi-cpha;
++		spi-cpol;
++		pagesize = <1>;
++		size = <8192>;
++		address-width = <16>;
++	};
++};
++
++&fec1 {
++	pinctrl-0 = <&pinctrl_enet1>;
++	/delete-node/ mdio;
++};
++
++&fec2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet2 &pinctrl_enet2_mdio>;
++	phy-mode = "rmii";
++	phy-handle = <&ethphy2>;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy1: ethernet-phy@1 {
++			reg = <1>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET_REF>;
++			clock-names = "rmii-ref";
++		};
++
++		ethphy2: ethernet-phy@2 {
++			reg = <2>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET2_REF>;
++			clock-names = "rmii-ref";
++		};
++	};
++};
++
++&i2c1 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c1>;
++	status = "okay";
++};
++
++&i2c4 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c4>;
++	status = "okay";
++
++	rtc@32 {
++		compatible = "epson,rx8900";
++		reg = <0x32>;
++	};
++};
++
++&pwm8 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm8>;
++	status = "okay";
++};
++
++&uart1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1>;
++	status = "okay";
++};
++
++&uart2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart2>;
++	linux,rs485-enabled-at-boot-time;
++	rs485-rx-during-tx;
++	rs485-rts-active-low;
++	uart-has-rtscts;
++	status = "okay";
++};
++
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart3>;
++	fsl,uart-has-rtscts;
++	status = "okay";
++};
++
++&uart4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart4>;
++	status = "okay";
++};
++
++&usbotg1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usbotg1>;
++	dr_mode = "otg";
++	srp-disable;
++	hnp-disable;
++	adp-disable;
++	over-current-active-low;
++	vbus-supply = <&reg_usb_otg1_vbus>;
++	status = "okay";
++};
++
++&usbotg2 {
++	dr_mode = "host";
++	disable-over-current;
++	vbus-supply = <&reg_5v>;
++	status = "okay";
++};
++
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	cd-gpios = <&gpio1 19 GPIO_ACTIVE_LOW>;
++	keep-power-in-suspend;
++	wakeup-source;
++	vmmc-supply = <&reg_3v3>;
++	voltage-ranges = <3300 3300>;
++	bus-width = <4>;
++	no-1-8-v;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc2>;
++	pinctrl-1 = <&pinctrl_usdhc2_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc2_200mhz>;
++	non-removable;
++	keep-power-in-suspend;
++	wakeup-source;
++	vmmc-supply = <&reg_3v3>;
++	voltage-ranges = <3300 3300>;
++	bus-width = <4>;
++	no-1-8-v;
++	status = "okay";
++};
++
++&wdog1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_wdog>;
++	fsl,ext-reset-output;
++	status = "okay";
++};
++
++&iomuxc {
++	pinctrl-0 = <&pinctrl_reset_out &pinctrl_gpio>;
++
++	pinctrl_adc1: adc1grp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0xb0
++			MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0
++			MX6UL_PAD_GPIO1_IO08__GPIO1_IO08	0xb0
++		>;
++	};
++
++	pinctrl_ecspi1: ecspi1grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_DATA07__ECSPI1_MISO	0x100b1
++			MX6UL_PAD_CSI_DATA06__ECSPI1_MOSI	0x100b1
++			MX6UL_PAD_CSI_DATA04__ECSPI1_SCLK	0x100b1
++			MX6UL_PAD_CSI_DATA05__GPIO4_IO26	0x100b1	/* ECSPI1-CS1 */
++		>;
++	};
++
++	pinctrl_enet2: enet2grp {
++		fsl,pins = <
++			MX6UL_PAD_ENET2_RX_EN__ENET2_RX_EN	0x1b0b0
++			MX6UL_PAD_ENET2_RX_ER__ENET2_RX_ER	0x1b0b0
++			MX6UL_PAD_ENET2_RX_DATA0__ENET2_RDATA00	0x1b0b0
++			MX6UL_PAD_ENET2_RX_DATA1__ENET2_RDATA01	0x1b0b0
++			MX6UL_PAD_ENET2_TX_EN__ENET2_TX_EN	0x1b0b0
++			MX6UL_PAD_ENET2_TX_DATA0__ENET2_TDATA00	0x1b0b0
++			MX6UL_PAD_ENET2_TX_DATA1__ENET2_TDATA01	0x1b0b0
++			MX6UL_PAD_ENET2_TX_CLK__ENET2_REF_CLK2	0x4001b009
++		>;
++	};
++
++	pinctrl_enet2_mdio: enet2mdiogrp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO07__ENET2_MDC		0x1b0b0
++			MX6UL_PAD_GPIO1_IO06__ENET2_MDIO	0x1b0b0
++		>;
++	};
++
++	pinctrl_flexcan2: flexcan2grp{
++		fsl,pins = <
++			MX6UL_PAD_UART2_RTS_B__FLEXCAN2_RX	0x1b020
++			MX6UL_PAD_UART2_CTS_B__FLEXCAN2_TX	0x1b020
++		>;
++	};
++
++	pinctrl_gpio: gpiogrp {
++		fsl,pins = <
++			MX6UL_PAD_SNVS_TAMPER5__GPIO5_IO05	0x1b0b0	/* DOUT1 */
++			MX6UL_PAD_SNVS_TAMPER4__GPIO5_IO04	0x1b0b0	/* DIN1 */
++			MX6UL_PAD_SNVS_TAMPER1__GPIO5_IO01	0x1b0b0	/* DOUT2 */
++			MX6UL_PAD_SNVS_TAMPER0__GPIO5_IO00	0x1b0b0	/* DIN2 */
++		>;
++	};
++
++	pinctrl_gpio_leds: gpioledsgrp {
++		fsl,pins = <
++			MX6UL_PAD_UART5_TX_DATA__GPIO1_IO30	0x1b0b0	/* LED H14 */
++			MX6UL_PAD_SNVS_TAMPER3__GPIO5_IO03	0x1b0b0	/* LED H15 */
++			MX6UL_PAD_SNVS_TAMPER2__GPIO5_IO02	0x1b0b0	/* LED H16 */
++		>;
++	};
++
++	pinctrl_i2c1: i2c1grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_PIXCLK__I2C1_SCL		0x4001b8b0
++			MX6UL_PAD_CSI_MCLK__I2C1_SDA		0x4001b8b0
++		>;
++	};
++
++	pinctrl_i2c4: i2c4grp {
++		fsl,pins = <
++			MX6UL_PAD_UART2_TX_DATA__I2C4_SCL	0x4001f8b0
++			MX6UL_PAD_UART2_RX_DATA__I2C4_SDA	0x4001f8b0
++		>;
++	};
++
++	pinctrl_pwm8: pwm8grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_HSYNC__PWM8_OUT		0x110b0
++		>;
++	};
++
++	pinctrl_uart1: uart1grp {
++		fsl,pins = <
++			MX6UL_PAD_UART1_TX_DATA__UART1_DCE_TX	0x1b0b1
++			MX6UL_PAD_UART1_RX_DATA__UART1_DCE_RX	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart2: uart2grp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_DATA04__UART2_DCE_TX	0x1b0b1
++			MX6UL_PAD_NAND_DATA05__UART2_DCE_RX	0x1b0b1
++			MX6UL_PAD_NAND_DATA06__UART2_DCE_CTS	0x1b0b1
++			/*
++			 * mux unused RTS to make sure it doesn't cause
++			 * any interrupts when it is undefined
++			 */
++			MX6UL_PAD_NAND_DATA07__UART2_DCE_RTS	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart3: uart3grp {
++		fsl,pins = <
++			MX6UL_PAD_UART3_TX_DATA__UART3_DCE_TX	0x1b0b1
++			MX6UL_PAD_UART3_RX_DATA__UART3_DCE_RX	0x1b0b1
++			MX6UL_PAD_UART3_CTS_B__UART3_DCE_CTS	0x1b0b1
++			MX6UL_PAD_UART3_RTS_B__UART3_DCE_RTS	0x1b0b1
++		>;
++	};
++
++	pinctrl_uart4: uart4grp {
++		fsl,pins = <
++			MX6UL_PAD_UART4_TX_DATA__UART4_DCE_TX	0x1b0b1
++			MX6UL_PAD_UART4_RX_DATA__UART4_DCE_RX	0x1b0b1
++		>;
++	};
++
++	pinctrl_usbotg1: usbotg1 {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0x1b0b0
++		>;
++	};
++
++	pinctrl_usdhc1: usdhc1grp {
++		fsl,pins = <
++			MX6UL_PAD_SD1_CMD__USDHC1_CMD		0x17059
++			MX6UL_PAD_SD1_CLK__USDHC1_CLK		0x10059
++			MX6UL_PAD_SD1_DATA0__USDHC1_DATA0	0x17059
++			MX6UL_PAD_SD1_DATA1__USDHC1_DATA1	0x17059
++			MX6UL_PAD_SD1_DATA2__USDHC1_DATA2	0x17059
++			MX6UL_PAD_SD1_DATA3__USDHC1_DATA3	0x17059
++			MX6UL_PAD_UART1_RTS_B__GPIO1_IO19	0x100b1	/* SD1_CD */
++		>;
++	};
++
++	pinctrl_usdhc2: usdhc2grp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_RE_B__USDHC2_CLK		0x10059
++			MX6UL_PAD_NAND_WE_B__USDHC2_CMD		0x17059
++			MX6UL_PAD_NAND_DATA00__USDHC2_DATA0	0x17059
++			MX6UL_PAD_NAND_DATA01__USDHC2_DATA1	0x17059
++			MX6UL_PAD_NAND_DATA02__USDHC2_DATA2	0x17059
++			MX6UL_PAD_NAND_DATA03__USDHC2_DATA3	0x17059
++		>;
++	};
++
++	pinctrl_usdhc2_100mhz: usdhc2-100mhzgrp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_RE_B__USDHC2_CLK		0x100b9
++			MX6UL_PAD_NAND_WE_B__USDHC2_CMD		0x170b9
++			MX6UL_PAD_NAND_DATA00__USDHC2_DATA0	0x170b9
++			MX6UL_PAD_NAND_DATA01__USDHC2_DATA1	0x170b9
++			MX6UL_PAD_NAND_DATA02__USDHC2_DATA2	0x170b9
++			MX6UL_PAD_NAND_DATA03__USDHC2_DATA3	0x170b9
++		>;
++	};
++
++	pinctrl_usdhc2_200mhz: usdhc2-200mhzgrp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_RE_B__USDHC2_CLK		0x100f9
++			MX6UL_PAD_NAND_WE_B__USDHC2_CMD		0x170f9
++			MX6UL_PAD_NAND_DATA00__USDHC2_DATA0	0x170f9
++			MX6UL_PAD_NAND_DATA01__USDHC2_DATA1	0x170f9
++			MX6UL_PAD_NAND_DATA02__USDHC2_DATA2	0x170f9
++			MX6UL_PAD_NAND_DATA03__USDHC2_DATA3	0x170f9
++		>;
++	};
++
++	pinctrl_wdog: wdoggrp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO09__WDOG1_WDOG_ANY	0x30b0
++		>;
++	};
++};
+diff --git a/arch/arm/dts/imx6ul-kontron-n6x1x-som-common.dtsi b/arch/arm/dts/imx6ul-kontron-n6x1x-som-common.dtsi
+new file mode 100644
+index 0000000000..e9ec6b7891
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-kontron-n6x1x-som-common.dtsi
+@@ -0,0 +1,124 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ * Copyright (c) 2019 Krzysztof Kozlowski <krzk@kernel.org>
++ */
++
++#include <dt-bindings/gpio/gpio.h>
++
++/ {
++	chosen {
++		stdout-path = &uart4;
++	};
++
++	memory@80000000 {
++		reg = <0x80000000 0x10000000>;
++		device_type = "memory";
++	};
++};
++
++&ecspi2 {
++	cs-gpios = <&gpio4 22 GPIO_ACTIVE_HIGH>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_ecspi2>;
++	status = "okay";
++
++	spi-flash@0 {
++		compatible = "mxicy,mx25v8035f", "jedec,spi-nor";
++		spi-max-frequency = <50000000>;
++		reg = <0>;
++	};
++};
++
++&fec1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet1 &pinctrl_enet1_mdio>;
++	phy-mode = "rmii";
++	phy-handle = <&ethphy1>;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy1: ethernet-phy@1 {
++			reg = <1>;
++			micrel,led-mode = <0>;
++			clocks = <&clks IMX6UL_CLK_ENET_REF>;
++			clock-names = "rmii-ref";
++		};
++	};
++};
++
++&fec2 {
++	phy-mode = "rmii";
++	status = "disabled";
++};
++
++&qspi {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_qspi>;
++	status = "okay";
++
++	spi-flash@0 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "spi-nand";
++		spi-max-frequency = <104000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++		reg = <0>;
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_reset_out>;
++
++	pinctrl_ecspi2: ecspi2grp {
++		fsl,pins = <
++			MX6UL_PAD_CSI_DATA03__ECSPI2_MISO      0x100b1
++			MX6UL_PAD_CSI_DATA02__ECSPI2_MOSI      0x100b1
++			MX6UL_PAD_CSI_DATA00__ECSPI2_SCLK      0x100b1
++			MX6UL_PAD_CSI_DATA01__GPIO4_IO22       0x100b1
++		>;
++	};
++
++	pinctrl_enet1: enet1grp {
++		fsl,pins = <
++			MX6UL_PAD_ENET1_RX_EN__ENET1_RX_EN      0x1b0b0
++			MX6UL_PAD_ENET1_RX_ER__ENET1_RX_ER      0x1b0b0
++			MX6UL_PAD_ENET1_RX_DATA0__ENET1_RDATA00 0x1b0b0
++			MX6UL_PAD_ENET1_RX_DATA1__ENET1_RDATA01 0x1b0b0
++			MX6UL_PAD_ENET1_TX_EN__ENET1_TX_EN      0x1b0b0
++			MX6UL_PAD_ENET1_TX_DATA0__ENET1_TDATA00 0x1b0b0
++			MX6UL_PAD_ENET1_TX_DATA1__ENET1_TDATA01 0x1b0b0
++			MX6UL_PAD_ENET1_TX_CLK__ENET1_REF_CLK1  0x4001b009
++		>;
++	};
++
++	pinctrl_enet1_mdio: enet1mdiogrp {
++		fsl,pins = <
++			MX6UL_PAD_GPIO1_IO07__ENET1_MDC         0x1b0b0
++			MX6UL_PAD_GPIO1_IO06__ENET1_MDIO        0x1b0b0
++		>;
++	};
++
++	pinctrl_qspi: qspigrp {
++		fsl,pins = <
++			MX6UL_PAD_NAND_WP_B__QSPI_A_SCLK        0x70a1
++			MX6UL_PAD_NAND_READY_B__QSPI_A_DATA00   0x70a1
++			MX6UL_PAD_NAND_CE0_B__QSPI_A_DATA01     0x70a1
++			MX6UL_PAD_NAND_CE1_B__QSPI_A_DATA02     0x70a1
++			MX6UL_PAD_NAND_CLE__QSPI_A_DATA03       0x70a1
++			MX6UL_PAD_NAND_DQS__QSPI_A_SS0_B        0x70a1
++		>;
++	};
++
++	pinctrl_reset_out: rstoutgrp {
++		fsl,pins = <
++			MX6UL_PAD_SNVS_TAMPER9__GPIO5_IO09      0x1b0b0
++		>;
++	};
++};
+diff --git a/arch/arm/dts/imx6ull-kontron-n641x-s-u-boot.dtsi b/arch/arm/dts/imx6ull-kontron-n641x-s-u-boot.dtsi
+new file mode 100644
+index 0000000000..d3f013c58c
+--- /dev/null
++++ b/arch/arm/dts/imx6ull-kontron-n641x-s-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ */
++
++#include "imx6ul-kontron-n6x1x-s-u-boot.dtsi"
+diff --git a/arch/arm/dts/imx6ull-kontron-n641x-s.dts b/arch/arm/dts/imx6ull-kontron-n641x-s.dts
+new file mode 100644
+index 0000000000..01aeea4085
+--- /dev/null
++++ b/arch/arm/dts/imx6ull-kontron-n641x-s.dts
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2019 Kontron Electronics GmbH
++ */
++
++/dts-v1/;
++
++#include "imx6ull-kontron-n641x-som.dtsi"
++#include "imx6ul-kontron-n6x1x-s.dtsi"
++
++/ {
++	model = "Kontron N641X S";
++	compatible = "kontron,imx6ull-n641x-s", "kontron,imx6ull-n641x-som",
++		     "fsl,imx6ull";
++};
+diff --git a/arch/arm/dts/imx6ull-kontron-n641x-som.dtsi b/arch/arm/dts/imx6ull-kontron-n641x-som.dtsi
+new file mode 100644
+index 0000000000..8a64aa9a27
+--- /dev/null
++++ b/arch/arm/dts/imx6ull-kontron-n641x-som.dtsi
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 exceet electronics GmbH
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ */
++
++#include "imx6ull.dtsi"
++#include "imx6ul-kontron-n6x1x-som-common.dtsi"
++
++/ {
++	model = "Kontron N641X SOM";
++	compatible = "kontron,imx6ull-n641x-som", "fsl,imx6ull";
++};
+diff --git a/arch/arm/mach-imx/mx6/Kconfig b/arch/arm/mach-imx/mx6/Kconfig
+index 789a50d4e9..afa1c9c941 100644
+--- a/arch/arm/mach-imx/mx6/Kconfig
++++ b/arch/arm/mach-imx/mx6/Kconfig
+@@ -231,6 +231,15 @@ config TARGET_GW_VENTANA
+ 	imply CMD_SATA
+ 	imply CMD_SPL
+ 
++config TARGET_KONTRON_MX6UL
++	bool "Kontron Electronics SL/BL i.MX6UL/ULL (N63xx/N64xx)"
++	depends on MX6UL
++	select BINMAN
++	select DM
++	select DM_THERMAL
++	select SUPPORT_SPL
++	imply CMD_DM
++
+ config TARGET_KOSAGI_NOVENA
+ 	bool "Kosagi Novena"
+ 	select BOARD_LATE_INIT
+@@ -669,6 +678,7 @@ source "board/grinn/liteboard/Kconfig"
+ source "board/phytec/pcm058/Kconfig"
+ source "board/phytec/pcl063/Kconfig"
+ source "board/gateworks/gw_ventana/Kconfig"
++source "board/kontron/sl-mx6ul/Kconfig"
+ source "board/kosagi/novena/Kconfig"
+ source "board/softing/vining_2000/Kconfig"
+ source "board/liebherr/display5/Kconfig"
+diff --git a/board/kontron/sl-mx6ul/Kconfig b/board/kontron/sl-mx6ul/Kconfig
+new file mode 100644
+index 0000000000..4e58de2094
+--- /dev/null
++++ b/board/kontron/sl-mx6ul/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_KONTRON_MX6UL
++
++config SYS_BOARD
++	string
++	default "sl-mx6ul"
++
++config SYS_VENDOR
++	string
++	default "kontron"
++
++config SYS_CONFIG_NAME
++	string
++	default "kontron-sl-mx6ul"
++
++endif
+diff --git a/board/kontron/sl-mx6ul/MAINTAINERS b/board/kontron/sl-mx6ul/MAINTAINERS
+new file mode 100644
+index 0000000000..0f8b5512d6
+--- /dev/null
++++ b/board/kontron/sl-mx6ul/MAINTAINERS
+@@ -0,0 +1,9 @@
++Kontron SL/BL i.MX6UL/ULL Boards (N63xx/N64xx)
++M:	Frieder Schrempf <frieder.schrempf@kontron.de>
++S:	Maintained
++F:	arch/arm/dts/imx6ul-kontron-n6*
++F:	arch/arm/dts/imx6ull-kontron-n6*
++F:	board/kontron/sl-mx6ul
++F:	configs/kontron-sl-mx6ul_defconfig
++F:	doc/board/kontron/sl-mx6ul.rst
++F:	include/configs/kontron-sl-mx6ul.h
+diff --git a/board/kontron/sl-mx6ul/Makefile b/board/kontron/sl-mx6ul/Makefile
+new file mode 100644
+index 0000000000..cae273c930
+--- /dev/null
++++ b/board/kontron/sl-mx6ul/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0+
++# (C) Copyright 2018 Kontron Electronics GmbH
++
++ifdef CONFIG_SPL_BUILD
++obj-y := spl.o
++else
++obj-y := sl-mx6ul.o
++endif
+diff --git a/board/kontron/sl-mx6ul/sl-mx6ul.c b/board/kontron/sl-mx6ul/sl-mx6ul.c
+new file mode 100644
+index 0000000000..79d4d8753b
+--- /dev/null
++++ b/board/kontron/sl-mx6ul/sl-mx6ul.c
+@@ -0,0 +1,85 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ */
++
++#include <asm/arch/clock.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/global_data.h>
++#include <fdt_support.h>
++#include <phy.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int dram_init(void)
++{
++	gd->ram_size = imx_ddr_size();
++
++	return 0;
++}
++
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++	/*
++	 * Overwrite the memory size in the devicetree that is
++	 * passed to the kernel with the actual size detected.
++	 */
++	return fdt_fixup_memory(blob, PHYS_SDRAM, gd->ram_size);
++}
++
++static int setup_fec(void)
++{
++	struct iomuxc *const iomuxc_regs = (struct iomuxc *)IOMUXC_BASE_ADDR;
++	int ret;
++
++	/*
++	 * Use 50M anatop loopback REF_CLK1 for ENET1,
++	 * clear gpr1[13], set gpr1[17].
++	 */
++	clrsetbits_le32(&iomuxc_regs->gpr[1], IOMUX_GPR1_FEC1_MASK,
++			IOMUX_GPR1_FEC1_CLOCK_MUX1_SEL_MASK);
++
++	/*
++	 * Use 50M anatop loopback REF_CLK2 for ENET2,
++	 * clear gpr1[14], set gpr1[18].
++	 */
++	clrsetbits_le32(&iomuxc_regs->gpr[1], IOMUX_GPR1_FEC2_MASK,
++			IOMUX_GPR1_FEC2_CLOCK_MUX1_SEL_MASK);
++
++	ret = enable_fec_anatop_clock(0, ENET_50MHZ);
++	if (ret)
++		return ret;
++
++	ret = enable_fec_anatop_clock(1, ENET_50MHZ);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++int board_phy_config(struct phy_device *phydev)
++{
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1f, 0x8190);
++
++	if (phydev->drv->config)
++		phydev->drv->config(phydev);
++
++	return 0;
++}
++
++int board_early_init_f(void)
++{
++	enable_qspi_clk(0);
++
++	return 0;
++}
++
++int board_init(void)
++{
++	/* Address of boot parameters */
++	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
++
++	setup_fec();
++
++	return 0;
++}
+diff --git a/board/kontron/sl-mx6ul/spl.c b/board/kontron/sl-mx6ul/spl.c
+new file mode 100644
+index 0000000000..12b0352146
+--- /dev/null
++++ b/board/kontron/sl-mx6ul/spl.c
+@@ -0,0 +1,377 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ */
++
++#include <asm/arch/clock.h>
++#include <asm/arch/crm_regs.h>
++#include <asm/arch/mx6-pins.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/global_data.h>
++#include <asm/gpio.h>
++#include <asm/io.h>
++#include <asm/mach-imx/iomux-v3.h>
++#include <fsl_esdhc_imx.h>
++#include <init.h>
++#include <linux/delay.h>
++#include <linux/sizes.h>
++#include <linux/errno.h>
++#include <mmc.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++enum {
++	BOARD_TYPE_KTN_N631X = 1,
++	BOARD_TYPE_KTN_N641X,
++	BOARD_TYPE_MAX
++};
++
++#define UART_PAD_CTRL  (PAD_CTL_PKE | PAD_CTL_PUE |		\
++	PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED |		\
++	PAD_CTL_DSE_40ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
++
++#define USDHC_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE |		\
++	PAD_CTL_PUS_22K_UP  | PAD_CTL_SPEED_LOW |		\
++	PAD_CTL_DSE_80ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
++
++#define USDHC_CD_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE |	\
++	PAD_CTL_PUS_100K_DOWN  | PAD_CTL_SPEED_LOW |		\
++	PAD_CTL_DSE_80ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
++
++#define SPI_PAD_CTRL (PAD_CTL_HYS | PAD_CTL_SPEED_MED | \
++	PAD_CTL_DSE_40ohm | PAD_CTL_SRE_FAST)
++
++#include <spl.h>
++#include <asm/arch/mx6-ddr.h>
++
++static iomux_v3_cfg_t const usdhc1_pads[] = {
++	MX6_PAD_SD1_CLK__USDHC1_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_SD1_CMD__USDHC1_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_SD1_DATA0__USDHC1_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_SD1_DATA1__USDHC1_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_SD1_DATA2__USDHC1_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_SD1_DATA3__USDHC1_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++
++	/* CD */
++	MX6_PAD_UART1_RTS_B__GPIO1_IO19 | MUX_PAD_CTRL(USDHC_CD_PAD_CTRL),
++};
++
++#define USDHC1_CD_GPIO	IMX_GPIO_NR(1, 19)
++
++static iomux_v3_cfg_t const usdhc2_pads[] = {
++	MX6_PAD_NAND_RE_B__USDHC2_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_NAND_WE_B__USDHC2_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_NAND_DATA00__USDHC2_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_NAND_DATA01__USDHC2_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_NAND_DATA02__USDHC2_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX6_PAD_NAND_DATA03__USDHC2_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	/* RST */
++	MX6_PAD_NAND_ALE__GPIO4_IO10 | MUX_PAD_CTRL(NO_PAD_CTRL),
++};
++
++#define USDHC2_PWR_GPIO	IMX_GPIO_NR(4, 10)
++
++static struct fsl_esdhc_cfg usdhc_cfg[2] = {
++	{USDHC1_BASE_ADDR, 0, 4},
++	{USDHC2_BASE_ADDR, 0, 4},
++};
++
++int board_mmc_getcd(struct mmc *mmc)
++{
++	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
++	int ret = 0;
++
++	switch (cfg->esdhc_base) {
++	case USDHC1_BASE_ADDR:
++		ret = !gpio_get_value(USDHC1_CD_GPIO);
++		break;
++	case USDHC2_BASE_ADDR:
++		// This SDHC interface does not use a CD pin
++		ret = 1;
++		break;
++	}
++
++	return ret;
++}
++
++int board_mmc_init(struct bd_info *bis)
++{
++	int i, ret;
++
++	/*
++	 * According to the board_mmc_init() the following map is done:
++	 * (U-boot device node)    (Physical Port)
++	 * mmc0                    USDHC1
++	 * mmc1                    USDHC2
++	 */
++	for (i = 0; i < CONFIG_SYS_FSL_USDHC_NUM; i++) {
++		switch (i) {
++		case 0:
++			imx_iomux_v3_setup_multiple_pads(usdhc1_pads, ARRAY_SIZE(usdhc1_pads));
++			gpio_direction_input(USDHC1_CD_GPIO);
++			usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
++			break;
++		case 1:
++			imx_iomux_v3_setup_multiple_pads(usdhc2_pads, ARRAY_SIZE(usdhc2_pads));
++			gpio_direction_output(USDHC2_PWR_GPIO, 0);
++			udelay(500);
++			gpio_direction_output(USDHC2_PWR_GPIO, 1);
++			usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC2_CLK);
++			break;
++		default:
++			printf("Warning: you configured more USDHC controllers (%d) than supported by the board\n",
++			       i + 1);
++			return -EINVAL;
++			}
++
++			ret = fsl_esdhc_initialize(bis, &usdhc_cfg[i]);
++			if (ret) {
++				printf("Warning: failed to initialize mmc dev %d\n", i);
++				return ret;
++			}
++	}
++	return 0;
++}
++
++iomux_v3_cfg_t const ecspi2_pads[] = {
++	MX6_PAD_CSI_DATA00__ECSPI2_SCLK | MUX_PAD_CTRL(SPI_PAD_CTRL),
++	MX6_PAD_CSI_DATA02__ECSPI2_MOSI | MUX_PAD_CTRL(SPI_PAD_CTRL),
++	MX6_PAD_CSI_DATA03__ECSPI2_MISO | MUX_PAD_CTRL(SPI_PAD_CTRL),
++	MX6_PAD_CSI_DATA01__GPIO4_IO22  | MUX_PAD_CTRL(NO_PAD_CTRL),
++};
++
++int board_spi_cs_gpio(unsigned int bus, unsigned int cs)
++{
++	return (bus == CONFIG_SF_DEFAULT_BUS && cs == CONFIG_SF_DEFAULT_CS)
++		? (IMX_GPIO_NR(4, 22)) : -1;
++}
++
++static void setup_spi(void)
++{
++	gpio_request(IMX_GPIO_NR(4, 22), "spi2_cs0");
++	gpio_direction_output(IMX_GPIO_NR(4, 22), 1);
++	imx_iomux_v3_setup_multiple_pads(ecspi2_pads, ARRAY_SIZE(ecspi2_pads));
++
++	enable_spi_clk(true, 1);
++}
++
++static iomux_v3_cfg_t const uart4_pads[] = {
++	MX6_PAD_UART4_TX_DATA__UART4_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX6_PAD_UART4_RX_DATA__UART4_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
++};
++
++static void setup_iomux_uart(void)
++{
++	imx_iomux_v3_setup_multiple_pads(uart4_pads, ARRAY_SIZE(uart4_pads));
++}
++
++// DDR 256MB (Hynix H5TQ2G63DFR)
++static struct mx6_ddr3_cfg mem_256M_ddr = {
++	.mem_speed = 800,
++	.density = 2,
++	.width = 16,
++	.banks = 8,
++	.rowaddr = 14,
++	.coladdr = 10,
++	.pagesz = 2,
++	.trcd = 1350,
++	.trcmin = 4950,
++	.trasmin = 3600,
++};
++
++static struct mx6_mmdc_calibration mx6_mmcd_256M_calib = {
++	.p0_mpwldectrl0 = 0x00000000,
++	.p0_mpdgctrl0 = 0x01340134,
++	.p0_mprddlctl = 0x40405052,
++	.p0_mpwrdlctl = 0x40404E48,
++};
++
++// DDR 512MB (Hynix H5TQ4G63DFR)
++static struct mx6_ddr3_cfg mem_512M_ddr = {
++	.mem_speed = 800,
++	.density = 4,
++	.width = 16,
++	.banks = 8,
++	.rowaddr = 15,
++	.coladdr = 10,
++	.pagesz = 2,
++	.trcd = 1350,
++	.trcmin = 4950,
++	.trasmin = 3600,
++};
++
++static struct mx6_mmdc_calibration mx6_mmcd_512M_calib = {
++	.p0_mpwldectrl0 = 0x00000000,
++	.p0_mpdgctrl0 = 0X01440144,
++	.p0_mprddlctl = 0x40405454,
++	.p0_mpwrdlctl = 0x40404E4C,
++};
++
++// Common DDR parameters (256MB and 512MB)
++static struct mx6ul_iomux_grp_regs mx6_grp_ioregs = {
++	.grp_addds = 0x00000028,
++	.grp_ddrmode_ctl = 0x00020000,
++	.grp_b0ds = 0x00000028,
++	.grp_ctlds = 0x00000028,
++	.grp_b1ds = 0x00000028,
++	.grp_ddrpke = 0x00000000,
++	.grp_ddrmode = 0x00020000,
++	.grp_ddr_type = 0x000c0000,
++};
++
++static struct mx6ul_iomux_ddr_regs mx6_ddr_ioregs = {
++	.dram_dqm0 = 0x00000028,
++	.dram_dqm1 = 0x00000028,
++	.dram_ras = 0x00000028,
++	.dram_cas = 0x00000028,
++	.dram_odt0 = 0x00000028,
++	.dram_odt1 = 0x00000028,
++	.dram_sdba2 = 0x00000000,
++	.dram_sdclk_0 = 0x00000028,
++	.dram_sdqs0 = 0x00000028,
++	.dram_sdqs1 = 0x00000028,
++	.dram_reset = 0x00000028,
++};
++
++struct mx6_ddr_sysinfo ddr_sysinfo = {
++	.dsize = 0,
++	.cs_density = 20,
++	.ncs = 1,
++	.cs1_mirror = 0,
++	.rtt_wr = 2,
++	.rtt_nom = 1,		/* RTT_Nom = RZQ/2 */
++	.walat = 1,		/* Write additional latency */
++	.ralat = 5,		/* Read additional latency */
++	.mif3_mode = 3,		/* Command prediction working mode */
++	.bi_on = 1,		/* Bank interleaving enabled */
++	.sde_to_rst = 0x10,	/* 14 cycles, 200us (JEDEC default) */
++	.rst_to_cke = 0x23,	/* 33 cycles, 500us (JEDEC default) */
++	.ddr_type = DDR_TYPE_DDR3,
++	.refsel = 0,	/* Refresh cycles at 64KHz */
++	.refr = 1,	/* 2 refresh commands per refresh cycle */
++};
++
++static void ccgr_init(void)
++{
++	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
++
++	writel(0xFFFFFFFF, &ccm->CCGR0);
++	writel(0xFFFFFFFF, &ccm->CCGR1);
++	writel(0xFFFFFFFF, &ccm->CCGR2);
++	writel(0xFFFFFFFF, &ccm->CCGR3);
++	writel(0xFFFFFFFF, &ccm->CCGR4);
++	writel(0xFFFFFFFF, &ccm->CCGR5);
++	writel(0xFFFFFFFF, &ccm->CCGR6);
++	writel(0xFFFFFFFF, &ccm->CCGR7);
++}
++
++static void spl_dram_init(void)
++{
++	unsigned int size;
++
++	// DDR RAM connection is always 16 bit wide. Init IOs.
++	mx6ul_dram_iocfg(16, &mx6_ddr_ioregs, &mx6_grp_ioregs);
++
++	// Try to detect the 512MB RAM chip first.
++	mx6_dram_cfg(&ddr_sysinfo, &mx6_mmcd_512M_calib, &mem_512M_ddr);
++
++	// Get the available RAM size
++	size = get_ram_size((void *)PHYS_SDRAM, SZ_512M);
++
++	gd->ram_size = size;
++
++	if (size == SZ_512M) {
++		// 512MB RAM was detected
++		return;
++	} else if (size == SZ_256M) {
++		// 256MB RAM was detected, use correct config and calibration
++		mx6_dram_cfg(&ddr_sysinfo, &mx6_mmcd_256M_calib, &mem_256M_ddr);
++	} else {
++		printf("Invalid DDR RAM size detected: %x\n", size);
++	}
++}
++
++static int do_board_detect(void)
++{
++	if (is_mx6ul())
++		gd->board_type = BOARD_TYPE_KTN_N631X;
++	else if (is_mx6ull())
++		gd->board_type = BOARD_TYPE_KTN_N641X;
++
++	printf("Kontron SL i.MX6UL%s (N6%s1x) module, %lu MB RAM detected\n",
++	       is_mx6ull() ? "L" : "", is_mx6ull() ? "4" : "3", gd->ram_size / SZ_1M);
++
++	return 0;
++}
++
++void board_init_f(ulong dummy)
++{
++	ccgr_init();
++
++	/* setup AIPS and disable watchdog */
++	arch_cpu_init();
++
++	/* iomux and setup of UART and SPI */
++	board_early_init_f();
++
++	/* setup GP timer */
++	timer_init();
++
++	/* UART clocks enabled and gd valid - init serial console */
++	preloader_console_init();
++
++	/* DDR initialization */
++	spl_dram_init();
++
++	/* Clear the BSS. */
++	memset(__bss_start, 0, __bss_end - __bss_start);
++
++	/* Detect the board type */
++	do_board_detect();
++
++	/* load/boot image from boot device */
++	board_init_r(NULL, 0);
++}
++
++void board_boot_order(u32 *spl_boot_list)
++{
++	u32 bootdev = spl_boot_device();
++
++	/*
++	 * The default boot fuse settings use the SD card (MMC1) as primary
++	 * boot device, but allow SPI NOR as a fallback boot device.
++	 * We can't detect the fallback case and spl_boot_device() will return
++	 * BOOT_DEVICE_MMC1 despite the actual boot device being SPI NOR.
++	 * Therefore we try to load U-Boot proper vom SPI NOR after loading
++	 * from MMC has failed.
++	 */
++	spl_boot_list[0] = bootdev;
++
++	switch (bootdev) {
++	case BOOT_DEVICE_MMC1:
++	case BOOT_DEVICE_MMC2:
++		spl_boot_list[1] = BOOT_DEVICE_SPI;
++		break;
++	}
++}
++
++int board_early_init_f(void)
++{
++	setup_iomux_uart();
++	setup_spi();
++
++	return 0;
++}
++
++int board_fit_config_name_match(const char *name)
++{
++	if (gd->board_type == BOARD_TYPE_KTN_N631X && is_mx6ul() &&
++	    !strcmp(name, "imx6ul-kontron-n631x-s"))
++		return 0;
++
++	if (gd->board_type == BOARD_TYPE_KTN_N641X && is_mx6ull() &&
++	    !strcmp(name, "imx6ull-kontron-n641x-s"))
++		return 0;
++
++	return -1;
++}
+diff --git a/configs/kontron-sl-mx6ul_defconfig b/configs/kontron-sl-mx6ul_defconfig
+new file mode 100644
+index 0000000000..23d1df7fa9
+--- /dev/null
++++ b/configs/kontron-sl-mx6ul_defconfig
+@@ -0,0 +1,108 @@
++CONFIG_ARM=y
++CONFIG_ARCH_MX6=y
++CONFIG_SYS_TEXT_BASE=0x87800000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_SYS_MEMTEST_START=0x80000000
++CONFIG_SYS_MEMTEST_END=0x90000000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0xF0000
++CONFIG_ENV_SECT_SIZE=0x10000
++CONFIG_MX6UL=y
++CONFIG_TARGET_KONTRON_MX6UL=y
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="imx6ul-kontron-n631x-s"
++CONFIG_SPL_TEXT_BASE=0x00908000
++CONFIG_SPL_MMC_SUPPORT=y
++CONFIG_SPL_SERIAL_SUPPORT=y
++CONFIG_BOOTCOUNT_BOOTLIMIT=3
++CONFIG_SPL=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI_SUPPORT=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_FIT=y
++CONFIG_SPL_LOAD_FIT=y
++# CONFIG_USE_SPL_FIT_GENERATOR is not set
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=arch/arm/mach-imx/spl_sd.cfg"
++CONFIG_SYS_CONSOLE_IS_IN_ENV=y
++CONFIG_BOARD_TYPES=y
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_SPL_RAW_IMAGE_SUPPORT=y
++CONFIG_SPL_LEGACY_IMAGE_SUPPORT=y
++CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x8A
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x11400
++CONFIG_SPL_USB_HOST=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_SPL_USB_SDP_SUPPORT=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_SDP=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FS_UUID=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_MTDIDS_DEFAULT="nor0=spi1.0,spi-nand0=spi4.0"
++CONFIG_MTDPARTS_DEFAULT="mtdparts=spi1.0:128k(spl),832k(u-boot),64k(env);spi4.0:-(UBI)"
++CONFIG_CMD_UBI=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIST="imx6ul-kontron-n631x-s imx6ull-kontron-n641x-s"
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_USE_ENV_SPI_BUS=y
++CONFIG_ENV_SPI_BUS=2
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_BOOTCOUNT_ENV=y
++CONFIG_DM_I2C=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SF_DEFAULT_BUS=1
++CONFIG_SF_DEFAULT_MODE=0
++CONFIG_SF_DEFAULT_SPEED=10000000
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHYLIB=y
++CONFIG_PHY_MICREL=y
++CONFIG_PHY_MICREL_KSZ8XXX=y
++CONFIG_DM_ETH=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_FEC_MXC=y
++CONFIG_MII=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_IMX6=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_CONS_INDEX=4
++CONFIG_MXC_UART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_FSL_QSPI=y
++CONFIG_MXC_SPI=y
++CONFIG_IMX_THERMAL=y
++CONFIG_USB=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="FSL"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_CI_UDC=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_FDT_FIXUP_PARTITIONS=y
+diff --git a/doc/board/kontron/index.rst b/doc/board/kontron/index.rst
+index 543b22e2f5..c3fadcef76 100644
+--- a/doc/board/kontron/index.rst
++++ b/doc/board/kontron/index.rst
+@@ -7,3 +7,4 @@ Kontron
+    :maxdepth: 2
+ 
+    sl28
++   sl-mx6ul
+diff --git a/doc/board/kontron/sl-mx6ul.rst b/doc/board/kontron/sl-mx6ul.rst
+new file mode 100644
+index 0000000000..b0b0f44db2
+--- /dev/null
++++ b/doc/board/kontron/sl-mx6ul.rst
+@@ -0,0 +1,43 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Kontron Electronics SL i.MX6UL/ULL SoM
++======================================
++
++The Kontron SoM-Line i.MX6UL/ULL (N6x1x) by Kontron Electronics GmbH is a SoM module
++with either an i.MX6UL or i.MX6ULL SoC, 256/512 MB DDR3 RAM, SPI NOR, SPI NAND and Ethernet PHY.
++
++The matching evaluation boards (Board-Line) have two Ethernet ports, USB 2.0,
++RGB, SD card, CAN, RS485, RS232 and much more.
++
++Quick Start
++-----------
++
++- Build U-Boot
++- Boot
++
++Build U-Boot
++^^^^^^^^^^^^
++
++.. code-block:: bash
++
++   $ make kontron-sl-mx6ul_defconfig
++   $ make
++
++Burn the flash.bin to SD card at an offset of 1 KiB:
++
++.. code-block:: bash
++
++   $ dd if=flash.bin of=/dev/sd[x] bs=1K seek=1 conv=notrunc
++
++Boot
++^^^^
++
++Put the SD card in the slot on the board and apply power.
++
++Further Information
++-------------------
++
++The bootloader configuration is setup to be used with kernel FIT images. Legacy
++images might not be working out of the box.
++
++Please see https://docs.kontron-electronics.de for further vendor documentation.
+diff --git a/include/configs/kontron-sl-mx6ul.h b/include/configs/kontron-sl-mx6ul.h
+new file mode 100644
+index 0000000000..f2774d5e61
+--- /dev/null
++++ b/include/configs/kontron-sl-mx6ul.h
+@@ -0,0 +1,78 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2018 Kontron Electronics GmbH
++ *
++ * Configuration settings for the Kontron i.MX6UL boards/SoMs.
++ */
++#ifndef __KONTRON_MX6UL_CONFIG_H
++#define __KONTRON_MX6UL_CONFIG_H
++
++#include <asm/arch/imx-regs.h>
++#include <linux/sizes.h>
++
++#include "mx6_common.h"
++#ifdef CONFIG_SPL_BUILD
++#include "imx6_spl.h"
++#endif
++
++/* RAM */
++#define PHYS_SDRAM			MMDC0_ARB_BASE_ADDR
++#define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM
++
++#define CONFIG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
++#define CONFIG_SYS_INIT_RAM_SIZE	IRAM_SIZE
++
++#define CONFIG_SYS_MALLOC_LEN		SZ_64M
++#define CONFIG_SYS_HZ			1000
++
++#define CONFIG_SYS_INIT_SP_OFFSET \
++	(CONFIG_SYS_INIT_RAM_SIZE - GENERATED_GBL_DATA_SIZE)
++#define CONFIG_SYS_INIT_SP_ADDR \
++	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
++
++#define CONFIG_SYS_UBOOT_BASE		CONFIG_SYS_TEXT_BASE
++
++/* Board and environment settings */
++#define CONFIG_MXC_UART_BASE		UART4_BASE
++#define CONFIG_HOSTNAME			"kontron-mx6ul"
++#define CONFIG_ETHPRIME			"eth0"
++
++#ifdef CONFIG_USB_EHCI_HCD
++#define CONFIG_EHCI_HCD_INIT_AFTER_RESET
++#define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
++#define CONFIG_MXC_USB_FLAGS		0
++#define CONFIG_USB_MAX_CONTROLLER_COUNT	2
++#endif
++
++/* Boot order for distro boot */
++#ifndef CONFIG_SPL_BUILD
++#define BOOT_TARGET_DEVICES(func) \
++	func(MMC, mmc, 1) \
++	func(MMC, mmc, 0) \
++	func(UBIFS, ubifs, 0) \
++	func(USB, usb, 0) \
++	func(PXE, pxe, na) \
++	func(DHCP, dhcp, na)
++#include <config_distro_bootcmd.h>
++#else
++#define BOOTENV
++#endif
++
++/* MMC Configs */
++#ifdef CONFIG_FSL_USDHC
++#define CONFIG_SYS_FSL_ESDHC_ADDR	USDHC1_BASE_ADDR
++#define CONFIG_SYS_FSL_USDHC_NUM	2
++#define CONFIG_SYS_MMC_IMG_LOAD_PART	1
++#endif
++
++#define CONFIG_EXTRA_ENV_SETTINGS \
++	"kernel_addr_r=0x82000000\0" \
++	"ramdisk_addr_r=0x88080000\0" \
++	"pxefile_addr_r=0x80100000\0" \
++	"scriptaddr=0x80100000\0" \
++	"bootdelay=3\0" \
++	"ethact=" CONFIG_ETHPRIME "\0" \
++	"hostname=" CONFIG_HOSTNAME "\0" \
++	BOOTENV
++
++#endif /* __KONTRON_MX6UL_CONFIG_H */
+-- 
+2.30.0
+

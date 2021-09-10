@@ -10,3 +10,9 @@
 [submodule "pitx-imx8m/arm-trusted-firmware"]
 	path = pitx-imx8m/arm-trusted-firmware
 	url = https://github.com/ARM-software/arm-trusted-firmware.git
+[submodule "sl-mx8mm/u-boot"]
+	path = sl-mx8mm/u-boot
+	url = https://github.com/u-boot/u-boot.git
+[submodule "sl-mx8mm/arm-trusted-firmware"]
+	path = sl-mx8mm/arm-trusted-firmware
+	url = https://github.com/ARM-software/arm-trusted-firmware.git
