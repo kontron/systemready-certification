@@ -1,7 +1,7 @@
-From 8a1018946c4007b77876ba8f549056618542dff4 Mon Sep 17 00:00:00 2001
+From 1ecb220d214c0b709e17eb6c1be9f3aae37a8f47 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 2 Sep 2021 14:09:24 +0200
-Subject: [PATCH 20/32] spi: fsl_dspi: rename num-cs to spi-num-chipselects
+Subject: [PATCH] spi: fsl_dspi: rename num-cs to spi-num-chipselects
 
 The official devicetree bindings specifies spi-num-chipselects as the
 name. Use it.

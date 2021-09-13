@@ -1,8 +1,8 @@
-From ec09dd4a352c2eadb6fba967d7bb342d696e5b5a Mon Sep 17 00:00:00 2001
+From bd15677cbcb07304934b2e14a5c39eaf9b5cc69d Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:19:56 +0200
-Subject: [PATCH 09/32] arm: dts: ls1028a: move the SPI and eSDHC controller
- nodes into /soc
+Subject: [PATCH] arm: dts: ls1028a: move the SPI and eSDHC controller nodes
+ into /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

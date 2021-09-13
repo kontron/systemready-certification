@@ -1,8 +1,7 @@
-From 00494910ef1f96f967348ea078b41a6d0518bafc Mon Sep 17 00:00:00 2001
+From e9f11935386826ea125e839f9e43fabe09c6d58d Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:20:44 +0200
-Subject: [PATCH 10/32] arm: dts: ls1028a: move the UART controller nodes into
- /soc
+Subject: [PATCH] arm: dts: ls1028a: move the UART controller nodes into /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

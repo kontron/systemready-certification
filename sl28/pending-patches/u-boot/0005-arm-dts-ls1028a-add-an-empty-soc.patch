@@ -1,7 +1,7 @@
-From 3ac8d44b6a0811a23254e46c23acdc3e8839e18f Mon Sep 17 00:00:00 2001
+From 95a652b763090bc51a00ea4f33746ffb49031fe1 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 13:41:37 +0200
-Subject: [PATCH 05/32] arm: dts: ls1028a: add an empty /soc
+Subject: [PATCH] arm: dts: ls1028a: add an empty /soc
 
 To keep the device tree similar to the linux kernel one, we need to move
 all CCSR related devices into the /soc node. To keep the patches easy to

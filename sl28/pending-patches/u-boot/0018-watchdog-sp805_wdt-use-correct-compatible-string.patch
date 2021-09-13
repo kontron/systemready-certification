@@ -1,7 +1,7 @@
-From 9352ee13b689a1c13270356545ba4cefb87f5f1b Mon Sep 17 00:00:00 2001
+From c423aecbef67fa778c7cf44c2a4e8a1fe2b8a447 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 26 Aug 2021 14:40:02 +0200
-Subject: [PATCH 18/32] watchdog: sp805_wdt: use correct compatible string
+Subject: [PATCH] watchdog: sp805_wdt: use correct compatible string
 
 According to the linux device tree specification the compatible string
 is:

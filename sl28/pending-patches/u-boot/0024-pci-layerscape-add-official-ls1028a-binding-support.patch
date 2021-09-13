@@ -1,7 +1,7 @@
-From 2a7a1808cbfc2a3a29a11bad4f38cca75e0847d9 Mon Sep 17 00:00:00 2001
+From a085b8ca453b0a269edd96d6374bf4304f728cd3 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 2 Sep 2021 11:43:57 +0200
-Subject: [PATCH 24/32] pci: layerscape: add official ls1028a binding support
+Subject: [PATCH] pci: layerscape: add official ls1028a binding support
 
 The official bindind of the PCIe controller of the ls1028a has the
 following compatible string:

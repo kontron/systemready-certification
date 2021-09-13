@@ -1,8 +1,7 @@
-From f104f251c24f040ec85345ea6a069a3fbb0b6f5b Mon Sep 17 00:00:00 2001
+From 14b4c547068e5d786f8a77806e2e942dc02c7914 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:49:25 +0200
-Subject: [PATCH 14/32] arm: dts: ls1028a: move the PCIe controller nodes into
- /soc
+Subject: [PATCH] arm: dts: ls1028a: move the PCIe controller nodes into /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

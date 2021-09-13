@@ -1,7 +1,7 @@
-From a11880fce23e1dec91c1cbb70979c31b4965f685 Mon Sep 17 00:00:00 2001
+From f3215b1824004aac7f9dc4a918a706e0255d2e28 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Sun, 29 Aug 2021 22:26:49 +0200
-Subject: [PATCH 29/32] arm: dts: ls1028a: sync the fsl-ls1028a.dtsi with linux
+Subject: [PATCH] arm: dts: ls1028a: sync the fsl-ls1028a.dtsi with linux
 
 Now that everything is prepared, copy the fsl-ls1028a.dtsi from the
 linux kernel v5.14.

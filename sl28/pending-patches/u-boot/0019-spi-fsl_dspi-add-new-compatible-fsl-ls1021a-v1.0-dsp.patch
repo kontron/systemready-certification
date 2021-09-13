@@ -1,7 +1,7 @@
-From 8e4f58be924d9484bb35ece4d32cc64137405b26 Mon Sep 17 00:00:00 2001
+From d0c877706d54e5f4dbaa6e0ce743ac00c8fe586a Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 26 Aug 2021 15:41:57 +0200
-Subject: [PATCH 19/32] spi: fsl_dspi: add new compatible fsl,ls1021a-v1.0-dspi
+Subject: [PATCH] spi: fsl_dspi: add new compatible fsl,ls1021a-v1.0-dspi
 
 The official ls1028a binding of the driver uses the following as
 compatibles:

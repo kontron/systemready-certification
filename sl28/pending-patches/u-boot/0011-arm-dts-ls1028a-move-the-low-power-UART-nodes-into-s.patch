@@ -1,8 +1,7 @@
-From 5546e25d8c587890d9222d74fb834051bcdbbfa5 Mon Sep 17 00:00:00 2001
+From 084c1247456e06e4fc4743dbeb03780abe1bf1ca Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:22:51 +0200
-Subject: [PATCH 11/32] arm: dts: ls1028a: move the low-power UART nodes into
- /soc
+Subject: [PATCH] arm: dts: ls1028a: move the low-power UART nodes into /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

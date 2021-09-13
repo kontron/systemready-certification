@@ -1,7 +1,7 @@
-From d00a64d2b0f91f88a9592cce2d1862f44182ed0e Mon Sep 17 00:00:00 2001
+From 6e42af0298e352cd4640873b84a6d112df1a404f Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 26 Aug 2021 15:41:57 +0200
-Subject: [PATCH 21/32] serial: lpuart: add new compatible fsl,ls1028a-lpuart
+Subject: [PATCH] serial: lpuart: add new compatible fsl,ls1028a-lpuart
 
 The official ls1028a binding of the driver uses the following as
 compatibles:

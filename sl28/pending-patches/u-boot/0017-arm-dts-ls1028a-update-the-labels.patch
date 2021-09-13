@@ -1,7 +1,7 @@
-From d8d814b928fdfc31c1ce3d30a22bd214cfa79c71 Mon Sep 17 00:00:00 2001
+From ee7dd1e672f41746037f3b4395df78df9488fc49 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 25 Aug 2021 22:34:55 +0200
-Subject: [PATCH 17/32] arm: dts: ls1028a: update the labels
+Subject: [PATCH] arm: dts: ls1028a: update the labels
 
 Update the labels of the nodes to match the kernel ones.
 

@@ -1,7 +1,7 @@
-From 763f9bf68c9a85beda970cfc1505682c6c30306b Mon Sep 17 00:00:00 2001
+From 631d6166c43ed202ee201151585bb46aace5e22c Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:50:47 +0200
-Subject: [PATCH 15/32] arm: dts: ls1028a: move the watchdog node into /soc
+Subject: [PATCH] arm: dts: ls1028a: move the watchdog node into /soc
 
 While inserting it into the new location, keep it sorted by the
 register base offset just like in the linux kernel device tree.

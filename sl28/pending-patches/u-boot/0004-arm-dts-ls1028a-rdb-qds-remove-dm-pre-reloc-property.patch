@@ -1,8 +1,7 @@
-From 2979ac548d55c34afa892ab379f47aef0a1565b6 Mon Sep 17 00:00:00 2001
+From 6a94744a3a60546629801d2240f0f9fa9af0d032 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 13:40:54 +0200
-Subject: [PATCH 04/32] arm: dts: ls1028a-{rdb,qds}: remove dm-pre-reloc
- property
+Subject: [PATCH] arm: dts: ls1028a-{rdb,qds}: remove dm-pre-reloc property
 
 Nowadays, both boards boot using the TF-A BL1/BL2 and SPL isn't used at
 all. The property is not needed, remove it.

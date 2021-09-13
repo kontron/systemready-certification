@@ -1,7 +1,7 @@
-From 51dc055c2db9887cd8aa156feb4a791ca0c7594c Mon Sep 17 00:00:00 2001
+From a8a82c65318f4511f109a5c8165e3024e66d9a74 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Sun, 29 Aug 2021 23:25:49 +0200
-Subject: [PATCH 30/32] arm: dts: sl28: sync dtbs
+Subject: [PATCH] arm: dts: sl28: sync dtbs
 
 Copy the board device tree files from linux v5.14. On top of the v5.14
 dtbs the changes of these two patches are included here which are needed

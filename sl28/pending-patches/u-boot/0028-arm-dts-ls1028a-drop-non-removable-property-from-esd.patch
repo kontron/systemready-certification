@@ -1,8 +1,8 @@
-From 2651a41985773e8150b3602b0af892f06ec81033 Mon Sep 17 00:00:00 2001
+From 63ce3227dca43e08128c09627a83a7a582345a1b Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 2 Sep 2021 15:42:01 +0200
-Subject: [PATCH 28/32] arm: dts: ls1028a: drop non-removable property from
- esdhc controller node
+Subject: [PATCH] arm: dts: ls1028a: drop non-removable property from esdhc
+ controller node
 
 The linux device tree hasn't set this property. To be similarly we remove
 it from the u-boot device tree, too. The second controller of the

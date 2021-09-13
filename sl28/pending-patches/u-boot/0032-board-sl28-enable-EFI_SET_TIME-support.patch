@@ -1,7 +1,7 @@
-From eee9aa6ccb85daa002bd101f521046470326be4f Mon Sep 17 00:00:00 2001
+From 101337e450da54d09aa3a26b8c77657900976f57 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Tue, 7 Sep 2021 13:40:41 +0200
-Subject: [PATCH 31/32] board: sl28: enable EFI_SET_TIME support
+Subject: [PATCH] board: sl28: enable EFI_SET_TIME support
 
 Allow EFI to actually set the time before ExitBootServices().
 

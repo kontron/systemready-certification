@@ -1,7 +1,7 @@
-From 620c30e3b1203da37f9f51be3e5318b84a8475c4 Mon Sep 17 00:00:00 2001
+From 029d0bc423fab0983ac4d4b3deaf6b57327d1ab0 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:18:04 +0200
-Subject: [PATCH 08/32] arm: dts: ls1028a: move the FlexSPI controller node
+Subject: [PATCH] arm: dts: ls1028a: move the FlexSPI controller node
 
 While inserting it into the new location, keep it sorted by the
 register base offset just like in the linux kernel device tree.

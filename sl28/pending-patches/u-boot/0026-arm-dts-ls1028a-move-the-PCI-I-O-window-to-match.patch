@@ -1,7 +1,7 @@
-From ca7a5a41622bde05a18dec9cbb5ac903ad496feb Mon Sep 17 00:00:00 2001
+From 975b0c8d6dcd248162070680e697f4f673495311 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 17:06:34 +0200
-Subject: [PATCH 26/32] arm: dts: ls1028a: move the PCI I/O window to match
+Subject: [PATCH] arm: dts: ls1028a: move the PCI I/O window to match
 
 To make the synchronization of the u-boot device tree with the one from
 linux easier, move the I/O window to the one which is specified in the

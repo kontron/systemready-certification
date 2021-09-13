@@ -1,7 +1,7 @@
-From 8ff834e03752480a3e1edd7424e9670f2099a64c Mon Sep 17 00:00:00 2001
+From 7dc4d27588d29af9485367687a60d54493395af0 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Tue, 31 Aug 2021 14:58:57 +0200
-Subject: [PATCH 02/32] armv8: ls1028a: add IOMMU stream ID to vivante node
+Subject: [PATCH] armv8: ls1028a: add IOMMU stream ID to vivante node
 
 The fixup is done for the "fsl,ls1028a-gpu" which isn't any official
 device tree binding. Don't break it, but instead add a fixup for another

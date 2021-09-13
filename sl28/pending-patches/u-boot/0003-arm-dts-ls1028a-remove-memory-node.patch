@@ -1,7 +1,7 @@
-From 5bf5d4f620da667ae6ea0583e3658bcebe6a08ec Mon Sep 17 00:00:00 2001
+From 892aa2438cbc38fc6ed98c58c940cee2ca716143 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 25 Aug 2021 21:30:27 +0200
-Subject: [PATCH 03/32] arm: dts: ls1028a: remove /memory node
+Subject: [PATCH] arm: dts: ls1028a: remove /memory node
 
 This node is some hodgepodge between the ddr controller node at SoC
 offset 0x1080000 and some static memory size of 2GiB. Remove this bogus

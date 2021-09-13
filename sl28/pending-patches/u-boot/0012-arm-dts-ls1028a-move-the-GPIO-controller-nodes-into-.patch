@@ -1,8 +1,7 @@
-From 4986c98e957170379082d879e1e83ebe04895c3d Mon Sep 17 00:00:00 2001
+From a49347cc0f51906c38d335dea1293a69ae5a4644 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:40:47 +0200
-Subject: [PATCH 12/32] arm: dts: ls1028a: move the GPIO controller nodes into
- /soc
+Subject: [PATCH] arm: dts: ls1028a: move the GPIO controller nodes into /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

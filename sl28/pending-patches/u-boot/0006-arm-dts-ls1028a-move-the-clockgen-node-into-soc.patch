@@ -1,7 +1,7 @@
-From 793c38c30f3dd4221fa862f01951521abac9c80e Mon Sep 17 00:00:00 2001
+From daa0c27420805551a6f890a19cc07016cfc4de7b Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 13:54:48 +0200
-Subject: [PATCH 06/32] arm: dts: ls1028a: move the clockgen node into /soc
+Subject: [PATCH] arm: dts: ls1028a: move the clockgen node into /soc
 
 Populate the /soc node with the first device node.
 

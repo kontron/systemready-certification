@@ -1,7 +1,7 @@
-From 66ddbe0d69cbcdb821366418995f5da19f68a747 Mon Sep 17 00:00:00 2001
+From 90a0261e02a20a79cf48b1827b2f73236c65fa6b Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 16:50:03 +0200
-Subject: [PATCH 22/32] scsi: ceva: rename the resource name to match the linux
+Subject: [PATCH] scsi: ceva: rename the resource name to match the linux
  kernel one
 
 The driver will look for a named resource "ecc-addr", but this isn't the

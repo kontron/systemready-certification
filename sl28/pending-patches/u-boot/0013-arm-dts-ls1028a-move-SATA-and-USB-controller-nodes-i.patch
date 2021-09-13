@@ -1,8 +1,8 @@
-From 5197aaaa153287f9dfda1bc46c8cbbf0bcb16144 Mon Sep 17 00:00:00 2001
+From e25f48e9e6cdb1cb7f5050230f7a7b6a387968ca Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:41:59 +0200
-Subject: [PATCH 13/32] arm: dts: ls1028a: move SATA and USB controller nodes
- into /soc
+Subject: [PATCH] arm: dts: ls1028a: move SATA and USB controller nodes into
+ /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

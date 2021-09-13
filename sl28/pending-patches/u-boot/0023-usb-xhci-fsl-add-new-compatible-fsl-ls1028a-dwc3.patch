@@ -1,7 +1,7 @@
-From dafabac9c8f1fc299510a1ad469c9ecc83429f71 Mon Sep 17 00:00:00 2001
+From e6f1f766f7defcf19ffcc85076b14f41feda512d Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 2 Sep 2021 14:22:37 +0200
-Subject: [PATCH 23/32] usb: xhci: fsl: add new compatible fsl,ls1028a-dwc3
+Subject: [PATCH] usb: xhci: fsl: add new compatible fsl,ls1028a-dwc3
 
 The official ls1028a binding of the driver uses the following as
 compatibles:

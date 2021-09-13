@@ -1,8 +1,7 @@
-From ccb6980dbc096d6f5f7bd3f956c0dd8feb879407 Mon Sep 17 00:00:00 2001
+From 489085558b98b0708d5ba05770e5b3616199ff43 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 2 Sep 2021 11:43:25 +0200
-Subject: [PATCH 27/32] arm: dts: ls1028a: disable the PCIe controller by
- default
+Subject: [PATCH] arm: dts: ls1028a: disable the PCIe controller by default
 
 Disable the PCIe controllers by default, just like in the linux device
 tree. But there is one catch, for linux they are enabled in-place by the

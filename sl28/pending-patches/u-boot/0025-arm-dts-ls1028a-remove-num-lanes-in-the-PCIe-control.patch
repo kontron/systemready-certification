@@ -1,8 +1,8 @@
-From 4d168807b88cc9830b00966d580c9200c80ba409 Mon Sep 17 00:00:00 2001
+From e458506e7a0e95a54ea8ddc32f25f84defd6c2a1 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Thu, 2 Sep 2021 15:14:24 +0200
-Subject: [PATCH 25/32] arm: dts: ls1028a: remove num-lanes in the PCIe
- controller nodes
+Subject: [PATCH] arm: dts: ls1028a: remove num-lanes in the PCIe controller
+ nodes
 
 This property is unused in the layerscape PCIe controller driver and not
 present in the linux device tree. Remove it to be similarly.

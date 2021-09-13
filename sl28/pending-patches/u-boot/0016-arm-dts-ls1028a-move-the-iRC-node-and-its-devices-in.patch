@@ -1,8 +1,8 @@
-From e9e1ec28f207d85c9dc55d237559a823d0d02f1e Mon Sep 17 00:00:00 2001
+From 9410311b8fd6ba6b181bf3d6c81c2a498661011d Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 14:52:04 +0200
-Subject: [PATCH 16/32] arm: dts: ls1028a: move the iRC node and its devices
- into /soc
+Subject: [PATCH] arm: dts: ls1028a: move the iRC node and its devices into
+ /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.

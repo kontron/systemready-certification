@@ -1,0 +1,85 @@
+From 4c3b10f892a2f83230b6efbb8c0221ce80173d0f Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Mon, 13 Sep 2021 15:46:18 +0200
+Subject: [PATCH] board: sl28: generate FIT update image
+
+Generate a FIT update image during build. The image will be called
+"u-boot.update" and can be used to build an EFI UpdateCapsule or during
+DFU mode. Although, the latter isn't supported because there is no USB
+OTG driver yet.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ .../dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi  | 35 +++++++++++++++++--
+ 1 file changed, 33 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi b/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
+index 8538ce7984..d4b833284e 100644
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
++++ b/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
+@@ -12,6 +12,12 @@
+ 	};
+ 
+ 	binman: binman {
++		multiple-images;
++	};
++};
++
++&binman {
++	u_boot_rom: u-boot-rom {
+ 		filename = "u-boot.rom";
+ 		pad-byte = <0xff>;
+ 
+@@ -130,6 +136,31 @@
+ 	};
+ };
+ 
++&binman {
++	u-boot-update {
++		filename = "u-boot.update";
++
++		fit {
++			description = "FIT update image";
++
++			images {
++				u-boot-bin {
++					description = "U-Boot";
++					type = "firmware";
++					os = "u-boot";
++					arch = "arm";
++					compression = "none";
++					load = <0>; /* unused */
++
++					blob {
++						filename = "u-boot.rom";
++					};
++				};
++			};
++		};
++	};
++};
++
+ #ifdef CONFIG_SL28_ENABLE_SER0_CONSOLE
+ / {
+ 	chosen {
+@@ -139,7 +170,7 @@
+ #endif
+ 
+ #ifdef CONFIG_SL28_SPL_LOADS_ATF_BL31
+-&binman {
++&u_boot_rom {
+ 	fit {
+ 		images {
+ 			bl31 {
+@@ -188,7 +219,7 @@
+ #endif
+ 
+ #ifdef CONFIG_SL28_SPL_LOADS_OPTEE_BL32
+-&binman {
++&u_boot_rom {
+ 	fit {
+ 		images {
+ 			bl32 {
+-- 
+2.30.2
+

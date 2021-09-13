@@ -1,7 +1,7 @@
-From 8257fd41bec1991aebf2541c9ea0f17daa4db53e Mon Sep 17 00:00:00 2001
+From 5e4e912071163299d9513eb005fc18fe80582674 Mon Sep 17 00:00:00 2001
 From: Michael Walle <michael@walle.cc>
 Date: Wed, 1 Sep 2021 13:55:52 +0200
-Subject: [PATCH 07/32] arm: dts: ls1028a: move I2C controller nodes into /soc
+Subject: [PATCH] arm: dts: ls1028a: move I2C controller nodes into /soc
 
 While inserting them into the new location, keep them sorted by the
 register base offset just like in the linux kernel device tree.
