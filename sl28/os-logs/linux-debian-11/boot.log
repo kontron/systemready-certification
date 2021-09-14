@@ -1,0 +1,122 @@
+U-Boot SPL 2021.10-rc3-00036-gadea187350 (Sep 13 2021 - 16:52:44 +0200)
+Trying to boot from SPI
+NOTICE:  BL31: v1.5(release):LSDK-20.04-update-290520-1-ga5d788c82
+NOTICE:  BL31: Built : 13:21:33, Sep 10 2021
+NOTICE:  Welcome to LS1028 BL31 Phase
+
+
+U-Boot 2021.10-rc3-00036-gadea187350 (Sep 13 2021 - 16:52:44 +0200)
+
+SoC:  LS1028A Rev1.0 (0x870b0110)
+Clock Configuration:
+       CPU0(A72):1300 MHz  CPU1(A72):1300 MHz  
+       Bus:      400  MHz  DDR:      1600 MT/s
+Reset Configuration Word (RCW):
+       00000000: 34004010 00000030 00000000 00000000
+       00000010: 00000000 008f0000 0030c000 00000000
+       00000020: 06200000 00002580 00000000 00019016
+       00000030: 00000000 00000048 00000000 00000000
+       00000040: 00000000 00000000 00000000 00000000
+       00000050: 00000000 00000000 00000000 00000000
+       00000060: 00000304 00000000 000e7000 00000000
+       00000070: bb580000 00020000
+Model: Kontron SMARC-sAL28 (Dual PHY)
+EL:    2
+DRAM:  3.9 GiB
+DDR    3.9 GiB (DDR3, 32-bit, CL=11, ECC on)
+SEC0:  RNG instantiated
+Using SERDES1 Protocol: 47960 (0xbb58)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+Loading Environment from SPIFlash... SF: Detected w25q32dw with page size 256 Bytes, erase size 64 KiB, total 4 MiB
+OK
+PCIe1: pcie@3400000 Root Complex: no link
+PCIe2: pcie@3500000 Root Complex: no link
+In:    serial@21c0500
+Out:   serial@21c0500
+Err:   serial@21c0500
+Net:   eth0: enetc-0, eth1: enetc-1
+Hit any key to stop autoboot:  3  0 
+=> boot
+switch to partitions #0, OK
+mmc0(part 0) is current device
+Scanning mmc 0:1...
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+7[r[999;999H[6n8Scanning disk mmc@2140000.blk...
+Scanning disk mmc@2150000.blk...
+** Unrecognized filesystem type **
+Found 7 disks
+WARNING: SEC firmware not running, no kaslr-seed
+WARNING could not find node vivante,gc: FDT_ERR_NOTFOUND.
+WARNING could not find node fsl,ls1028a-gpu: FDT_ERR_NOTFOUND.
+BootOrder not defined
+EFI boot manager: Cannot load any image
+Found EFI removable media binary efi/boot/bootaa64.efi
+1811840 bytes read in 18 ms (96 MiB/s)
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+WARNING: SEC firmware not running, no kaslr-seed
+WARNING could not find node vivante,gc: FDT_ERR_NOTFOUND.
+WARNING could not find node fsl,ls1028a-gpu: FDT_ERR_NOTFOUND.
+Booting /efi\boot\bootaa64.efi
+[?25h[0;30;47mWelcome to GRUB!
+
+[0;37;40m[0;37;40m[0;37;40m[0;37;40m[2J[1;1H[0;37;40merror: no suitable video mode found.
+[?25l[0;37;40m[0;37;40m[2J[1;1H[0;37;40m[2;48HGNU GRUB  version 2.04-20
+
+[0;36;44m[4;2H┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐[5;2H│[5;118H│[6;2H│[6;118H│[7;2H│[7;118H│[8;2H│[8;118H│[9;2H│[9;118H│[10;2H│[10;118H│[11;2H│[11;118H│[12;2H│[12;118H│[13;2H│[13;118H│[14;2H│[14;118H│[15;2H│[15;118H│[16;2H│[16;118H│[17;2H│[17;118H│[18;2H│[18;118H│[19;2H│[19;118H│[20;2H│[20;118H│[21;2H│[21;118H│[22;2H│[22;118H│[23;2H│[23;118H│[24;2H│[24;118H│[25;2H│[25;118H│[26;2H│[26;118H│[27;2H│[27;118H│[28;2H│[28;118H│[29;2H│[29;118H│[30;2H│[30;118H│[31;2H│[31;118H│[32;2H│[32;118H│[33;2H│[33;118H│[34;2H│[34;118H│[35;2H│[35;118H│[36;2H│[36;118H│[37;2H│[37;118H│[38;2H│[38;118H│[39;2H│[39;118H│[40;2H│[40;118H│[41;2H│[41;118H│[42;2H│[42;118H│[43;2H│[43;118H│[44;2H│[44;118H│[45;2H│[45;118H│[46;2H│[46;118H│[47;2H│[47;118H│[48;2H│[48;118H│[49;2H│[49;118H│[50;2H│[50;118H│[51;2H│[51;118H│[52;2H│[52;118H│[53;2H│[53;118H│[54;2H│[54;118H│[55;2H│[55;118H│[56;2H│[56;118H│[57;2H│[57;118H│[58;2H│[58;118H│[59;2H│[59;118H│[60;2H│[60;118H│[61;2H└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘[0;36;44m[62;2H[63;2H[0;37;40m     Use the ▲ and ▼ keys to select which entry is highlighted.                                                 
+      Press enter to boot the selected OS, `e' to edit the commands before booting or `c' for a command-line.    
+      ESC to return previous menu.                                                                               [5;119H [1;37;44m[5;3H*Debian GNU/Linux                                                                                                  [0;36;44m[5;117H[0;37;40m[0;36;44m[6;3H Advanced options for Debian GNU/Linux                                                                             [0;36;44m[6;117H[0;37;40m[0;36;44m[7;3H                                                                                                                   [0;36;44m[7;117H[0;37;40m[0;36;44m[8;3H                                                                                                                   [0;36;44m[8;117H[0;37;40m[0;36;44m[9;3H                                                                                                                   [0;36;44m[9;117H[0;37;40m[0;36;44m[10;3H                                                                                                                   [0;36;44m[10;117H[0;37;40m[0;36;44m[11;3H                                                                                                                   [0;36;44m[11;117H[0;37;40m[0;36;44m[12;3H                                                                                                                   [0;36;44m[12;117H[0;37;40m[0;36;44m[13;3H                                                                                                                   [0;36;44m[13;117H[0;37;40m[0;36;44m[14;3H                                                                                                                   [0;36;44m[14;117H[0;37;40m[0;36;44m[15;3H                                                                                                                   [0;36;44m[15;117H[0;37;40m[0;36;44m[16;3H                                                                                                                   [0;36;44m[16;117H[0;37;40m[0;36;44m[17;3H                                                                                                                   [0;36;44m[17;117H[0;37;40m[0;36;44m[18;3H                                                                                                                   [0;36;44m[18;117H[0;37;40m[0;36;44m[19;3H                                                                                                                   [0;36;44m[19;117H[0;37;40m[0;36;44m[20;3H                                                                                                                   [0;36;44m[20;117H[0;37;40m[0;36;44m[21;3H                                                                                                                   [0;36;44m[21;117H[0;37;40m[0;36;44m[22;3H                                                                                                                   [0;36;44m[22;117H[0;37;40m[0;36;44m[23;3H                                                                                                                   [0;36;44m[23;117H[0;37;40m[0;36;44m[24;3H                                                                                                                   [0;36;44m[24;117H[0;37;40m[0;36;44m[25;3H                                                                                                                   [0;36;44m[25;117H[0;37;40m[0;36;44m[26;3H                                                                                                                   [0;36;44m[26;117H[0;37;40m[0;36;44m[27;3H                                                                                                                   [0;36;44m[27;117H[0;37;40m[0;36;44m[28;3H                                                                                                                   [0;36;44m[28;117H[0;37;40m[0;36;44m[29;3H                                                                                                                   [0;36;44m[29;117H[0;37;40m[0;36;44m[30;3H                                                                                                                   [0;36;44m[30;117H[0;37;40m[0;36;44m[31;3H                                                                                                                   [0;36;44m[31;117H[0;37;40m[0;36;44m[32;3H                                                                                                                   [0;36;44m[32;117H[0;37;40m[0;36;44m[33;3H                                                                                                                   [0;36;44m[33;117H[0;37;40m[0;36;44m[34;3H                                                                                                                   [0;36;44m[34;117H[0;37;40m[0;36;44m[35;3H                                                                                                                   [0;36;44m[35;117H[0;37;40m[0;36;44m[36;3H                                                                                                                   [0;36;44m[36;117H[0;37;40m[0;36;44m[37;3H                                                                                                                   [0;36;44m[37;117H[0;37;40m[0;36;44m[38;3H                                                                                                                   [0;36;44m[38;117H[0;37;40m[0;36;44m[39;3H                                                                                                                   [0;36;44m[39;117H[0;37;40m[0;36;44m[40;3H                                                                                                                   [0;36;44m[40;117H[0;37;40m[0;36;44m[41;3H                                                                                                                   [0;36;44m[41;117H[0;37;40m[0;36;44m[42;3H                                                                                                                   [0;36;44m[42;117H[0;37;40m[0;36;44m[43;3H                                                                                                                   [0;36;44m[43;117H[0;37;40m[0;36;44m[44;3H                                                                                                                   [0;36;44m[44;117H[0;37;40m[0;36;44m[45;3H                                                                                                                   [0;36;44m[45;117H[0;37;40m[0;36;44m[46;3H                                                                                                                   [0;36;44m[46;117H[0;37;40m[0;36;44m[47;3H                                                                                                                   [0;36;44m[47;117H[0;37;40m[0;36;44m[48;3H                                                                                                                   [0;36;44m[48;117H[0;37;40m[0;36;44m[49;3H                                                                                                                   [0;36;44m[49;117H[0;37;40m[0;36;44m[50;3H                                                                                                                   [0;36;44m[50;117H[0;37;40m[0;36;44m[51;3H                                                                                                                   [0;36;44m[51;117H[0;37;40m[0;36;44m[52;3H                                                                                                                   [0;36;44m[52;117H[0;37;40m[0;36;44m[53;3H                                                                                                                   [0;36;44m[53;117H[0;37;40m[0;36;44m[54;3H                                                                                                                   [0;36;44m[54;117H[0;37;40m[0;36;44m[55;3H                                                                                                                   [0;36;44m[55;117H[0;37;40m[0;36;44m[56;3H                                                                                                                   [0;36;44m[56;117H[0;37;40m[0;36;44m[57;3H                                                                                                                   [0;36;44m[57;117H[0;37;40m[0;36;44m[58;3H                                                                                                                   [0;36;44m[58;117H[0;37;40m[0;36;44m[59;3H                                                                                                                   [0;36;44m[59;117H[0;37;40m[0;36;44m[60;3H                                                                                                                   [0;36;44m[60;117H[0;37;40m[60;119H [5;117H[66;1H   The highlighted entry will be executed automatically in 5s.                                                        [5;117H[66;1H                                                                                                                      [67;1H                                                                                                                      [5;117H[?25h[0;37;40m[2J[1;1H[0;37;40m[0;37;40m[2J[1;1H[0;37;40mLoading Linux 5.10.0-8-arm64 ...
+Loading initial ramdisk ...
+[    1.692515] gpio-keys buttons0: Found button without gpio or irq
+[    1.752497] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.854445] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.883628] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.918637] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.939940] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.959672] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.981588] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.989641] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.996522] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.010588] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.017299] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.038377] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.090542] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.096361] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.104490] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.114321] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.126336] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.136363] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+/dev/mmcblk0p2: clean, 20092/1843200 files, 339881/7368192 blocks
+[    2.634054] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.081476] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.465575] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.777672] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.807453] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.867853] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.897659] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.929491] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.015266] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.034044] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.044333] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.085827] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.096269] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.108254] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.119941] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.250518] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.340189] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.835959] caam_jr 8010000.jr: 2000090f: CCB: desc idx 9: : Invalid CHA selected.
+[    4.843660] alg: ahash: xcbc-aes-caam final() failed with err -22 on test vector 0, cfg="init+update+final aligned buffer"
+[    4.932606] caam_jr 8010000.jr: 2000090f: CCB: desc idx 9: : Invalid CHA selected.
+[    4.940405] alg: ahash: cmac-aes-caam final() failed with err -22 on test vector 0, cfg="init+update+final aligned buffer"
+[    4.953018] sd 1:0:0:0: [sda] Asking for cache data failed
+[    4.958588] sd 1:0:0:0: [sda] Assuming drive cache: write through
+[    4.965761] caam_jr 8010000.jr: 20000b0f: CCB: desc idx 11: : Invalid CHA selected.
+[    4.974213] alg: akcipher: encrypt test failed. err -22
+[    4.979535] alg: akcipher: test 1 failed for rsa-caam, err=-22
+[    5.012056] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    5.028107] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    5.053226] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    5.129062] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+
+Debian GNU/Linux 11 debian ttyS0
+
+debian login: 

@@ -1,0 +1,645 @@
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd083]
+[    0.000000] Linux version 5.10.0-8-arm64 (debian-kernel@lists.debian.org) (gcc-10 (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2) #1 SMP Debian 5.10.46-4 (2021-08-03)
+[    0.000000] Machine model: Kontron SMARC-sAL28 (Dual PHY)
+[    0.000000] efi: EFI v2.80 by Das U-Boot
+[    0.000000] efi: ESRT=0x20fffe4040 RTPROP=0x20fffe6040 SMBIOS=0xfab25000 RNG=0x20bdee2040 MEMRESERVE=0x20bdee1040 
+[    0.000000] efi: seeding entropy pool
+[    0.000000] secureboot: Secure boot disabled
+[    0.000000] esrt: Reserving ESRT space from 0x00000020fffe4040 to 0x00000020fffe4078.
+[    0.000000] NUMA: No NUMA configuration found
+[    0.000000] NUMA: Faking a node at [mem 0x0000000080000000-0x00000020ffffffff]
+[    0.000000] NUMA: NODE_DATA [mem 0x20ff7efb00-0x20ff7f1fff]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000080000000-0x00000000ffffffff]
+[    0.000000]   DMA32    empty
+[    0.000000]   Normal   [mem 0x0000000100000000-0x00000020ffffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x00000000fab24fff]
+[    0.000000]   node   0: [mem 0x00000000fab25000-0x00000000fab25fff]
+[    0.000000]   node   0: [mem 0x00000000fab26000-0x00000000fbd2ffff]
+[    0.000000]   node   0: [mem 0x00000000fbd30000-0x00000000fbd3ffff]
+[    0.000000]   node   0: [mem 0x00000000fbd40000-0x00000000fbdfffff]
+[    0.000000]   node   0: [mem 0x0000002080000000-0x00000020bdee1fff]
+[    0.000000]   node   0: [mem 0x00000020bdee2000-0x00000020bdee2fff]
+[    0.000000]   node   0: [mem 0x00000020bdee3000-0x00000020fffe5fff]
+[    0.000000]   node   0: [mem 0x00000020fffe6000-0x00000020fffe6fff]
+[    0.000000]   node   0: [mem 0x00000020fffe7000-0x00000020fffe8fff]
+[    0.000000]   node   0: [mem 0x00000020fffe9000-0x00000020fffeafff]
+[    0.000000]   node   0: [mem 0x00000020fffeb000-0x00000020fffebfff]
+[    0.000000]   node   0: [mem 0x00000020fffec000-0x00000020fffeffff]
+[    0.000000]   node   0: [mem 0x00000020ffff0000-0x00000020ffffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x00000020ffffffff]
+[    0.000000] On node 0 totalpages: 1031680
+[    0.000000]   DMA zone: 8192 pages used for memmap
+[    0.000000]   DMA zone: 0 pages reserved
+[    0.000000]   DMA zone: 507392 pages, LIFO batch:63
+[    0.000000]   Normal zone: 8192 pages used for memmap
+[    0.000000]   Normal zone: 524288 pages, LIFO batch:63
+[    0.000000] cma: Reserved 64 MiB at 0x00000000f5000000
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.1 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: MIGRATE_INFO_TYPE not supported.
+[    0.000000] psci: SMC Calling Convention v1.1
+[    0.000000] percpu: Embedded 33 pages/cpu s95192 r8192 d31784 u135168
+[    0.000000] pcpu-alloc: s95192 r8192 d31784 u135168 alloc=33*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 
+[    0.000000] Detected PIPT I-cache on CPU0
+[    0.000000] CPU features: detected: GIC system register CPU interface
+[    0.000000] CPU features: detected: EL2 vector hardening
+[    0.000000] CPU features: kernel page table isolation forced ON by KASLR
+[    0.000000] CPU features: detected: Kernel page table isolation (KPTI)
+[    0.000000] CPU features: detected: Spectre-v2
+[    0.000000] CPU features: detected: ARM errata 1165522, 1319367, or 1530923
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 1015296
+[    0.000000] Policy zone: Normal
+[    0.000000] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.10.0-8-arm64 root=UUID=8dec032b-2197-4199-a165-c14bc0a928cc ro quiet
+[    0.000000] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:on, heap free:off
+[    0.000000] software IO TLB: mapped [mem 0x00000000f1000000-0x00000000f5000000] (64MB)
+[    0.000000] Memory: 2892944K/4126720K available (11776K kernel code, 2436K rwdata, 7008K rodata, 5440K init, 598K bss, 200288K reserved, 65536K cma-reserved)
+[    0.000000] random: get_random_u64 called from __kmem_cache_create+0x38/0x560 with crng_init=0
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] ftrace: allocating 38535 entries in 151 pages
+[    0.000000] ftrace: allocated 151 pages with 5 groups
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=2.
+[    0.000000] 	Rude variant of Tasks RCU enabled.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] GICv3: GIC: Using split EOI/Deactivate mode
+[    0.000000] GICv3: 256 SPIs implemented
+[    0.000000] GICv3: 0 Extended SPIs implemented
+[    0.000000] GICv3: Distributor has no Range Selector support
+[    0.000000] GICv3: 16 PPIs implemented
+[    0.000000] GICv3: CPU0: found redistributor 0 region 0:0x0000000006040000
+[    0.000000] ITS [mem 0x06020000-0x0603ffff]
+[    0.000000] ITS@0x0000000006020000: allocated 65536 Devices @2080180000 (flat, esz 8, psz 64K, shr 0)
+[    0.000000] ITS: using cache flushing for cmd queue
+[    0.000000] GICv3: using LPI property table @0x0000002080170000
+[    0.000000] GIC: using cache flushing for LPI property table
+[    0.000000] GICv3: CPU0: using allocated LPI pending table @0x0000002080200000
+[    0.000000] arch_timer: cp15 timer(s) running at 25.00MHz (phys).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x5c409fb33, max_idle_ns: 440795203156 ns
+[    0.000002] sched_clock: 56 bits at 25MHz, resolution 39ns, wraps every 4398046511103ns
+[    0.000246] Console: colour dummy device 80x25
+[    0.000277] printk: console [tty0] enabled
+[    0.000332] Calibrating delay loop (skipped), value calculated using timer frequency.. 50.00 BogoMIPS (lpj=100000)
+[    0.000339] pid_max: default: 32768 minimum: 301
+[    0.000408] LSM: Security Framework initializing
+[    0.000425] Yama: disabled by default; enable with sysctl kernel.yama.*
+[    0.000493] AppArmor: AppArmor initialized
+[    0.000499] TOMOYO Linux initialized
+[    0.000559] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.000588] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.001707] rcu: Hierarchical SRCU implementation.
+[    0.002202] Platform MSI: gic-its@6020000 domain created
+[    0.002294] PCI/MSI: /interrupt-controller@6000000/gic-its@6020000 domain created
+[    0.002336] fsl-mc MSI: gic-its@6020000 domain created
+[    0.002712] Remapping and enabling EFI services.
+[    0.002945] smp: Bringing up secondary CPUs ...
+[    0.003315] Detected PIPT I-cache on CPU1
+[    0.003337] GICv3: CPU1: found redistributor 1 region 0:0x0000000006060000
+[    0.003365] GICv3: CPU1: using allocated LPI pending table @0x0000002080210000
+[    0.003392] CPU1: Booted secondary processor 0x0000000001 [0x410fd083]
+[    0.003464] smp: Brought up 1 node, 2 CPUs
+[    0.003469] SMP: Total of 2 processors activated.
+[    0.003473] CPU features: detected: 32-bit EL0 Support
+[    0.003476] CPU features: detected: CRC32 instructions
+[    0.003481] CPU features: detected: 32-bit EL1 Support
+[    0.016901] CPU: All CPU(s) started at EL2
+[    0.016936] alternatives: patching kernel code
+[    0.038933] node 0 deferred pages initialised in 20ms
+[    0.039644] devtmpfs: initialized
+[    0.042959] Registered cp15_barrier emulation handler
+[    0.042968] Registered setend emulation handler
+[    0.042974] KASLR enabled
+[    0.043107] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.043131] futex hash table entries: 512 (order: 3, 32768 bytes, linear)
+[    0.044270] pinctrl core: initialized pinctrl subsystem
+[    0.044677] SMBIOS 3.0 present.
+[    0.044689] DMI: Unknown Unknown Product/Unknown Product, BIOS 2021.10-rc3-00036-gadea187350 10/01/2021
+[    0.045004] NET: Registered protocol family 16
+[    0.045820] DMA: preallocated 512 KiB GFP_KERNEL pool for atomic allocations
+[    0.045926] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[    0.046098] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.046125] audit: initializing netlink subsys (disabled)
+[    0.046251] audit: type=2000 audit(0.044:1): state=initialized audit_enabled=0 res=1
+[    0.046781] thermal_sys: Registered thermal governor 'fair_share'
+[    0.046784] thermal_sys: Registered thermal governor 'bang_bang'
+[    0.046786] thermal_sys: Registered thermal governor 'step_wise'
+[    0.046789] thermal_sys: Registered thermal governor 'user_space'
+[    0.046792] thermal_sys: Registered thermal governor 'power_allocator'
+[    0.046957] cpuidle: using governor ladder
+[    0.046968] cpuidle: using governor menu
+[    0.047045] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.047077] ASID allocator initialised with 32768 entries
+[    0.047281] Serial: AMBA PL011 UART driver
+[    0.056075] Machine: Kontron SMARC-sAL28 (Dual PHY)
+[    0.056103] SoC family: QorIQ LS1028A
+[    0.056106] SoC ID: svr:0x870b0110, Revision: 1.0
+[    0.060482] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.060488] HugeTLB registered 32.0 MiB page size, pre-allocated 0 pages
+[    0.060492] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.060495] HugeTLB registered 64.0 KiB page size, pre-allocated 0 pages
+[    0.363703] ACPI: Interpreter disabled.
+[    0.363857] iommu: Default domain type: Translated 
+[    0.363969] vgaarb: loaded
+[    0.364128] EDAC MC: Ver: 3.0.0
+[    0.364398] Registered efivars operations
+[    0.364904] NetLabel: Initializing
+[    0.364908] NetLabel:  domain hash size = 128
+[    0.364911] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.364944] NetLabel:  unlabeled traffic allowed by default
+[    0.365083] clocksource: Switched to clocksource arch_sys_counter
+[    0.400037] VFS: Disk quotas dquot_6.6.0
+[    0.400078] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.400497] AppArmor: AppArmor Filesystem Enabled
+[    0.400625] pnp: PnP ACPI: disabled
+[    0.404653] NET: Registered protocol family 2
+[    0.404960] IP idents hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.406680] tcp_listen_portaddr_hash hash table entries: 2048 (order: 3, 32768 bytes, linear)
+[    0.406885] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.407279] TCP bind hash table entries: 32768 (order: 7, 524288 bytes, linear)
+[    0.407605] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.407762] UDP hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    0.407858] UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    0.408028] NET: Registered protocol family 1
+[    0.408043] NET: Registered protocol family 44
+[    0.408051] PCI: CLS 0 bytes, default 64
+[    0.408177] Trying to unpack rootfs image as initramfs...
+[    1.323415] Freeing initrd memory: 26540K
+[    1.323798] hw perfevents: enabled with armv8_cortex_a72 PMU driver, 7 counters available
+[    1.323959] kvm [1]: IPA Size Limit: 44 bits
+[    1.324624] kvm [1]: GICv3: no GICV resource entry
+[    1.324627] kvm [1]: disabling GICv2 emulation
+[    1.324646] kvm [1]: GIC system register CPU interface enabled
+[    1.324685] kvm [1]: vgic interrupt IRQ9
+[    1.324750] kvm [1]: Hyp mode initialized successfully
+[    1.325526] Initialise system trusted keyrings
+[    1.325553] Key type blacklist registered
+[    1.325694] workingset: timestamp_bits=42 max_order=20 bucket_order=0
+[    1.328566] zbud: loaded
+[    1.328941] integrity: Platform Keyring initialized
+[    1.328953] Key type asymmetric registered
+[    1.328956] Asymmetric key parser 'x509' registered
+[    1.328977] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 249)
+[    1.329136] io scheduler mq-deadline registered
+[    1.331516] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    1.331690] pci-host-generic 1f0000000.pcie: host bridge /soc/pcie@1f0000000 ranges:
+[    1.331711] pci-host-generic 1f0000000.pcie:      MEM 0x01f8000000..0x01f815ffff -> 0x01f8000000
+[    1.331726] pci-host-generic 1f0000000.pcie:      MEM 0x01f8160000..0x01f81cffff -> 0x01f8160000
+[    1.331739] pci-host-generic 1f0000000.pcie:      MEM 0x01f81d0000..0x01f81effff -> 0x01f81d0000
+[    1.331752] pci-host-generic 1f0000000.pcie:      MEM 0x01f81f0000..0x01f820ffff -> 0x01f81f0000
+[    1.331764] pci-host-generic 1f0000000.pcie:      MEM 0x01f8210000..0x01f822ffff -> 0x01f8210000
+[    1.331776] pci-host-generic 1f0000000.pcie:      MEM 0x01f8230000..0x01f824ffff -> 0x01f8230000
+[    1.331786] pci-host-generic 1f0000000.pcie:      MEM 0x01fc000000..0x01fc3fffff -> 0x01fc000000
+[    1.331838] pci-host-generic 1f0000000.pcie: ECAM at [mem 0x1f0000000-0x1f00fffff] for [bus 00]
+[    1.331922] pci-host-generic 1f0000000.pcie: PCI host bridge to bus 0000:00
+[    1.331927] pci_bus 0000:00: root bus resource [bus 00]
+[    1.331931] pci_bus 0000:00: root bus resource [mem 0x1f8000000-0x1f815ffff]
+[    1.331934] pci_bus 0000:00: root bus resource [mem 0x1f8160000-0x1f81cffff pref]
+[    1.331938] pci_bus 0000:00: root bus resource [mem 0x1f81d0000-0x1f81effff]
+[    1.331941] pci_bus 0000:00: root bus resource [mem 0x1f81f0000-0x1f820ffff pref]
+[    1.331945] pci_bus 0000:00: root bus resource [mem 0x1f8210000-0x1f822ffff]
+[    1.331949] pci_bus 0000:00: root bus resource [mem 0x1f8230000-0x1f824ffff pref]
+[    1.331952] pci_bus 0000:00: root bus resource [mem 0x1fc000000-0x1fc3fffff]
+[    1.331972] pci 0000:00:00.0: [1957:e100] type 00 class 0x020001
+[    1.332004] pci 0000:00:00.0: BAR 0: [mem 0x1f8000000-0x1f803ffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.332010] pci 0000:00:00.0: BAR 2: [mem 0x1f8160000-0x1f816ffff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.332015] pci 0000:00:00.0: VF BAR 0: [mem 0x1f81d0000-0x1f81dffff 64bit] (from Enhanced Allocation, properties 0x4)
+[    1.332020] pci 0000:00:00.0: VF BAR 2: [mem 0x1f81f0000-0x1f81fffff 64bit pref] (from Enhanced Allocation, properties 0x3)
+[    1.332038] pci 0000:00:00.0: PME# supported from D0 D3hot
+[    1.332049] pci 0000:00:00.0: VF(n) BAR0 space: [mem 0x1f81d0000-0x1f81effff 64bit] (contains BAR0 for 2 VFs)
+[    1.332053] pci 0000:00:00.0: VF(n) BAR2 space: [mem 0x1f81f0000-0x1f820ffff 64bit pref] (contains BAR2 for 2 VFs)
+[    1.332227] pci 0000:00:00.1: [1957:e100] type 00 class 0x020001
+[    1.332255] pci 0000:00:00.1: BAR 0: [mem 0x1f8040000-0x1f807ffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.332260] pci 0000:00:00.1: BAR 2: [mem 0x1f8170000-0x1f817ffff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.332265] pci 0000:00:00.1: VF BAR 0: [mem 0x1f8210000-0x1f821ffff 64bit] (from Enhanced Allocation, properties 0x4)
+[    1.332270] pci 0000:00:00.1: VF BAR 2: [mem 0x1f8230000-0x1f823ffff 64bit pref] (from Enhanced Allocation, properties 0x3)
+[    1.332287] pci 0000:00:00.1: PME# supported from D0 D3hot
+[    1.332296] pci 0000:00:00.1: VF(n) BAR0 space: [mem 0x1f8210000-0x1f822ffff 64bit] (contains BAR0 for 2 VFs)
+[    1.332300] pci 0000:00:00.1: VF(n) BAR2 space: [mem 0x1f8230000-0x1f824ffff 64bit pref] (contains BAR2 for 2 VFs)
+[    1.332444] pci 0000:00:00.2: [1957:e100] type 00 class 0x020001
+[    1.332468] pci 0000:00:00.2: BAR 0: [mem 0x1f8080000-0x1f80bffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.332473] pci 0000:00:00.2: BAR 2: [mem 0x1f8180000-0x1f818ffff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.332488] pci 0000:00:00.2: PME# supported from D0 D3hot
+[    1.332621] pci 0000:00:00.3: [1957:ee01] type 00 class 0x088001
+[    1.332648] pci 0000:00:00.3: BAR 0: [mem 0x1f8100000-0x1f811ffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.332653] pci 0000:00:00.3: BAR 2: [mem 0x1f8190000-0x1f819ffff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.332668] pci 0000:00:00.3: PME# supported from D0 D3hot
+[    1.332831] pci 0000:00:00.4: [1957:ee02] type 00 class 0x088001
+[    1.332855] pci 0000:00:00.4: BAR 0: [mem 0x1f8120000-0x1f813ffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.332860] pci 0000:00:00.4: BAR 2: [mem 0x1f81a0000-0x1f81affff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.332875] pci 0000:00:00.4: PME# supported from D0 D3hot
+[    1.333004] pci 0000:00:00.5: [1957:eef0] type 00 class 0x020801
+[    1.333027] pci 0000:00:00.5: BAR 0: [mem 0x1f8140000-0x1f815ffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.333032] pci 0000:00:00.5: BAR 2: [mem 0x1f81b0000-0x1f81bffff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.333037] pci 0000:00:00.5: BAR 4: [mem 0x1fc000000-0x1fc3fffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.333052] pci 0000:00:00.5: PME# supported from D0 D3hot
+[    1.333217] pci 0000:00:00.6: [1957:e100] type 00 class 0x020001
+[    1.333241] pci 0000:00:00.6: BAR 0: [mem 0x1f80c0000-0x1f80fffff 64bit] (from Enhanced Allocation, properties 0x0)
+[    1.333245] pci 0000:00:00.6: BAR 2: [mem 0x1f81c0000-0x1f81cffff 64bit pref] (from Enhanced Allocation, properties 0x1)
+[    1.333261] pci 0000:00:00.6: PME# supported from D0 D3hot
+[    1.334166] pci 0000:00:1f.0: [1957:e001] type 00 class 0x080700
+[    1.334209] OF: /soc/pcie@1f0000000: no msi-map translation for id 0xf8 on (null)
+[    1.334836] layerscape-pcie 3400000.pcie: host bridge /soc/pcie@3400000 ranges:
+[    1.334856] layerscape-pcie 3400000.pcie:       IO 0x8000010000..0x800001ffff -> 0x0000000000
+[    1.334867] layerscape-pcie 3400000.pcie:      MEM 0x8040000000..0x807fffffff -> 0x0040000000
+[    1.334975] layerscape-pcie 3400000.pcie: PCI host bridge to bus 0001:00
+[    1.334980] pci_bus 0001:00: root bus resource [bus 00-ff]
+[    1.334984] pci_bus 0001:00: root bus resource [io  0x0000-0xffff]
+[    1.334993] pci_bus 0001:00: root bus resource [mem 0x8040000000-0x807fffffff] (bus address [0x40000000-0x7fffffff])
+[    1.335013] pci 0001:00:00.0: [1957:82c1] type 01 class 0x060400
+[    1.335069] pci 0001:00:00.0: supports D1 D2
+[    1.335072] pci 0001:00:00.0: PME# supported from D0 D1 D2 D3hot
+[    1.336712] pci_bus 0001:01: busn_res: [bus 01-ff] end is updated to 01
+[    1.336722] pci 0001:00:00.0: PCI bridge to [bus 01]
+[    1.336901] layerscape-pcie 3500000.pcie: host bridge /soc/pcie@3500000 ranges:
+[    1.336919] layerscape-pcie 3500000.pcie:       IO 0x8800010000..0x880001ffff -> 0x0000000000
+[    1.336929] layerscape-pcie 3500000.pcie:      MEM 0x8840000000..0x887fffffff -> 0x0040000000
+[    1.337022] layerscape-pcie 3500000.pcie: PCI host bridge to bus 0002:00
+[    1.337027] pci_bus 0002:00: root bus resource [bus 00-ff]
+[    1.337032] pci_bus 0002:00: root bus resource [io  0x10000-0x1ffff] (bus address [0x0000-0xffff])
+[    1.337037] pci_bus 0002:00: root bus resource [mem 0x8840000000-0x887fffffff] (bus address [0x40000000-0x7fffffff])
+[    1.337054] pci 0002:00:00.0: [1957:82c1] type 01 class 0x060400
+[    1.337129] pci 0002:00:00.0: supports D1 D2
+[    1.337133] pci 0002:00:00.0: PME# supported from D0 D1 D2 D3hot
+[    1.338757] pci_bus 0002:01: busn_res: [bus 01-ff] end is updated to 01
+[    1.338765] pci 0002:00:00.0: PCI bridge to [bus 01]
+[    1.342410] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    1.343544] 21c0500.serial: ttyS0 at MMIO 0x21c0500 (irq = 24, base_baud = 12500000) is a 16550A
+[    1.343632] printk: console [ttyS0] enabled
+[    1.343986] 21c0600.serial: ttyS1 at MMIO 0x21c0600 (irq = 24, base_baud = 12500000) is a 16550A
+[    1.344191] Serial: AMBA driver
+[    1.344402] msm_serial: driver initialized
+[    1.344672] 2270000.serial: ttyLP2 at MMIO 0x2270000 (irq = 25, base_baud = 12500000) is a FSL_LPUART
+[    1.345562] arm-smmu 5000000.iommu: probing hardware configuration...
+[    1.345567] arm-smmu 5000000.iommu: SMMUv2 with:
+[    1.345571] arm-smmu 5000000.iommu: 	stage 1 translation
+[    1.345573] arm-smmu 5000000.iommu: 	stage 2 translation
+[    1.345576] arm-smmu 5000000.iommu: 	nested translation
+[    1.345581] arm-smmu 5000000.iommu: 	stream matching with 128 register groups
+[    1.345587] arm-smmu 5000000.iommu: 	64 context banks (0 stage-2 only)
+[    1.345593] arm-smmu 5000000.iommu: 	Supported page sizes: 0x61311000
+[    1.345597] arm-smmu 5000000.iommu: 	Stage-1: 48-bit VA -> 48-bit IPA
+[    1.345600] arm-smmu 5000000.iommu: 	Stage-2: 48-bit IPA -> 48-bit PA
+[    1.346503] mousedev: PS/2 mouse device common for all mice
+[    1.347439] ledtrig-cpu: registered to indicate activity on CPUs
+[    1.348402] NET: Registered protocol family 10
+[    1.368117] Segment Routing with IPv6
+[    1.368175] mip6: Mobile IPv6
+[    1.368180] NET: Registered protocol family 17
+[    1.368264] mpls_gso: MPLS GSO support
+[    1.368470] registered taskstats version 1
+[    1.368478] Loading compiled-in X.509 certificates
+[    1.437739] Loaded X.509 cert 'Debian Secure Boot CA: 6ccece7e4c6c0d1f6149f3dd27dfcc5cbb419ea1'
+[    1.437775] Loaded X.509 cert 'Debian Secure Boot Signer 2021 - linux: 4b6ef5abca669825178e052c84667ccbc0531f8c'
+[    1.437840] zswap: loaded using pool lzo/zbud
+[    1.438087] Key type ._fscrypt registered
+[    1.438090] Key type .fscrypt registered
+[    1.438093] Key type fscrypt-provisioning registered
+[    1.438190] AppArmor: AppArmor sha1 policy hashing enabled
+[    1.440766] pcieport 0001:00:00.0: Adding to iommu group 0
+[    1.440999] pcieport 0001:00:00.0: PME: Signaling with IRQ 33
+[    1.441256] pcieport 0001:00:00.0: AER: enabled with IRQ 33
+[    1.441423] pcieport 0002:00:00.0: Adding to iommu group 1
+[    1.441586] pcieport 0002:00:00.0: PME: Signaling with IRQ 35
+[    1.441739] pcieport 0002:00:00.0: AER: enabled with IRQ 35
+[    1.446504] Freeing unused kernel memory: 5440K
+[    1.492260] Checked W+X mappings: passed, no W+X pages found
+[    1.492278] Run /init as init process
+[    1.492281]   with arguments:
+[    1.492284]     /init
+[    1.492287]   with environment:
+[    1.492290]     HOME=/
+[    1.492292]     TERM=linux
+[    1.492295]     BOOT_IMAGE=/boot/vmlinuz-5.10.0-8-arm64
+[    1.692477] irq: no irq domain found for interrupt-controller@1c !
+[    1.692488] irq: no irq domain found for interrupt-controller@1c !
+[    1.692515] gpio-keys buttons0: Found button without gpio or irq
+[    1.698585] gpio-keys: probe of buttons0 failed with error -22
+[    1.720712] pps_core: LinuxPPS API ver. 1 registered
+[    1.720718] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    1.730237] PTP clock support registered
+[    1.731902] libphy: Fixed MDIO Bus: probed
+[    1.740743] fsl_enetc_mdio 0000:00:00.3: Adding to iommu group 2
+[    1.742067] imx-i2c 2000000.i2c: can't get pinctrl, bus recovery not supported
+[    1.752497] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.764725] sdhci: Secure Digital Host Controller Interface driver
+[    1.764730] sdhci: Copyright(c) Pierre Ossman
+[    1.766275] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.768518] sdhci-esdhc 2140000.mmc: Adding to iommu group 3
+[    1.773655] fsl_enetc_ptp 0000:00:00.4: Adding to iommu group 4
+[    1.773790] fsl_enetc_ptp 0000:00:00.4: enabling device (0404 -> 0406)
+[    1.773918] ptp_qoriq: device tree node missing required elements, try automatic configuration
+[    1.785644] pps pps0: new PPS source ptp0
+[    1.808738] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[    1.809575] i2c i2c-0: IMX I2C adapter registered
+[    1.809736] imx-i2c 2030000.i2c: can't get pinctrl, bus recovery not supported
+[    1.809800] i2c i2c-1: IMX I2C adapter registered
+[    1.809901] imx-i2c 2040000.i2c: can't get pinctrl, bus recovery not supported
+[    1.810050] i2c i2c-2: IMX I2C adapter registered
+[    1.815562] sdhci-esdhc 2150000.mmc: Adding to iommu group 5
+[    1.840552] mmc1: SDHCI controller on 2140000.mmc [2140000.mmc] using ADMA
+[    1.845147] fsl_enetc_mdio 0000:00:00.3: enabling device (0400 -> 0402)
+[    1.845450] libphy: FSL PCIe IE Central MDIO Bus: probed
+[    1.849122] mmc0: SDHCI controller on 2150000.mmc [2150000.mmc] using ADMA
+[    1.854445] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.883628] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.891634] SCSI subsystem initialized
+[    1.915128] fsl_enetc 0000:00:00.0: Adding to iommu group 6
+[    1.918637] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.920179] dwc3 3100000.usb: Adding to iommu group 7
+[    1.925701] libata version 3.00 loaded.
+[    1.935539] mscc_felix 0000:00:00.5: Adding to iommu group 8
+[    1.935714] mscc_felix 0000:00:00.5: device is disabled, skipping
+[    1.938377] ahci-qoriq 3200000.sata: Adding to iommu group 9
+[    1.938526] ahci-qoriq 3200000.sata: supply ahci not found, using dummy regulator
+[    1.938629] ahci-qoriq 3200000.sata: supply phy not found, using dummy regulator
+[    1.938663] ahci-qoriq 3200000.sata: supply target not found, using dummy regulator
+[    1.938763] ahci-qoriq 3200000.sata: AHCI 0001.0301 32 slots 1 ports 6 Gbps 0x1 impl platform mode
+[    1.938770] ahci-qoriq 3200000.sata: flags: 64bit ncq sntf pm clo only pmp fbs pio slum part ccc sds apst 
+[    1.939295] scsi host0: ahci-qoriq
+[    1.939490] ata1: SATA max UDMA/133 mmio [mem 0x03200000-0x0320ffff] port 0x100 irq 31
+[    1.939940] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.957036] mmc1: new ultra high speed SDR104 SDHC card at address 0001
+[    1.958176] mmcblk1: mmc1:0001 EB1QT 29.8 GiB 
+[    1.959672] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.965515] dwc3 3110000.usb: Adding to iommu group 10
+[    1.978381] GPT:Primary header thinks Alt. header is not at the end of the disk.
+[    1.978388] GPT:1155071 != 62521343
+[    1.978390] GPT:Alternate GPT header not at the end of the disk.
+[    1.978393] GPT:1155071 != 62521343
+[    1.978396] GPT: Use GNU Parted to correct GPT errors.
+[    1.978414]  mmcblk1: p1 p2
+[    1.981154] rtc-rv8803 0-0032: registered as rtc0
+[    1.981588] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.986849] rtc-rv8803 0-0032: setting system clock to 2000-01-01T02:38:31 UTC (946694311)
+[    1.989641] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    1.995478] mmc0: new HS400 MMC card at address 0001
+[    1.996522] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.002693] mmcblk0: mmc0:0001 S0J58X 29.6 GiB 
+[    2.003002] mmcblk0boot0: mmc0:0001 S0J58X partition 1 31.5 MiB
+[    2.003337] mmcblk0boot1: mmc0:0001 S0J58X partition 2 31.5 MiB
+[    2.003513] mmcblk0rpmb: mmc0:0001 S0J58X partition 3 4.00 MiB, chardev (244:0)
+[    2.006723] random: fast init done
+[    2.006944]  mmcblk0: p1 p2 p3
+[    2.010588] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.017299] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.022607] fsl_enetc 0000:00:00.0: enabling device (0400 -> 0402)
+[    2.022656] fsl_enetc 0000:00:00.0: no MAC address specified for SI1, using e6:9f:3a:cc:fa:09
+[    2.022662] fsl_enetc 0000:00:00.0: no MAC address specified for SI2, using b2:5f:14:f6:cf:74
+[    2.023988] libphy: Freescale ENETC internal MDIO Bus: probed
+[    2.024720] fsl_enetc 0000:00:00.1: Adding to iommu group 11
+[    2.038377] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.059568] usbcore: registered new interface driver usbfs
+[    2.059714] usbcore: registered new interface driver hub
+[    2.059867] usbcore: registered new device driver usb
+[    2.086998] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    2.087024] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 1
+[    2.087200] xhci-hcd xhci-hcd.0.auto: hcc params 0x0220f66d hci version 0x100 quirks 0x0000000002010010
+[    2.087239] xhci-hcd xhci-hcd.0.auto: irq 29, io mem 0x03100000
+[    2.087454] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 5.10
+[    2.087459] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    2.087463] usb usb1: Product: xHCI Host Controller
+[    2.087467] usb usb1: Manufacturer: Linux 5.10.0-8-arm64 xhci-hcd
+[    2.087470] usb usb1: SerialNumber: xhci-hcd.0.auto
+[    2.090057] hub 1-0:1.0: USB hub found
+[    2.090094] hub 1-0:1.0: 1 port detected
+[    2.090542] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.093500] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    2.096361] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.098105] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 2
+[    2.102025] xhci-hcd xhci-hcd.0.auto: Host supports USB 3.0 SuperSpeed
+[    2.102087] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    2.102219] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 5.10
+[    2.102225] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    2.102229] usb usb2: Product: xHCI Host Controller
+[    2.102232] usb usb2: Manufacturer: Linux 5.10.0-8-arm64 xhci-hcd
+[    2.102236] usb usb2: SerialNumber: xhci-hcd.0.auto
+[    2.103744] hub 2-0:1.0: USB hub found
+[    2.103933] hub 2-0:1.0: 1 port detected
+[    2.104490] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.111400] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+[    2.111415] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 3
+[    2.111564] xhci-hcd xhci-hcd.1.auto: hcc params 0x0220f66d hci version 0x100 quirks 0x0000000002010010
+[    2.111607] xhci-hcd xhci-hcd.1.auto: irq 30, io mem 0x03110000
+[    2.114321] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.119806] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 5.10
+[    2.119812] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    2.119816] usb usb3: Product: xHCI Host Controller
+[    2.119820] usb usb3: Manufacturer: Linux 5.10.0-8-arm64 xhci-hcd
+[    2.119823] usb usb3: SerialNumber: xhci-hcd.1.auto
+[    2.120453] hub 3-0:1.0: USB hub found
+[    2.120487] hub 3-0:1.0: 1 port detected
+[    2.120715] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+[    2.120792] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 4
+[    2.120805] xhci-hcd xhci-hcd.1.auto: Host supports USB 3.0 SuperSpeed
+[    2.121204] usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+[    2.121520] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 5.10
+[    2.121526] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    2.121529] usb usb4: Product: xHCI Host Controller
+[    2.121533] usb usb4: Manufacturer: Linux 5.10.0-8-arm64 xhci-hcd
+[    2.121536] usb usb4: SerialNumber: xhci-hcd.1.auto
+[    2.124813] hub 4-0:1.0: USB hub found
+[    2.124837] hub 4-0:1.0: 1 port detected
+[    2.126336] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.131732] fsl_enetc 0000:00:00.1: enabling device (0400 -> 0402)
+[    2.131790] fsl_enetc 0000:00:00.1: no MAC address specified for SI1, using aa:c9:6e:09:f3:27
+[    2.131797] fsl_enetc 0000:00:00.1: no MAC address specified for SI2, using 02:bd:6d:f4:ef:c6
+[    2.134662] fsl_enetc 0000:00:00.2: Adding to iommu group 12
+[    2.136363] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.241106] fsl_enetc 0000:00:00.2: enabling device (0400 -> 0402)
+[    2.241509] fsl_enetc 0000:00:00.2: device is disabled, skipping
+[    2.241684] fsl_enetc 0000:00:00.6: Adding to iommu group 13
+[    2.259341] ata1: SATA link down (SStatus 0 SControl 300)
+[    2.349105] fsl_enetc 0000:00:00.6: enabling device (0400 -> 0402)
+[    2.349507] fsl_enetc 0000:00:00.6: device is disabled, skipping
+[    2.352680] fsl_enetc 0000:00:00.1 enp0s0f1: renamed from eth1
+[    2.365451] fsl_enetc 0000:00:00.0 enp0s0f0: renamed from eth0
+[    2.373110] usb 3-1: new high-speed USB device number 2 using xhci-hcd
+[    2.432856] PM: Image not found (code -22)
+[    2.521265] usb 3-1: New USB device found, idVendor=0424, idProduct=2517, bcdDevice= 0.02
+[    2.521272] usb 3-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    2.569031] hub 3-1:1.0: USB hub found
+[    2.569319] hub 3-1:1.0: 7 ports detected
+[    2.569638] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)
+[    2.634054] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    2.675556] Not activating Mandatory Access Control as /sbin/tomoyo-init does not exist.
+[    2.781745] systemd[1]: System time before build time, advancing clock.
+[    2.801285] systemd[1]: Inserted module 'autofs4'
+[    2.833844] systemd[1]: systemd 247.3-6 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +ZSTD +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=unified)
+[    2.834229] systemd[1]: Detected architecture arm64.
+[    2.835031] systemd[1]: Set hostname to <debian>.
+[    2.925146] usb 3-1.6: new full-speed USB device number 3 using xhci-hcd
+[    3.034240] usb 3-1.6: New USB device found, idVendor=064f, idProduct=2af9, bcdDevice= 1.00
+[    3.034248] usb 3-1.6: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[    3.034252] usb 3-1.6: Product: CodeMeter-Stick
+[    3.034256] usb 3-1.6: Manufacturer: WIBU-SYSTEMS AG
+[    3.034259] usb 3-1.6: SerialNumber: 000004384618
+[    3.081476] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.146844] systemd[1]: Queued start job for default target Graphical Interface.
+[    3.147584] random: systemd: uninitialized urandom read (16 bytes read)
+[    3.149202] systemd[1]: Created slice system-getty.slice.
+[    3.149413] random: systemd: uninitialized urandom read (16 bytes read)
+[    3.150111] systemd[1]: Created slice system-modprobe.slice.
+[    3.150159] random: systemd: uninitialized urandom read (16 bytes read)
+[    3.150984] systemd[1]: Created slice system-serial\x2dgetty.slice.
+[    3.151568] systemd[1]: Created slice User and Session Slice.
+[    3.151778] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[    3.151929] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[    3.152383] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[    3.152506] systemd[1]: Reached target Local Encrypted Volumes.
+[    3.152605] systemd[1]: Reached target Paths.
+[    3.152660] systemd[1]: Reached target Remote File Systems.
+[    3.152708] systemd[1]: Reached target Slices.
+[    3.153216] systemd[1]: Listening on Syslog Socket.
+[    3.153521] systemd[1]: Listening on fsck to fsckd communication Socket.
+[    3.153688] systemd[1]: Listening on initctl Compatibility Named Pipe.
+[    3.154117] systemd[1]: Listening on Journal Audit Socket.
+[    3.154388] systemd[1]: Listening on Journal Socket (/dev/log).
+[    3.154724] systemd[1]: Listening on Journal Socket.
+[    3.155474] systemd[1]: Listening on udev Control Socket.
+[    3.155783] systemd[1]: Listening on udev Kernel Socket.
+[    3.158068] systemd[1]: Mounting Huge Pages File System...
+[    3.160987] systemd[1]: Mounting POSIX Message Queue File System...
+[    3.163928] systemd[1]: Mounting Kernel Debug File System...
+[    3.166745] systemd[1]: Mounting Kernel Trace File System...
+[    3.171015] systemd[1]: Starting Create list of static device nodes for the current kernel...
+[    3.174559] systemd[1]: Starting Load Kernel Module configfs...
+[    3.177582] systemd[1]: Starting Load Kernel Module drm...
+[    3.180245] systemd[1]: Starting Load Kernel Module fuse...
+[    3.181518] systemd[1]: Condition check resulted in Set Up Additional Binary Formats being skipped.
+[    3.181662] systemd[1]: Condition check resulted in File System Check on Root Device being skipped.
+[    3.186302] systemd[1]: Starting Journal Service...
+[    3.190362] systemd[1]: Starting Load Kernel Modules...
+[    3.196538] systemd[1]: Starting Remount Root and Kernel File Systems...
+[    3.199603] systemd[1]: Starting Coldplug All udev Devices...
+[    3.219405] systemd[1]: Mounted Huge Pages File System.
+[    3.219700] systemd[1]: Mounted POSIX Message Queue File System.
+[    3.219943] systemd[1]: Mounted Kernel Debug File System.
+[    3.220178] systemd[1]: Mounted Kernel Trace File System.
+[    3.233247] systemd[1]: Finished Create list of static device nodes for the current kernel.
+[    3.234263] systemd[1]: modprobe@configfs.service: Succeeded.
+[    3.241604] systemd[1]: Finished Load Kernel Module configfs.
+[    3.245981] systemd[1]: Mounting Kernel Configuration File System...
+[    3.253237] fuse: init (API version 7.32)
+[    3.255153] systemd[1]: modprobe@fuse.service: Succeeded.
+[    3.255921] systemd[1]: Finished Load Kernel Module fuse.
+[    3.261939] systemd[1]: Mounting FUSE Control File System...
+[    3.277735] systemd[1]: Mounted Kernel Configuration File System.
+[    3.286167] systemd[1]: Finished Load Kernel Modules.
+[    3.291114] EXT4-fs (mmcblk0p2): re-mounted. Opts: errors=remount-ro
+[    3.292620] systemd[1]: Starting Apply Kernel Variables...
+[    3.296612] systemd[1]: Finished Remount Root and Kernel File Systems.
+[    3.298155] systemd[1]: Mounted FUSE Control File System.
+[    3.307326] systemd[1]: Condition check resulted in Rebuild Hardware Database being skipped.
+[    3.307458] systemd[1]: Condition check resulted in Platform Persistent Storage Archival being skipped.
+[    3.313575] systemd[1]: Starting Load/Save Random Seed...
+[    3.317184] usb 3-1.3: new high-speed USB device number 4 using xhci-hcd
+[    3.317851] systemd[1]: Starting Create System Users...
+[    3.347942] systemd[1]: modprobe@drm.service: Succeeded.
+[    3.348613] systemd[1]: Finished Load Kernel Module drm.
+[    3.357475] systemd[1]: Finished Apply Kernel Variables.
+[    3.377355] systemd[1]: Finished Create System Users.
+[    3.379784] systemd[1]: Starting Create Static Device Nodes in /dev...
+[    3.426911] usb 3-1.3: New USB device found, idVendor=1307, idProduct=0165, bcdDevice= 1.00
+[    3.426920] usb 3-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[    3.426924] usb 3-1.3: Product: USB Mass Storage Device
+[    3.426928] usb 3-1.3: Manufacturer: USBest Technology
+[    3.426931] usb 3-1.3: SerialNumber: 0000000000092E
+[    3.438637] systemd[1]: Finished Create Static Device Nodes in /dev.
+[    3.438973] systemd[1]: Reached target Local File Systems (Pre).
+[    3.442945] systemd[1]: Starting Rule-based Manager for Device Events and Files...
+[    3.465575] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.533716] systemd[1]: Finished Coldplug All udev Devices.
+[    3.537271] systemd[1]: Starting Helper to synchronize boot up for ifupdown...
+[    3.542478] systemd[1]: Started Journal Service.
+[    3.585915] systemd-journald[211]: Received client request to flush runtime journal.
+[    3.590838] systemd-journald[211]: File /var/log/journal/b633f9e06c0d43fbbffc1ea09fa9ff93/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[    3.777333] qoriq-cpufreq qoriq-cpufreq: Freescale QorIQ CPU frequency scaling driver
+[    3.777672] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.803599] usb-storage 3-1.3:1.0: USB Mass Storage device detected
+[    3.806476] scsi host1: usb-storage 3-1.3:1.0
+[    3.806697] usbcore: registered new interface driver usb-storage
+[    3.807453] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.827475] usbcore: registered new interface driver uas
+[    3.841309] mali-dp f080000.display: Adding to iommu group 14
+[    3.867397] EDAC MC0: Giving out device to module fsl_ddr_edac controller fsl_mc_err: DEV fsl_mc_err (INTERRUPT)
+[    3.867447] fsl_ddr_edac acquired irq 15 for MC
+[    3.867451] fsl_ddr_edac MC err registered
+[    3.867853] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.897659] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.906833] at24 0-0050: supply vcc not found, using dummy regulator
+[    3.917143] at24 0-0050: 4096 byte 24c32 EEPROM, writable, 32 bytes/write
+[    3.917291] at24 2-0050: supply vcc not found, using dummy regulator
+[    3.918294] at24 2-0050: 4096 byte 24c32 EEPROM, writable, 32 bytes/write
+[    3.929491] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    3.999999] fsl-edma 22c0000.dma-controller: Adding to iommu group 15
+[    4.015266] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.034044] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.043674] sl28cpld-wdt 2000000.i2c:sl28cpld@4a:watchdog@4: initial timeout 8 sec
+[    4.044333] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.071831] CAN device driver interface
+[    4.085827] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.095288] fsl-qdma 8380000.dma-controller: Adding to iommu group 16
+[    4.096269] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.107738] sp805-wdt c000000.watchdog: registration successful
+[    4.108254] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.114994] sp805-wdt c010000.watchdog: registration successful
+[    4.116227] caam 8000000.crypto: device ID = 0x0a12070000000000 (Era 10)
+[    4.116233] caam 8000000.crypto: job rings = 3, qi = 0
+[    4.119941] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.186867] hid: raw HID events driver (C) Jiri Kosina
+[    4.250518] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.256617] usbcore: registered new interface driver usbhid
+[    4.256622] usbhid: USB HID core driver
+[    4.339830] hid-generic 0003:064F:2AF9.0001: hiddev0,hidraw0: USB HID v1.11 Device [WIBU-SYSTEMS AG CodeMeter-Stick] on usb-xhci-hcd.1.auto-1.6/input0
+[    4.340189] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    4.416352] caam_jr 8010000.jr: Adding to iommu group 17
+[    4.431582] alg: No test for authenc(hmac(sha224),ecb(cipher_null)) (authenc-hmac-sha224-ecb-cipher_null-caam)
+[    4.436090] alg: No test for authenc(hmac(sha256),ecb(cipher_null)) (authenc-hmac-sha256-ecb-cipher_null-caam)
+[    4.439507] alg: No test for authenc(hmac(sha384),ecb(cipher_null)) (authenc-hmac-sha384-ecb-cipher_null-caam)
+[    4.442913] alg: No test for authenc(hmac(sha512),ecb(cipher_null)) (authenc-hmac-sha512-ecb-cipher_null-caam)
+[    4.442940] caam algorithms registered in /proc/crypto
+[    4.477171] Adding 999420k swap on /dev/mmcblk0p3.  Priority:-2 extents:1 across:999420k SSFS
+[    4.508918] FAT-fs (mmcblk0p1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+[    4.661978] audit: type=1400 audit(1626197365.875:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe" pid=313 comm="apparmor_parser"
+[    4.661993] audit: type=1400 audit(1626197365.875:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe//kmod" pid=313 comm="apparmor_parser"
+[    4.669513] audit: type=1400 audit(1626197365.883:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="lsb_release" pid=314 comm="apparmor_parser"
+[    4.829733] scsi 1:0:0:0: Direct-Access     Ut165    USB Flash Disk   0.00 PQ: 0 ANSI: 2
+[    4.835959] caam_jr 8010000.jr: 2000090f: CCB: desc idx 9: : Invalid CHA selected.
+[    4.843660] alg: ahash: xcbc-aes-caam final() failed with err -22 on test vector 0, cfg="init+update+final aligned buffer"
+[    4.864749] scsi 1:0:0:0: Attached scsi generic sg0 type 0
+[    4.878682] fsl_enetc 0000:00:00.0 enp0s0f0: PHY [0000:00:00.3:05] driver [Qualcomm Atheros AR8031/AR8033] (irq=POLL)
+[    4.883049] fsl_enetc 0000:00:00.0 enp0s0f0: configuring for inband/sgmii link mode
+[    4.932606] caam_jr 8010000.jr: 2000090f: CCB: desc idx 9: : Invalid CHA selected.
+[    4.940405] alg: ahash: cmac-aes-caam final() failed with err -22 on test vector 0, cfg="init+update+final aligned buffer"
+[    4.952644] sd 1:0:0:0: [sda] 3947016 512-byte logical blocks: (2.02 GB/1.88 GiB)
+[    4.952827] sd 1:0:0:0: [sda] Write Protect is off
+[    4.952833] sd 1:0:0:0: [sda] Mode Sense: 00 00 00 00
+[    4.953018] sd 1:0:0:0: [sda] Asking for cache data failed
+[    4.958588] sd 1:0:0:0: [sda] Assuming drive cache: write through
+[    4.965761] caam_jr 8010000.jr: 20000b0f: CCB: desc idx 11: : Invalid CHA selected.
+[    4.974213] alg: akcipher: encrypt test failed. err -22
+[    4.979535] alg: akcipher: test 1 failed for rsa-caam, err=-22
+[    5.005333] caam 8000000.crypto: caam pkc algorithms registered in /proc/crypto
+[    5.005345] caam 8000000.crypto: registering rng-caam
+[    5.011306] caam_jr 8020000.jr: Adding to iommu group 18
+[    5.012056] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    5.027434] caam_jr 8030000.jr: Adding to iommu group 19
+[    5.028107] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    5.045588] random: crng init done
+[    5.045595] random: 7 urandom warning(s) missed due to ratelimiting
+[    5.053226] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    5.125918]  sda: sda1 sda2
+[    5.128394] sd 1:0:0:0: [sda] Attached SCSI removable disk
+[    5.129062] nxp-fspi 20c0000.spi: NXP FSPI probe failed
+[    7.966134] fsl_enetc 0000:00:00.0 enp0s0f0: Link is Up - 1Gbps/Full - flow control rx/tx
+[    7.966182] IPv6: ADDRCONF(NETDEV_CHANGE): enp0s0f0: link becomes ready
+[   31.709172] VDDH: disabling
