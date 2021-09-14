@@ -1,0 +1,52 @@
+From df9f4df0911276c5d4ed68a2e971fb35b04c79ce Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Mon, 13 Sep 2021 11:06:19 +0200
+Subject: [PATCH] board: sl28: enable EFI UpdateCapsule support
+
+Enable support for update over EFI UpdateCapsule mechanism. This board
+doesn't support setting EFI variables after ExitBootservices().
+Therefore, we are also enabling EFI_IGNORE_OSINDICATIONS.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ configs/kontron_sl28_defconfig | 6 ++++++
+ include/configs/kontron_sl28.h | 2 ++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
+index 8bd7d5be4b..20b4a8c40d 100644
+--- a/configs/kontron_sl28_defconfig
++++ b/configs/kontron_sl28_defconfig
+@@ -60,6 +60,8 @@ CONFIG_SCSI_AHCI=y
+ CONFIG_SATA_CEVA=y
+ CONFIG_FSL_CAAM=y
+ CONFIG_SYS_FSL_DDR3=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_SF=y
+ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ CONFIG_I2C_DEFAULT_BUS_NUMBER=0
+ CONFIG_I2C_MUX=y
+@@ -93,3 +95,7 @@ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_OF_LIBFDT_ASSUME_MASK=0x0
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_IGNORE_OSINDICATIONS=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/include/configs/kontron_sl28.h b/include/configs/kontron_sl28.h
+index bfb4e67c8f..a02b8ce2b1 100644
+--- a/include/configs/kontron_sl28.h
++++ b/include/configs/kontron_sl28.h
+@@ -96,6 +96,8 @@
+ 	"envload=env import -d -b ${env_addr}\0" \
+ 	"install_rcw=source 20200000\0" \
+ 	"fdtfile=freescale/fsl-ls1028a-kontron-sl28.dtb\0" \
++	"dfu_alt_info=sf 0:0=u-boot-bin raw 0x210000 0x1d0000;" \
++			    "u-boot-env raw 0x3e0000 0x20000\0" \
+ 	ENV_MEM_LAYOUT_SETTINGS \
+ 	BOOTENV
+ 
+-- 
+2.30.2
+

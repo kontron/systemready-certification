@@ -1,0 +1,58 @@
+From e6f1f766f7defcf19ffcc85076b14f41feda512d Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Thu, 2 Sep 2021 14:22:37 +0200
+Subject: [PATCH] usb: xhci: fsl: add new compatible fsl,ls1028a-dwc3
+
+The official ls1028a binding of the driver uses the following as
+compatibles:
+  compatible = "fsl,ls1028a-dwc3", "snps,dwc3";
+
+Change the ls1028a device tree and add this new compatible to the fsl
+specific xhci driver, otherwise the generic dwc3 driver will be used
+with the compatibles above.
+
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Marek Vasut <marex@denx.de>
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 4 ++--
+ drivers/usb/host/xhci-fsl.c   | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 34aad526fe..cc055e65e5 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -319,7 +319,7 @@
+ 		};
+ 
+ 		usb0: usb3@3100000 {
+-			compatible = "fsl,layerscape-dwc3";
++			compatible = "fsl,ls1028a-dwc3", "snps,dwc3";
+ 			reg = <0x0 0x3100000 0x0 0x10000>;
+ 			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
+ 			dr_mode = "host";
+@@ -327,7 +327,7 @@
+ 		};
+ 
+ 		usb1: usb3@3110000 {
+-			compatible = "fsl,layerscape-dwc3";
++			compatible = "fsl,ls1028a-dwc3", "snps,dwc3";
+ 			reg = <0x0 0x3110000 0x0 0x10000>;
+ 			interrupts = <GIC_SPI 81 IRQ_TYPE_LEVEL_HIGH>;
+ 			dr_mode = "host";
+diff --git a/drivers/usb/host/xhci-fsl.c b/drivers/usb/host/xhci-fsl.c
+index f062f12ade..80871908dc 100644
+--- a/drivers/usb/host/xhci-fsl.c
++++ b/drivers/usb/host/xhci-fsl.c
+@@ -159,6 +159,7 @@ static int xhci_fsl_remove(struct udevice *dev)
+ 
+ static const struct udevice_id xhci_usb_ids[] = {
+ 	{ .compatible = "fsl,layerscape-dwc3", },
++	{ .compatible = "fsl,ls1028a-dwc3", },
+ 	{ }
+ };
+ 
+-- 
+2.30.2
+

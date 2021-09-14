@@ -1,0 +1,43 @@
+From 631d6166c43ed202ee201151585bb46aace5e22c Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 14:50:47 +0200
+Subject: [PATCH] arm: dts: ls1028a: move the watchdog node into /soc
+
+While inserting it into the new location, keep it sorted by the
+register base offset just like in the linux kernel device tree.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index d0f90941b9..c289009ca1 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -142,11 +142,6 @@
+ 		};
+ 	};
+ 
+-	cluster1_core0_watchdog: wdt@c000000 {
+-		compatible = "arm,sp805-wdt";
+-		reg = <0x0 0xc000000 0x0 0x1000>;
+-	};
+-
+ 	soc: soc {
+ 		compatible = "simple-bus";
+ 		#address-cells = <2>;
+@@ -484,5 +479,10 @@
+ 			ranges = <0x81000000 0x0 0x00000000 0x88 0x00020000 0x0 0x00010000   /* downstream I/O */
+ 				  0x82000000 0x0 0x40000000 0x88 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
+ 		};
++
++		cluster1_core0_watchdog: wdt@c000000 {
++			compatible = "arm,sp805-wdt";
++			reg = <0x0 0xc000000 0x0 0x1000>;
++		};
+ 	};
+ };
+-- 
+2.30.2
+

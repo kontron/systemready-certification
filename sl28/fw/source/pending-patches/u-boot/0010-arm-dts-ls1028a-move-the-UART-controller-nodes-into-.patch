@@ -1,0 +1,65 @@
+From e9f11935386826ea125e839f9e43fabe09c6d58d Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 14:20:44 +0200
+Subject: [PATCH] arm: dts: ls1028a: move the UART controller nodes into /soc
+
+While inserting them into the new location, keep them sorted by the
+register base offset just like in the linux kernel device tree.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index ecafa67d08..07aeb380ef 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -43,22 +43,6 @@
+ 					  IRQ_TYPE_LEVEL_LOW)>;
+ 	};
+ 
+-	serial0: serial@21c0500 {
+-		device_type = "serial";
+-		compatible = "fsl,ns16550", "ns16550a";
+-		reg = <0x0 0x21c0500 0x0 0x100>;
+-		interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
+-		status = "disabled";
+-	};
+-
+-	serial1: serial@21c0600 {
+-		device_type = "serial";
+-		compatible = "fsl,ns16550", "ns16550a";
+-		reg = <0x0 0x21c0600 0x0 0x100>;
+-		interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
+-		status = "disabled";
+-	};
+-
+ 	pcie1: pcie@3400000 {
+ 	       compatible = "fsl,ls-pcie", "fsl,ls1028-pcie", "snps,dw-pcie";
+ 	       reg = <0x00 0x03400000 0x0 0x80000
+@@ -484,5 +468,21 @@
+ 			bus-width = <4>;
+ 			status = "disabled";
+ 		};
++
++		serial0: serial@21c0500 {
++			device_type = "serial";
++			compatible = "fsl,ns16550", "ns16550a";
++			reg = <0x0 0x21c0500 0x0 0x100>;
++			interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
++			status = "disabled";
++		};
++
++		serial1: serial@21c0600 {
++			device_type = "serial";
++			compatible = "fsl,ns16550", "ns16550a";
++			reg = <0x0 0x21c0600 0x0 0x100>;
++			interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
++			status = "disabled";
++		};
+ 	};
+ };
+-- 
+2.30.2
+

@@ -1,0 +1,46 @@
+From daa0c27420805551a6f890a19cc07016cfc4de7b Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Wed, 1 Sep 2021 13:54:48 +0200
+Subject: [PATCH] arm: dts: ls1028a: move the clockgen node into /soc
+
+Populate the /soc node with the first device node.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a.dtsi | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index 1f562cfdad..54f97014be 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -21,13 +21,6 @@
+ 		clock-output-names = "sysclk";
+ 	};
+ 
+-	clockgen: clocking@1300000 {
+-		compatible = "fsl,ls1028a-clockgen";
+-		reg = <0x0 0x1300000 0x0 0xa0000>;
+-		#clock-cells = <2>;
+-		clocks = <&sysclk>;
+-	};
+-
+ 	gic: interrupt-controller@6000000 {
+ 		compatible = "arm,gic-v3";
+ 		reg = <0x0 0x06000000 0 0x10000>, /* GIC Dist */
+@@ -484,5 +477,12 @@
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
++
++		clockgen: clocking@1300000 {
++			compatible = "fsl,ls1028a-clockgen";
++			reg = <0x0 0x1300000 0x0 0xa0000>;
++			#clock-cells = <2>;
++			clocks = <&sysclk>;
++		};
+ 	};
+ };
+-- 
+2.30.2
+

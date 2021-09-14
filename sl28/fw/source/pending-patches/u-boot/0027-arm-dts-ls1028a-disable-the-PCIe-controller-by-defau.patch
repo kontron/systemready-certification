@@ -1,0 +1,103 @@
+From 489085558b98b0708d5ba05770e5b3616199ff43 Mon Sep 17 00:00:00 2001
+From: Michael Walle <michael@walle.cc>
+Date: Thu, 2 Sep 2021 11:43:25 +0200
+Subject: [PATCH] arm: dts: ls1028a: disable the PCIe controller by default
+
+Disable the PCIe controllers by default, just like in the linux device
+tree. But there is one catch, for linux they are enabled in-place by the
+bootloader. Obviously, this doesn't work for the bootloader. Thus we
+explicitly enable the controllers in the -u-boot.dtsi files.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
+ arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi | 13 +++++++++++++
+ arch/arm/dts/fsl-ls1028a-qds.dtsi                 |  8 ++++++++
+ arch/arm/dts/fsl-ls1028a-rdb.dts                  |  8 ++++++++
+ arch/arm/dts/fsl-ls1028a.dtsi                     |  2 ++
+ 4 files changed, 31 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi b/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
+index 42bd3138b2..25aa274765 100644
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
++++ b/arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
+@@ -266,6 +266,19 @@
+ 	u-boot,dm-pre-reloc;
+ };
+ 
++/*
++ * u-boot will enable the device in the linux device tree in place. Because
++ * we are using the linux device tree, we have to enable the PCI controller
++ * ourselves.
++ */
++&pcie1 {
++	status = "okay";
++};
++
++&pcie2 {
++	status = "okay";
++};
++
+ &soc {
+ 	u-boot,dm-pre-reloc;
+ };
+diff --git a/arch/arm/dts/fsl-ls1028a-qds.dtsi b/arch/arm/dts/fsl-ls1028a-qds.dtsi
+index babd8445ee..0da0a7bc5d 100644
+--- a/arch/arm/dts/fsl-ls1028a-qds.dtsi
++++ b/arch/arm/dts/fsl-ls1028a-qds.dtsi
+@@ -240,6 +240,14 @@
+ 	status = "okay";
+ };
+ 
++&pcie1 {
++	status = "okay";
++};
++
++&pcie2 {
++	status = "okay";
++};
++
+ &usb0 {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/fsl-ls1028a-rdb.dts b/arch/arm/dts/fsl-ls1028a-rdb.dts
+index 18ee363d75..537ebbc697 100644
+--- a/arch/arm/dts/fsl-ls1028a-rdb.dts
++++ b/arch/arm/dts/fsl-ls1028a-rdb.dts
+@@ -122,6 +122,14 @@
+ 	status = "okay";
+ };
+ 
++&pcie1 {
++	status = "okay";
++};
++
++&pcie2 {
++	status = "okay";
++};
++
+ &usb0 {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/fsl-ls1028a.dtsi b/arch/arm/dts/fsl-ls1028a.dtsi
+index f11e75032b..d2f558d208 100644
+--- a/arch/arm/dts/fsl-ls1028a.dtsi
++++ b/arch/arm/dts/fsl-ls1028a.dtsi
+@@ -354,6 +354,7 @@
+ 			bus-range = <0x0 0xff>;
+ 			ranges = <0x81000000 0x0 0x00000000 0x80 0x00010000 0x0 0x00010000   /* downstream I/O */
+ 				  0x82000000 0x0 0x40000000 0x80 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
++			status = "disabled";
+ 		};
+ 
+ 		pcie2: pcie@3500000 {
+@@ -367,6 +368,7 @@
+ 			bus-range = <0x0 0xff>;
+ 			ranges = <0x81000000 0x0 0x00000000 0x88 0x00010000 0x0 0x00010000   /* downstream I/O */
+ 				  0x82000000 0x0 0x40000000 0x88 0x40000000 0x0 0x40000000>; /* non-prefetchable memory */
++			status = "disabled";
+ 		};
+ 
+ 		cluster1_core0_watchdog: wdt@c000000 {
+-- 
+2.30.2
+
