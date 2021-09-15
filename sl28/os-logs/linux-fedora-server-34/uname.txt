@@ -1,0 +1,1 @@
+Linux fedora 5.11.12-300.fc34.aarch64 #1 SMP Wed Apr 7 16:12:21 UTC 2021 aarch64 aarch64 aarch64 GNU/Linux
