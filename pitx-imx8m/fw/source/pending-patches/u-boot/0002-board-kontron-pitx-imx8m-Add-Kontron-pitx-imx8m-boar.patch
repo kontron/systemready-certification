@@ -1,7 +1,7 @@
-From 0776045a324eaa11bbdd80b9977306832a646074 Mon Sep 17 00:00:00 2001
+From 056734d8edb18582068738e171f0a112114ff0b9 Mon Sep 17 00:00:00 2001
 From: Heiko Thiery <heiko.thiery@gmail.com>
 Date: Tue, 2 Mar 2021 14:39:45 +0100
-Subject: [PATCH 2/3] board: kontron: pitx-imx8m: Add Kontron pitx-imx8m board
+Subject: [PATCH] board: kontron: pitx-imx8m: Add Kontron pitx-imx8m board
  support
 
 The Kontron pitx-imx8m is an NXP i.MX8MQ based board in the pITX

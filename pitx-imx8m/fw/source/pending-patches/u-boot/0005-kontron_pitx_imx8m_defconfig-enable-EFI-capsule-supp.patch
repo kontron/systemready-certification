@@ -1,0 +1,40 @@
+From ad9b87b3521c0da1b344560ab1eb412057d4c935 Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Tue, 14 Sep 2021 15:34:40 +0200
+Subject: [PATCH] kontron_pitx_imx8m_defconfig: enable EFI capsule support
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ configs/kontron_pitx_imx8m_defconfig | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
+index 0fae4c8c16..70a97fff0e 100644
+--- a/configs/kontron_pitx_imx8m_defconfig
++++ b/configs/kontron_pitx_imx8m_defconfig
+@@ -26,6 +26,7 @@ CONFIG_SPL_BOARD_INIT=y
+ # CONFIG_CMD_IMPORTENV is not set
+ CONFIG_CMD_NVEDIT_EFI=y
+ # CONFIG_CMD_CRC32 is not set
++CONFIG_CMD_DFU=y
+ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+@@ -46,6 +47,7 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
++CONFIG_DFU_MMC=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MXC=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+@@ -73,3 +75,6 @@ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+ CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+-- 
+2.30.0
+
