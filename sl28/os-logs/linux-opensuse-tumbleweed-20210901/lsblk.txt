@@ -1,0 +1,11 @@
+NAME         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda            8:0    1  1.9G  0 disk 
+├─sda1         8:1    1 10.2M  0 part 
+└─sda2         8:2    1  181M  0 part 
+mmcblk0      179:0    0 29.6G  0 disk 
+├─mmcblk0p1  179:1    0  600M  0 part /boot/efi
+├─mmcblk0p2  179:2    0    1G  0 part 
+├─mmcblk0p3  179:3    0   26G  0 part /
+└─mmcblk0p4  179:4    0    2G  0 part [SWAP]
+mmcblk0boot0 179:8    0 31.5M  1 disk 
+mmcblk0boot1 179:16   0 31.5M  1 disk 
