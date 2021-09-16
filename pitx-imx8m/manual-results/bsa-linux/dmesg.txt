@@ -1,0 +1,29 @@
+[   75.898548]  PE_INFO: Number of PE detected       :    4 
+[   75.906896]  PCIE_INFO: Number of ECAM regions    :    0 
+[   75.915442]  Peripheral: Num of USB controllers   :    0 
+[   75.923968]  Peripheral: Num of SATA controllers  :    0 
+[   75.932567]  Peripheral: Num of UART controllers  :    0 
+[   75.941177]  DMA_INFO: Number of DMA CTRL in PCIe :    0 
+[   75.948208]  SMMU_INFO: Number of SMMU CTRL       :    0 
+[   75.954068] 
+[   75.954068] Operating System View:
+[   75.962064]  104 : Addressability                        
+[   75.962064]        B_MEM_03-04, B_MEM_06
+[   75.962064]        Checkpoint --  1                           : Result:  SKIPPED 
+[   75.980622] 
+[   75.980622]       *** One or more tests have Failed/Skipped.*** 
+[   75.988605] 
+[   75.988605] Operating System View:
+[   75.996603]  605 : Memory Attribute of DMA               
+[   75.996603]        No DMA controllers detected...    
+[   75.996603]        B_PER_09, B_PER_10
+[   75.996603]        Checkpoint --  3                           : Result:  SKIPPED 
+[   76.020248] 
+[   76.020248]       *** One or more tests have Failed/Skipped.*** 
+[   76.028241] 
+[   76.028241]      *** No ECAM region found, Skipping PCIE tests *** 
+[   76.039227] 
+[   76.039227]      ------------------------------------------------------------
+[   76.039227]       Total Tests Run =  2, Tests Passed =  0, Tests Failed =  0 
+[   76.039227]      ------------------------------------------------------------
+
