@@ -1,0 +1,638 @@
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
+[    0.000000] Linux version 5.13.5-200.fc34.aarch64 (mockbuild@buildvm-a64-03.iad2.fedoraproject.org) (gcc (GCC) 11.1.1 20210531 (Red Hat 11.1.1-3), GNU ld version 2.35.1-41.fc34) #1 SMP Sun Jul 25 16:03:46 UTC 2021
+[    0.000000] Machine model: Kontron pITX-imx8m
+[    0.000000] efi: EFI v2.80 by Das U-Boot
+[    0.000000] efi: ESRT=0x7dd28040 RTPROP=0x7dd26040 SMBIOS=0x7dd22000 MOKvar=0x7dc05000 MEMRESERVE=0x7dbf7040 
+[    0.000000] esrt: Reserving ESRT space from 0x000000007dd28040 to 0x000000007dd28050.
+[    0.000000] ACPI: Early table checksum verification disabled
+[    0.000000] ACPI: OSL: ACPI: System description tables not found
+[    0.000000] ACPI: Failed to init ACPI tables
+[    0.000000] NUMA: No NUMA configuration found
+[    0.000000] NUMA: Faking a node at [mem 0x0000000040000000-0x000000013fffffff]
+[    0.000000] NUMA: NODE_DATA [mem 0x13f77c8c0-0x13f792fff]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000040000000-0x00000000ffffffff]
+[    0.000000]   DMA32    empty
+[    0.000000]   Normal   [mem 0x0000000100000000-0x000000013fffffff]
+[    0.000000]   Device   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000040000000-0x000000007dc04fff]
+[    0.000000]   node   0: [mem 0x000000007dc05000-0x000000007dc05fff]
+[    0.000000]   node   0: [mem 0x000000007dc06000-0x000000007dc45fff]
+[    0.000000]   node   0: [mem 0x000000007dc46000-0x000000007dc46fff]
+[    0.000000]   node   0: [mem 0x000000007dc47000-0x000000007dd21fff]
+[    0.000000]   node   0: [mem 0x000000007dd22000-0x000000007dd22fff]
+[    0.000000]   node   0: [mem 0x000000007dd23000-0x000000007dd25fff]
+[    0.000000]   node   0: [mem 0x000000007dd26000-0x000000007dd26fff]
+[    0.000000]   node   0: [mem 0x000000007dd27000-0x000000007dd28fff]
+[    0.000000]   node   0: [mem 0x000000007dd29000-0x000000007dd2afff]
+[    0.000000]   node   0: [mem 0x000000007dd2b000-0x000000007dd2bfff]
+[    0.000000]   node   0: [mem 0x000000007dd2c000-0x000000007dd2ffff]
+[    0.000000]   node   0: [mem 0x000000007dd30000-0x000000007ff3ffff]
+[    0.000000]   node   0: [mem 0x000000007ff40000-0x000000007ff4ffff]
+[    0.000000]   node   0: [mem 0x000000007ff50000-0x000000013fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x000000013fffffff]
+[    0.000000] On node 0 totalpages: 1048576
+[    0.000000]   DMA zone: 12288 pages used for memmap
+[    0.000000]   DMA zone: 0 pages reserved
+[    0.000000]   DMA zone: 786432 pages, LIFO batch:63
+[    0.000000]   Normal zone: 4096 pages used for memmap
+[    0.000000]   Normal zone: 262144 pages, LIFO batch:63
+[    0.000000] cma: Reserved 64 MiB at 0x00000000fc000000
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.1 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: MIGRATE_INFO_TYPE not supported.
+[    0.000000] psci: SMC Calling Convention v1.2
+[    0.000000] percpu: Embedded 32 pages/cpu s91480 r8192 d31400 u131072
+[    0.000000] pcpu-alloc: s91480 r8192 d31400 u131072 alloc=32*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Detected VIPT I-cache on CPU0
+[    0.000000] CPU features: detected: GIC system register CPU interface
+[    0.000000] CPU features: detected: ARM erratum 845719
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 1032192
+[    0.000000] Policy zone: Normal
+[    0.000000] Kernel command line: BOOT_IMAGE=(hd1,gpt2)/ostree/fedora-iot-3a29a0f10da08207b6b67a2d29a226bc19e362e0affbe00daafb0a0e6aaefe09/vmlinuz-5.13.5-200.fc34.aarch64 rd.lvm.lv=fedora-iot_fedora/root root=/dev/mapper/fedora--iot_fedora-root ostree=/ostree/boot.1/fedora-iot/3a29a0f10da08207b6b67a2d29a226bc19e362e0affbe00daafb0a0e6aaefe09/0
+[    0.000000] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] software IO TLB: mapped [mem 0x00000000f8000000-0x00000000fc000000] (64MB)
+[    0.000000] Memory: 3861200K/4194304K available (15680K kernel code, 4034K rwdata, 11016K rodata, 6912K init, 8675K bss, 267568K reserved, 65536K cma-reserved)
+[    0.000000] random: get_random_u64 called from kmem_cache_open+0x30/0x320 with crng_init=0
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] ftrace: allocating 51665 entries in 202 pages
+[    0.000000] ftrace: allocated 202 pages with 4 groups
+[    0.000000] trace event string verifier disabled
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=4096 to nr_cpu_ids=4.
+[    0.000000] 	Trampoline variant of Tasks RCU enabled.
+[    0.000000] 	Rude variant of Tasks RCU enabled.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] GICv3: GIC: Using split EOI/Deactivate mode
+[    0.000000] GICv3: 128 SPIs implemented
+[    0.000000] GICv3: 0 Extended SPIs implemented
+[    0.000000] GICv3: Distributor has no Range Selector support
+[    0.000000] Root IRQ handler: gic_handle_irq
+[    0.000000] GICv3: 16 PPIs implemented
+[    0.000000] GICv3: CPU0: found redistributor 0 region 0:0x0000000038880000
+[    0.000000] ITS: No ITS available, not enabling LPIs
+[    0.000000] rcu: 	Offload RCU callbacks from CPUs: (none).
+[    0.000000] arch_timer: cp15 timer(s) running at 8.00MHz (phys).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1d854df40, max_idle_ns: 440795202120 ns
+[    0.000001] sched_clock: 56 bits at 8MHz, resolution 125ns, wraps every 2199023255500ns
+[    0.000897] Console: colour dummy device 80x25
+[    0.001765] printk: console [tty0] enabled
+[    0.001937] Calibrating delay loop (skipped), value calculated using timer frequency.. 16.00 BogoMIPS (lpj=80000)
+[    0.001975] pid_max: default: 32768 minimum: 301
+[    0.002192] LSM: Security Framework initializing
+[    0.002284] Yama: becoming mindful.
+[    0.002344] SELinux:  Initializing.
+[    0.002531] LSM support for eBPF active
+[    0.002553] landlock: Up and running.
+[    0.002656] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.002705] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.005684] rcu: Hierarchical SRCU implementation.
+[    0.008787] Remapping and enabling EFI services.
+[    0.009366] smp: Bringing up secondary CPUs ...
+[    0.010319] Detected VIPT I-cache on CPU1
+[    0.010362] GICv3: CPU1: found redistributor 1 region 0:0x00000000388a0000
+[    0.010434] CPU1: Booted secondary processor 0x0000000001 [0x410fd034]
+[    0.011328] Detected VIPT I-cache on CPU2
+[    0.011354] GICv3: CPU2: found redistributor 2 region 0:0x00000000388c0000
+[    0.011394] CPU2: Booted secondary processor 0x0000000002 [0x410fd034]
+[    0.012284] Detected VIPT I-cache on CPU3
+[    0.012310] GICv3: CPU3: found redistributor 3 region 0:0x00000000388e0000
+[    0.012347] CPU3: Booted secondary processor 0x0000000003 [0x410fd034]
+[    0.012494] smp: Brought up 1 node, 4 CPUs
+[    0.012605] SMP: Total of 4 processors activated.
+[    0.012622] CPU features: detected: 32-bit EL0 Support
+[    0.012637] CPU features: detected: 32-bit EL1 Support
+[    0.012655] CPU features: detected: CRC32 instructions
+[    0.012770] CPU features: emulated: Privileged Access Never (PAN) using TTBR0_EL1 switching
+[    0.033384] CPU: All CPU(s) started at EL2
+[    0.033472] alternatives: patching kernel code
+[    0.037513] devtmpfs: initialized
+[    0.049182] Registered cp15_barrier emulation handler
+[    0.049224] Registered setend emulation handler
+[    0.049248] KASLR disabled due to lack of seed
+[    0.049502] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.049545] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+[    0.054299] pinctrl core: initialized pinctrl subsystem
+[    0.055589] SMBIOS 3.0 present.
+[    0.055631] DMI: Unknown Unknown Product/Unknown Product, BIOS 2021.10-rc3-00005-g739d606a30 10/01/2021
+[    0.056454] NET: Registered protocol family 16
+[    0.064956] DMA: preallocated 512 KiB GFP_KERNEL pool for atomic allocations
+[    0.065869] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[    0.067001] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.067108] audit: initializing netlink subsys (disabled)
+[    0.067340] audit: type=2000 audit(0.060:1): state=initialized audit_enabled=0 res=1
+[    0.068917] thermal_sys: Registered thermal governor 'fair_share'
+[    0.068925] thermal_sys: Registered thermal governor 'step_wise'
+[    0.068945] thermal_sys: Registered thermal governor 'user_space'
+[    0.069540] cpuidle: using governor menu
+[    0.069865] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.070060] ASID allocator initialised with 65536 entries
+[    0.070780] Serial: AMBA PL011 UART driver
+[    0.080796] debugfs: Directory 'dummy-syscon@30340000' with parent 'regmap' already present!
+[    0.081219] imx8mq-pinctrl 30330000.pinctrl: initialized IMX pinctrl driver
+[    0.111065] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.111119] HugeTLB registered 32.0 MiB page size, pre-allocated 0 pages
+[    0.111139] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.111157] HugeTLB registered 64.0 KiB page size, pre-allocated 0 pages
+[    1.201529] cryptd: max_cpu_qlen set to 1000
+[    1.210407] alg: No test for 842 (842-generic)
+[    1.210584] alg: No test for 842 (842-scomp)
+[    1.211152] wait_for_initramfs() called before rootfs_initcalls
+[    1.245754] DRBG: Continuing without Jitter RNG
+[    1.265848] raid6: skip pq benchmark and using algorithm neonx8
+[    1.265881] raid6: using neon recovery algorithm
+[    1.266532] fbcon: Taking over console
+[    1.266569] ACPI: Interpreter disabled.
+[    1.267296] iommu: Default domain type: Translated 
+[    1.267662] vgaarb: loaded
+[    1.268445] SCSI subsystem initialized
+[    1.268632] libata version 3.00 loaded.
+[    1.268902] usbcore: registered new interface driver usbfs
+[    1.268968] usbcore: registered new interface driver hub
+[    1.269024] usbcore: registered new device driver usb
+[    1.269339] pps_core: LinuxPPS API ver. 1 registered
+[    1.269357] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    1.269397] PTP clock support registered
+[    1.269637] EDAC MC: Ver: 3.0.0
+[    1.270723] Registered efivars operations
+[    1.272310] NetLabel: Initializing
+[    1.272327] NetLabel:  domain hash size = 128
+[    1.272345] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    1.272447] NetLabel:  unlabeled traffic allowed by default
+[    1.273108] clocksource: Switched to clocksource arch_sys_counter
+[    1.371724] VFS: Disk quotas dquot_6.6.0
+[    1.371861] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    1.372651] pnp: PnP ACPI: disabled
+[    1.382985] NET: Registered protocol family 2
+[    1.383279] IP idents hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    1.385864] tcp_listen_portaddr_hash hash table entries: 2048 (order: 3, 32768 bytes, linear)
+[    1.385970] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    1.386382] TCP bind hash table entries: 32768 (order: 7, 524288 bytes, linear)
+[    1.387156] TCP: Hash tables configured (established 32768 bind 32768)
+[    1.387441] MPTCP token hash table entries: 4096 (order: 4, 98304 bytes, linear)
+[    1.387641] UDP hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    1.387775] UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    1.388470] NET: Registered protocol family 1
+[    1.388514] NET: Registered protocol family 44
+[    1.388542] PCI: CLS 0 bytes, default 64
+[    1.389068] Trying to unpack rootfs image as initramfs...
+[    1.443771] hw perfevents: enabled with armv8_cortex_a53 PMU driver, 7 counters available
+[    1.444495] kvm [1]: IPA Size Limit: 40 bits
+[    1.450471] kvm [1]: vgic-v2@31020000
+[    1.450515] kvm [1]: GIC system register CPU interface enabled
+[    1.451565] kvm [1]: vgic interrupt IRQ9
+[    1.454290] kvm [1]: Hyp mode initialized successfully
+[    4.844060] Freeing initrd memory: 65340K
+[    5.007455] Initialise system trusted keyrings
+[    5.007568] Key type blacklist registered
+[    5.007759] workingset: timestamp_bits=37 max_order=20 bucket_order=0
+[    5.019696] zbud: loaded
+[    5.024457] integrity: Platform Keyring initialized
+[    5.078021] NET: Registered protocol family 38
+[    5.078053] xor: measuring software checksum speed
+[    5.084598]    8regs           :  1512 MB/sec
+[    5.090108]    32regs          :  1790 MB/sec
+[    5.096724]    arm64_neon      :  1495 MB/sec
+[    5.096741] xor: using function: 32regs (1790 MB/sec)
+[    5.096766] Key type asymmetric registered
+[    5.096782] Asymmetric key parser 'x509' registered
+[    5.096838] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+[    5.097074] io scheduler mq-deadline registered
+[    5.097094] io scheduler kyber registered
+[    5.097336] io scheduler bfq registered
+[    5.097820] atomic64_test: passed
+[    5.125432] SoC: i.MX8MQ revision 2.1
+[    5.129179] debugfs: Directory 'dummy-reset-controller@30390000' with parent 'regmap' already present!
+[    5.130224] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    5.141464] 30860000.serial: ttymxc0 at MMIO 0x30860000 (irq = 37, base_baud = 5000000) is a IMX
+[    5.142231] 30880000.serial: ttymxc2 at MMIO 0x30880000 (irq = 38, base_baud = 5000000) is a IMX
+[    6.393055] printk: console [ttymxc2] enabled
+[    6.398344] 30890000.serial: ttymxc1 at MMIO 0x30890000 (irq = 39, base_baud = 5000000) is a IMX
+[    6.408457] msm_serial: driver initialized
+[    6.418782] libphy: Fixed MDIO Bus: probed
+[    6.423819] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    6.430644] ehci-pci: EHCI PCI platform driver
+[    6.435524] usbcore: registered new interface driver usbserial_generic
+[    6.442369] usbserial: USB Serial support registered for generic
+[    6.448846] mousedev: PS/2 mouse device common for all mice
+[    6.457102] device-mapper: uevent: version 1.0.3
+[    6.462330] device-mapper: ioctl: 4.45.0-ioctl (2021-03-22) initialised: dm-devel@redhat.com
+[    6.472551] ledtrig-cpu: registered to indicate activity on CPUs
+[    6.479674] SMCCC: SOC_ID: ARCH_SOC_ID not implemented, skipping ....
+[    6.486856] hid: raw HID events driver (C) Jiri Kosina
+[    6.492438] usbcore: registered new interface driver usbhid
+[    6.498266] usbhid: USB HID core driver
+[    6.504257] drop_monitor: Initializing network drop monitor service
+[    6.511076] Initializing XFRM netlink socket
+[    6.516319] NET: Registered protocol family 10
+[    6.559779] Segment Routing with IPv6
+[    6.563664] RPL Segment Routing with IPv6
+[    6.567962] mip6: Mobile IPv6
+[    6.571066] NET: Registered protocol family 17
+[    6.577021] registered taskstats version 1
+[    6.581403] Loading compiled-in X.509 certificates
+[    6.590969] Loaded X.509 cert 'Fedora kernel signing key: deec2810dd901bc195c1a0cd5f464f66457311aa'
+[    6.601213] zswap: loaded using pool lzo/zbud
+[    6.606048] page_owner is disabled
+[    6.609961] Key type ._fscrypt registered
+[    6.614175] Key type .fscrypt registered
+[    6.618271] Key type fscrypt-provisioning registered
+[    6.626025] Btrfs loaded, crc32c=crc32c-generic, zoned=yes
+[    6.932408] Key type encrypted registered
+[    6.936865] integrity: Loading X.509 certificate: UEFI:MokListRT (MOKvar table)
+[    6.945868] integrity: Loaded X.509 cert 'Fedora Secure Boot CA: fde32599c2d61db1bf5807335d7b20e4cd963b42'
+[    6.956212] ima: No TPM chip found, activating TPM-bypass!
+[    6.961951] Loading compiled-in module X.509 certificates
+[    6.971687] Loaded X.509 cert 'Fedora kernel signing key: deec2810dd901bc195c1a0cd5f464f66457311aa'
+[    6.981169] ima: Allocated hash algorithm: sha256
+[    6.986152] ima: No architecture policies found
+[    6.990949] evm: Initialising EVM extended attributes:
+[    6.996328] evm: security.selinux
+[    6.999788] evm: security.ima
+[    7.002885] evm: security.capability
+[    7.006632] evm: HMAC attrs: 0x1
+[    7.041518] imx6q-pcie 33c00000.pcie: host bridge /soc@0/pcie@33c00000 ranges:
+[    7.049227] imx6q-pcie 33c00000.pcie:   No bus range found for /soc@0/pcie@33c00000, using [bus 00-ff]
+[    7.059005] imx6q-pcie 33c00000.pcie:       IO 0x0027f80000..0x0027f8ffff -> 0x0000000000
+[    7.067575] imx6q-pcie 33c00000.pcie:      MEM 0x0020000000..0x0027efffff -> 0x0020000000
+[    7.076841] imx6q-pcie 33c00000.pcie: invalid resource
+[    7.082215] imx6q-pcie 33c00000.pcie: iATU unroll: enabled
+[    7.087973] imx6q-pcie 33c00000.pcie: Detected iATU regions: 4 outbound, 4 inbound
+[    7.195970] imx6q-pcie 33c00000.pcie: Link up
+[    7.200524] imx6q-pcie 33c00000.pcie: Link: Gen2 disabled
+[    7.206181] imx6q-pcie 33c00000.pcie: Link up, Gen1
+[    7.211275] imx6q-pcie 33c00000.pcie: Link up
+[    7.215999] imx6q-pcie 33c00000.pcie: PCI host bridge to bus 0000:00
+[    7.222636] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    7.228381] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    7.234847] pci_bus 0000:00: root bus resource [mem 0x20000000-0x27efffff]
+[    7.242059] pci 0000:00:00.0: [16c3:abcd] type 01 class 0x060400
+[    7.248357] pci 0000:00:00.0: reg 0x10: [mem 0x00000000-0x000fffff]
+[    7.254927] pci 0000:00:00.0: reg 0x38: [mem 0x00000000-0x0000ffff pref]
+[    7.261977] pci 0000:00:00.0: supports D1
+[    7.266180] pci 0000:00:00.0: PME# supported from D0 D1 D3hot D3cold
+[    7.275748] pci 0000:01:00.0: [8086:157b] type 00 class 0x020000
+[    7.282073] pci 0000:01:00.0: reg 0x10: [mem 0x00000000-0x0001ffff]
+[    7.288677] pci 0000:01:00.0: reg 0x18: [io  0x0000-0x001f]
+[    7.294533] pci 0000:01:00.0: reg 0x1c: [mem 0x00000000-0x00003fff]
+[    7.301405] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    7.335519] pci 0000:00:00.0: BAR 0: assigned [mem 0x20000000-0x200fffff]
+[    7.342614] pci 0000:00:00.0: BAR 14: assigned [mem 0x20100000-0x201fffff]
+[    7.349812] pci 0000:00:00.0: BAR 6: assigned [mem 0x20200000-0x2020ffff pref]
+[    7.357372] pci 0000:00:00.0: BAR 13: assigned [io  0x1000-0x1fff]
+[    7.363845] pci 0000:01:00.0: BAR 0: assigned [mem 0x20100000-0x2011ffff]
+[    7.370944] pci 0000:01:00.0: BAR 3: assigned [mem 0x20120000-0x20123fff]
+[    7.378054] pci 0000:01:00.0: BAR 2: assigned [io  0x1000-0x101f]
+[    7.384444] pci 0000:00:00.0: PCI bridge to [bus 01-ff]
+[    7.389904] pci 0000:00:00.0:   bridge window [io  0x1000-0x1fff]
+[    7.396280] pci 0000:00:00.0:   bridge window [mem 0x20100000-0x201fffff]
+[    7.403827] pcieport 0000:00:00.0: PME: Signaling with IRQ 63
+[    7.410213] pcieport 0000:00:00.0: AER: enabled with IRQ 63
+[    7.429363] Freeing unused kernel memory: 6912K
+[    7.532553] Checked W+X mappings: passed, no W+X pages found
+[    7.538528] rodata_test: all tests were successful
+[    7.543611] Run /init as init process
+[    7.547440]   with arguments:
+[    7.547448]     /init
+[    7.547455]   with environment:
+[    7.547460]     HOME=/
+[    7.547466]     TERM=linux
+[    7.547471]     BOOT_IMAGE=(hd1,gpt2)/ostree/fedora-iot-3a29a0f10da08207b6b67a2d29a226bc19e362e0affbe00daafb0a0e6aaefe09/vmlinuz-5.13.5-200.fc34.aarch64
+[    7.547481]     ostree=/ostree/boot.1/fedora-iot/3a29a0f10da08207b6b67a2d29a226bc19e362e0affbe00daafb0a0e6aaefe09/0
+[    7.584618] systemd[1]: System time before build time, advancing clock.
+[    7.609854] systemd[1]: systemd v248.6-1.fc34 running in system mode. (+PAM +AUDIT +SELINUX -APPARMOR +IMA +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified)
+[    7.643190] systemd[1]: Detected architecture arm64.
+[    7.648394] systemd[1]: Running in initial RAM disk.
+[    7.683495] systemd[1]: No hostname configured, using default hostname.
+[    7.690871] systemd[1]: Hostname set to <fedora>.
+[    7.696266] random: systemd: uninitialized urandom read (16 bytes read)
+[    7.703319] systemd[1]: Initializing machine ID from random generator.
+[    8.231797] systemd[1]: Queued start job for default target Initrd Default Target.
+[    8.240801] random: systemd: uninitialized urandom read (16 bytes read)
+[    8.248213] systemd[1]: Started Forward Password Requests to Clevis Directory Watch.
+[    8.283309] random: systemd: uninitialized urandom read (16 bytes read)
+[    8.290509] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[    8.333354] systemd[1]: Reached target Local Encrypted Volumes (Pre).
+[    8.373293] systemd[1]: Reached target Local Encrypted Volumes.
+[    8.413326] systemd[1]: Reached target Ignition Subsequent Boot Disk Setup.
+[    8.453309] systemd[1]: Reached target Subsequent (Not Ignition) boot complete.
+[    8.493366] systemd[1]: Reached target Local File Systems.
+[    8.533283] systemd[1]: Reached target Path Units.
+[    8.563336] systemd[1]: Reached target Slice Units.
+[    8.593279] systemd[1]: Reached target Swaps.
+[    8.623298] systemd[1]: Reached target Timer Units.
+[    8.653812] systemd[1]: Listening on D-Bus System Message Bus Socket.
+[    8.694181] systemd[1]: Listening on Journal Audit Socket.
+[    8.733878] systemd[1]: Listening on Journal Socket (/dev/log).
+[    8.773915] systemd[1]: Listening on Journal Socket.
+[    8.803922] systemd[1]: Listening on udev Control Socket.
+[    8.843778] systemd[1]: Listening on udev Kernel Socket.
+[    8.883320] systemd[1]: Reached target Socket Units.
+[    8.920780] systemd[1]: Starting Create List of Static Device Nodes...
+[    8.968325] systemd[1]: Started Hardware RNG Entropy Gatherer Daemon.
+[    9.013445] systemd[1]: Starting Journal Service...
+[    9.050184] systemd[1]: Starting Load Kernel Modules...
+[    9.083749] systemd[1]: Condition check resulted in Create System Users being skipped.
+[    9.097579] systemd[1]: Starting Setup Virtual Console...
+[    9.122545] fuse: init (API version 7.34)
+[    9.134423] Asymmetric key parser 'pkcs8' registered
+[    9.146590] systemd[1]: Started Journal Service.
+[    9.183788] audit: type=1130 audit(1626912001.590:2): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-journald comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.233814] audit: type=1130 audit(1626912001.640:3): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=kmod-static-nodes comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.283777] audit: type=1130 audit(1626912001.690:4): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-modules-load comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.333421] audit: type=1130 audit(1626912001.740:5): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-vconsole-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.415147] audit: type=1130 audit(1626912001.820:6): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-tmpfiles-setup-dev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.440004] audit: type=1130 audit(1626912001.840:7): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-sysctl comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.463728] audit: type=1130 audit(1626912001.870:8): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-tmpfiles-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[    9.563407] audit: type=1130 audit(1626912001.970:9): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=dracut-cmdline-ask comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   10.233479] audit: type=1130 audit(1626912002.640:10): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=dracut-cmdline comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   10.443592] audit: type=1130 audit(1626912002.850:11): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=dracut-pre-udev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   11.614862] sdhci: Secure Digital Host Controller Interface driver
+[   11.621347] sdhci: Copyright(c) Pierre Ossman
+[   11.644567] sdhci-pltfm: SDHCI platform and OF driver helper
+[   11.682807] imx-sdma 302c0000.sdma: Direct firmware load for imx/sdma/sdma-imx7d.bin failed with error -2
+[   11.692953] imx-sdma 302c0000.sdma: external firmware not found, using ROM firmware
+[   11.702349] mmc0: SDHCI controller on 30b40000.mmc [30b40000.mmc] using ADMA
+[   11.711367] caam 30900000.crypto: Entropy delay = 3200
+[   11.718909] i2c i2c-0: IMX I2C adapter registered
+[   11.749800] imx6q-pcie 33800000.pcie: host bridge /soc@0/pcie@33800000 ranges:
+[   11.760051] imx6q-pcie 33800000.pcie:       IO 0x001ff80000..0x001ff8ffff -> 0x0000000000
+[   11.765810] pps pps0: new PPS source ptp0
+[   11.774220] sdhci-esdhc-imx 30b50000.mmc: Got CD GPIO
+[   11.775225] imx6q-pcie 33800000.pcie:      MEM 0x0018000000..0x001fefffff -> 0x0018000000
+[   11.781073] sdhci-esdhc-imx 30b50000.mmc: Got WP GPIO
+[   11.806215] libphy: fec_enet_mii_bus: probed
+[   11.829093] i2c i2c-1: IMX I2C adapter registered
+[   11.835061] input: 30370000.snvs:snvs-powerkey as /devices/platform/soc@0/30000000.bus/30370000.snvs/30370000.snvs:snvs-powerkey/input/input0
+[   11.838014] mmc0: new HS400 MMC card at address 0001
+[   11.848485] caam 30900000.crypto: Entropy delay = 3600
+[   11.853700] mmc1: SDHCI controller on 30b50000.mmc [30b50000.mmc] using ADMA
+[   11.886843] fec 30be0000.ethernet eth0: registered PHC device 0
+[   11.899067] imx-sdma 30bd0000.sdma: Direct firmware load for imx/sdma/sdma-imx7d.bin failed with error -2
+[   11.913781] imx-sdma 30bd0000.sdma: external firmware not found, using ROM firmware
+[   11.923229] imx6q-pcie 33800000.pcie: invalid resource
+[   11.926977] i2c i2c-2: IMX I2C adapter registered
+[   11.928627] imx6q-pcie 33800000.pcie: iATU unroll: enabled
+[   11.929462] caam 30900000.crypto: Instantiated RNG4 SH0
+[   11.944765] imx6q-pcie 33800000.pcie: Detected iATU regions: 4 outbound, 4 inbound
+[   11.999939] caam 30900000.crypto: Instantiated RNG4 SH1
+[   12.006689] caam 30900000.crypto: device ID = 0x0a16040100000000 (Era 9)
+[   12.008417] imx8mq-usb-phy 381f0040.usb-phy: supply vbus not found, using dummy regulator
+[   12.013795] caam 30900000.crypto: job rings = 3, qi = 0
+[   12.023030] imx8mq-usb-phy 382f0040.usb-phy: supply vbus not found, using dummy regulator
+[   12.023755] snvs_rtc 30370000.snvs:snvs-rtc-lp: registered as rtc0
+[   12.027854] snvs_rtc 30370000.snvs:snvs-rtc-lp: setting system clock to 2021-09-16T07:47:29 UTC (1631778449)
+[   12.061616] mmc1: new ultra high speed SDR104 SDHC card at address 1234
+[   12.148317] imx8m-ddrc-devfreq 3d400000.memory-controller: failed to init firmware freq info: -19
+[   12.206527] igb: Intel(R) Gigabit Ethernet Network Driver
+[   12.212205] igb: Copyright (c) 2007-2014 Intel Corporation.
+[   12.218737] igb 0000:01:00.0: enabling device (0000 -> 0002)
+[   12.266859] pps pps1: new PPS source ptp1
+[   12.271340] igb 0000:01:00.0: added PHC on eth1
+[   12.276154] igb 0000:01:00.0: Intel(R) Gigabit Ethernet Network Connection
+[   12.283391] igb 0000:01:00.0: eth1: (PCIe:2.5Gb/s:Width x1) 00:e0:4b:6f:dc:ce
+[   12.290865] igb 0000:01:00.0: eth1: PBA No: FFFFFF-0FF
+[   12.296372] igb 0000:01:00.0: Using MSI-X interrupts. 4 rx queue(s), 4 tx queue(s)
+[   12.355921] pfuze100-regulator 0-0008: Full layer: 2, Metal layer: 1
+[   12.375166] random: fast init done
+[   12.378928] pfuze100-regulator 0-0008: FAB: 0, FIN: 0
+[   12.384326] pfuze100-regulator 0-0008: pfuze100 found.
+[   12.399274] max6650 0-001b: Fan voltage: 5V, prescaler: 4.
+[   12.433326] lm75 0-004b: supply vs not found, using dummy regulator
+[   12.447115] lm75 0-004b: hwmon1: sensor 'lm75b'
+[   12.495257] mmcblk0: mmc0:0001 S0J56X 14.8 GiB 
+[   12.500514] mmcblk0boot0: mmc0:0001 S0J56X 31.5 MiB 
+[   12.506738] mmcblk0boot1: mmc0:0001 S0J56X 31.5 MiB 
+[   12.512285] mmcblk0rpmb: mmc0:0001 S0J56X 4.00 MiB, chardev (234:0)
+[   12.525601]  mmcblk0: p1 p2 p3
+[   12.562656] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+[   12.593647] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 1
+[   12.602223] xhci-hcd xhci-hcd.1.auto: hcc params 0x0220fe6c hci version 0x110 quirks 0x0000000000010010
+[   12.616101] igb 0000:01:00.0 enp1s0: renamed from eth1
+[   12.651873] xhci-hcd xhci-hcd.1.auto: irq 56, io mem 0x38200000
+[   12.661492] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 5.13
+[   12.670282] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   12.677894] usb usb1: Product: xHCI Host Controller
+[   12.683010] usb usb1: Manufacturer: Linux 5.13.5-200.fc34.aarch64 xhci-hcd
+[   12.690257] usb usb1: SerialNumber: xhci-hcd.1.auto
+[   12.697377] hub 1-0:1.0: USB hub found
+[   12.701400] hub 1-0:1.0: 1 port detected
+[   12.707669] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+[   12.714830] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 2
+[   12.722880] xhci-hcd xhci-hcd.1.auto: Host supports USB 3.0 SuperSpeed
+[   12.724859] mmcblk1: mmc1:1234 SA32G 28.9 GiB 
+[   12.739805] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[   12.743419]  mmcblk1: p1
+[   12.748885] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 5.13
+[   12.759740] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   12.767346] usb usb2: Product: xHCI Host Controller
+[   12.772458] usb usb2: Manufacturer: Linux 5.13.5-200.fc34.aarch64 xhci-hcd
+[   12.779672] usb usb2: SerialNumber: xhci-hcd.1.auto
+[   12.785964] hub 2-0:1.0: USB hub found
+[   12.789948] hub 2-0:1.0: 1 port detected
+[   12.953173] imx6q-pcie 33800000.pcie: Phy link never came up
+[   12.959435] imx6q-pcie: probe of 33800000.pcie failed with error -110
+[   13.013211] usb 1-1: new high-speed USB device number 2 using xhci-hcd
+[   13.203698] usb 1-1: New USB device found, idVendor=0451, idProduct=8142, bcdDevice= 1.00
+[   13.212289] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=1
+[   13.219786] usb 1-1: SerialNumber: 6008206914FF
+[   13.263500] hub 1-1:1.0: USB hub found
+[   13.267608] hub 1-1:1.0: 4 ports detected
+[   13.363258] usb 2-1: new SuperSpeed USB device number 2 using xhci-hcd
+[   13.393500] usb 2-1: New USB device found, idVendor=0451, idProduct=8140, bcdDevice= 1.00
+[   13.402054] usb 2-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[   13.430185] hub 2-1:1.0: USB hub found
+[   13.434229] hub 2-1:1.0: 4 ports detected
+[   13.773450] usb 2-1.1: new SuperSpeed USB device number 3 using xhci-hcd
+[   13.809550] usb 2-1.1: New USB device found, idVendor=8564, idProduct=1000, bcdDevice=11.00
+[   13.818329] usb 2-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[   13.825987] usb 2-1.1: Product: Mass Storage Device
+[   13.831082] usb 2-1.1: Manufacturer: JetFlash
+[   13.835658] usb 2-1.1: SerialNumber: 18SNCC7X2V2FTQ1Z
+[   13.872077] usb-storage 2-1.1:1.0: USB Mass Storage device detected
+[   13.879462] scsi host0: usb-storage 2-1.1:1.0
+[   13.884712] usbcore: registered new interface driver usb-storage
+[   13.901178] usbcore: registered new interface driver uas
+[   15.456323] scsi 0:0:0:0: Direct-Access     JetFlash Transcend 16GB   1100 PQ: 0 ANSI: 6
+[   15.466182] sd 0:0:0:0: Attached scsi generic sg0 type 0
+[   15.468355] sd 0:0:0:0: [sda] 30834688 512-byte logical blocks: (15.8 GB/14.7 GiB)
+[   15.484053] sd 0:0:0:0: [sda] Write Protect is off
+[   15.489098] sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+[   15.489856] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   15.617639] sd 0:0:0:0: [sda] Attached SCSI removable disk
+[   17.470187] alg: No test for authenc(hmac(sha224),ecb(cipher_null)) (authenc-hmac-sha224-ecb-cipher_null-caam)
+[   17.480875] alg: No test for authenc(hmac(sha256),ecb(cipher_null)) (authenc-hmac-sha256-ecb-cipher_null-caam)
+[   17.491559] alg: No test for authenc(hmac(md5),cbc(aes)) (authenc-hmac-md5-cbc-aes-caam)
+[   17.500217] alg: No test for echainiv(authenc(hmac(md5),cbc(aes))) (echainiv-authenc-hmac-md5-cbc-aes-caam)
+[   17.919786] alg: No test for echainiv(authenc(hmac(sha1),cbc(aes))) (echainiv-authenc-hmac-sha1-cbc-aes-caam)
+[   17.930381] alg: No test for authenc(hmac(sha224),cbc(aes)) (authenc-hmac-sha224-cbc-aes-caam)
+[   17.939615] alg: No test for echainiv(authenc(hmac(sha224),cbc(aes))) (echainiv-authenc-hmac-sha224-cbc-aes-caam)
+[   18.359644] alg: No test for echainiv(authenc(hmac(sha256),cbc(aes))) (echainiv-authenc-hmac-sha256-cbc-aes-caam)
+[   18.370559] alg: No test for authenc(hmac(md5),cbc(des3_ede)) (authenc-hmac-md5-cbc-des3_ede-caam)
+[   18.380128] alg: No test for echainiv(authenc(hmac(md5),cbc(des3_ede))) (echainiv-authenc-hmac-md5-cbc-des3_ede-caam)
+[   18.450071] alg: No test for echainiv(authenc(hmac(sha1),cbc(des3_ede))) (echainiv-authenc-hmac-sha1-cbc-des3_ede-caam)
+[   18.520117] alg: No test for echainiv(authenc(hmac(sha224),cbc(des3_ede))) (echainiv-authenc-hmac-sha224-cbc-des3_ede-caam)
+[   18.590576] alg: No test for echainiv(authenc(hmac(sha256),cbc(des3_ede))) (echainiv-authenc-hmac-sha256-cbc-des3_ede-caam)
+[   18.602415] alg: No test for authenc(hmac(md5),cbc(des)) (authenc-hmac-md5-cbc-des-caam)
+[   18.611095] alg: No test for echainiv(authenc(hmac(md5),cbc(des))) (echainiv-authenc-hmac-md5-cbc-des-caam)
+[   18.680100] alg: No test for echainiv(authenc(hmac(sha1),cbc(des))) (echainiv-authenc-hmac-sha1-cbc-des-caam)
+[   18.749254] alg: No test for echainiv(authenc(hmac(sha224),cbc(des))) (echainiv-authenc-hmac-sha224-cbc-des-caam)
+[   18.818824] alg: No test for echainiv(authenc(hmac(sha256),cbc(des))) (echainiv-authenc-hmac-sha256-cbc-des-caam)
+[   18.829753] alg: No test for authenc(hmac(md5),rfc3686(ctr(aes))) (authenc-hmac-md5-rfc3686-ctr-aes-caam)
+[   18.839980] alg: No test for seqiv(authenc(hmac(md5),rfc3686(ctr(aes)))) (seqiv-authenc-hmac-md5-rfc3686-ctr-aes-caam)
+[   18.851541] alg: No test for seqiv(authenc(hmac(sha1),rfc3686(ctr(aes)))) (seqiv-authenc-hmac-sha1-rfc3686-ctr-aes-caam)
+[   18.863125] alg: No test for authenc(hmac(sha224),rfc3686(ctr(aes))) (authenc-hmac-sha224-rfc3686-ctr-aes-caam)
+[   18.873918] alg: No test for seqiv(authenc(hmac(sha224),rfc3686(ctr(aes)))) (seqiv-authenc-hmac-sha224-rfc3686-ctr-aes-caam)
+[   18.886013] alg: No test for seqiv(authenc(hmac(sha256),rfc3686(ctr(aes)))) (seqiv-authenc-hmac-sha256-rfc3686-ctr-aes-caam)
+[   18.897786] caam algorithms registered in /proc/crypto
+[   22.348110] caam 30900000.crypto: caam pkc algorithms registered in /proc/crypto
+[   22.355923] caam 30900000.crypto: registering rng-caam
+[   22.436012] random: crng init done
+[   22.439597] random: 7 urandom warning(s) missed due to ratelimiting
+[   23.107329] kauditd_printk_skb: 6 callbacks suppressed
+[   23.107348] audit: type=1334 audit(1631778460.570:18): prog-id=9 op=LOAD
+[   23.203360] audit: type=1130 audit(1631778460.670:19): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=dbus-broker comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   23.454779] audit: type=1130 audit(1631778460.920:20): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=dracut-initqueue comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   23.694364] audit: type=1130 audit(1631778461.160:21): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=systemd-fsck-root comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   23.742383] EXT4-fs (dm-0): mounted filesystem with ordered data mode. Opts: (null). Quota mode: none.
+[   23.904157] audit: type=1130 audit(1631778461.370:22): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=kernel msg='unit=ostree-prepare-root comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   24.021439] audit: type=1334 audit(1631778461.480:23): prog-id=9 op=UNLOAD
+[   24.036250] audit: type=1334 audit(1631778461.500:24): prog-id=5 op=UNLOAD
+[   24.043601] audit: type=1334 audit(1631778461.500:25): prog-id=4 op=UNLOAD
+[   24.050819] audit: type=1334 audit(1631778461.500:26): prog-id=3 op=UNLOAD
+[   24.058142] audit: type=1334 audit(1631778461.510:27): prog-id=8 op=UNLOAD
+[   27.551352] systemd-journald[297]: Received SIGTERM from PID 1 (systemd).
+[   28.324515] SELinux:  policy capability network_peer_controls=1
+[   28.330740] SELinux:  policy capability open_perms=1
+[   28.336020] SELinux:  policy capability extended_socket_class=1
+[   28.342199] SELinux:  policy capability always_check_network=0
+[   28.348302] SELinux:  policy capability cgroup_seclabel=1
+[   28.353947] SELinux:  policy capability nnp_nosuid_transition=1
+[   28.360124] SELinux:  policy capability genfs_seclabel_symlinks=0
+[   28.696145] kauditd_printk_skb: 42 callbacks suppressed
+[   28.696166] audit: type=1403 audit(1631778466.160:70): auid=4294967295 ses=4294967295 lsm=selinux res=1
+[   28.720853] systemd[1]: Successfully loaded SELinux policy in 689.049ms.
+[   29.304209] systemd[1]: Relabelled /dev, /dev/shm, /run, /sys/fs/cgroup in 346.040ms.
+[   29.346283] systemd[1]: systemd v248.6-1.fc34 running in system mode. (+PAM +AUDIT +SELINUX -APPARMOR +IMA +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified)
+[   29.379807] systemd[1]: Detected architecture arm64.
+[   29.450216] audit: type=1334 audit(1631778466.910:71): prog-id=17 op=LOAD
+[   29.457387] audit: type=1334 audit(1631778466.910:72): prog-id=17 op=UNLOAD
+[   29.464735] audit: type=1334 audit(1631778466.920:73): prog-id=18 op=LOAD
+[   29.471987] audit: type=1334 audit(1631778466.920:74): prog-id=18 op=UNLOAD
+[   29.757190] zram: Added device: zram0
+[   30.057189] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/dbus-parsec is not a valid unit name, ignoring.
+[   30.072508] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/greenboot-grub2-set-counter is not a valid unit name, ignoring.
+[   30.088879] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/greenboot-grub2-set-success is not a valid unit name, ignoring.
+[   30.105252] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/greenboot-healthcheck is not a valid unit name, ignoring.
+[   30.123713] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/greenboot-rpm-ostree-grub2-check-fallback is not a valid unit name, ignoring.
+[   30.141674] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/greenboot-status is not a valid unit name, ignoring.
+[   30.157228] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/greenboot-task-runner is not a valid unit name, ignoring.
+[   30.173516] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/parsec is not a valid unit name, ignoring.
+[   30.188127] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/redboot-auto-reboot is not a valid unit name, ignoring.
+[   30.203779] systemd[1]: multi-user.target: Wants dependency dropin /etc/systemd/system/multi-user.target.wants/redboot-task-runner is not a valid unit name, ignoring.
+[   31.060132] audit: type=1334 audit(1631778468.520:75): prog-id=19 op=LOAD
+[   31.067296] audit: type=1334 audit(1631778468.530:76): prog-id=20 op=LOAD
+[   31.074442] audit: type=1334 audit(1631778468.540:77): prog-id=21 op=LOAD
+[   31.085310] audit: type=1131 audit(1631778468.550:78): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-journald comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   31.088321] systemd[1]: initrd-switch-root.service: Deactivated successfully.
+[   31.117428] systemd[1]: Stopped Switch Root.
+[   31.153397] audit: type=1334 audit(1631778468.620:79): prog-id=19 op=UNLOAD
+[   31.155042] systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+[   31.172338] systemd[1]: Created slice Slice /system/getty.
+[   31.215189] systemd[1]: Created slice Slice /system/modprobe.
+[   31.255065] systemd[1]: Created slice Slice /system/serial-getty.
+[   31.295062] systemd[1]: Created slice Slice /system/sshd-keygen.
+[   31.335094] systemd[1]: Created slice Slice /system/systemd-fsck.
+[   31.375151] systemd[1]: Created slice Slice /system/systemd-zram-setup.
+[   31.415412] systemd[1]: Created slice User and Session Slice.
+[   31.454858] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[   31.494498] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[   31.536085] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[   31.573519] systemd[1]: Reached target Local Encrypted Volumes.
+[   31.613356] systemd[1]: Stopped target Switch Root.
+[   31.643277] systemd[1]: Stopped target Initrd File Systems.
+[   31.683236] systemd[1]: Stopped target Initrd Root File System.
+[   31.723435] systemd[1]: Reached target Remote File Systems.
+[   31.763279] systemd[1]: Reached target Slice Units.
+[   31.793402] systemd[1]: Reached target Local Verity Integrity Protected Volumes.
+[   31.838519] systemd[1]: Listening on Device-mapper event daemon FIFOs.
+[   31.882020] systemd[1]: Listening on LVM2 poll daemon socket.
+[   31.936958] systemd[1]: Listening on Process Core Dump Socket.
+[   31.974290] systemd[1]: Listening on initctl Compatibility Named Pipe.
+[   32.019077] systemd[1]: Listening on udev Control Socket.
+[   32.055389] systemd[1]: Listening on udev Kernel Socket.
+[   32.096365] systemd[1]: Listening on User Database Manager Socket.
+[   32.142831] systemd[1]: Mounting Huge Pages File System...
+[   32.182267] systemd[1]: Mounting POSIX Message Queue File System...
+[   32.232144] systemd[1]: Mounting Kernel Debug File System...
+[   32.271962] systemd[1]: Mounting Kernel Trace File System...
+[   32.312277] systemd[1]: Starting Create List of Static Device Nodes...
+[   32.361063] systemd[1]: Starting Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling...
+[   32.412671] systemd[1]: Starting Load Kernel Module configfs...
+[   32.451764] systemd[1]: Starting Load Kernel Module drm...
+[   32.492533] systemd[1]: Starting Load Kernel Module fuse...
+[   32.523448] systemd[1]: ostree-prepare-root.service: Deactivated successfully.
+[   32.531603] systemd[1]: Stopped OSTree Prepare OS/.
+[   32.568181] systemd[1]: Condition check resulted in Set Up Additional Binary Formats being skipped.
+[   32.578254] systemd[1]: Stopped Journal Service.
+[   32.625770] systemd[1]: Starting Journal Service...
+[   32.674470] systemd[1]: Starting Load Kernel Modules...
+[   32.721699] systemd[1]: Starting Remount Root and Kernel File Systems...
+[   32.763804] systemd[1]: Condition check resulted in Repartition Root Disk being skipped.
+[   32.779239] EXT4-fs (dm-0): re-mounted. Opts: (null). Quota mode: none.
+[   32.781981] systemd[1]: Starting Coldplug All udev Devices...
+[   32.836402] systemd[1]: Started Journal Service.
+[   33.744841] kauditd_printk_skb: 25 callbacks suppressed
+[   33.744861] audit: type=1130 audit(1631778471.210:103): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-tmpfiles-setup-dev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   33.804071] audit: type=1130 audit(1631778471.270:104): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-udev-trigger comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   37.193425] audit: type=1130 audit(1631778474.660:105): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-hwdb-update comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   37.216637] audit: type=1334 audit(1631778474.680:106): prog-id=25 op=LOAD
+[   37.230320] audit: type=1334 audit(1631778474.690:107): prog-id=26 op=LOAD
+[   37.240620] audit: type=1334 audit(1631778474.690:108): prog-id=27 op=LOAD
+[   37.483644] audit: type=1130 audit(1631778474.950:109): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-udevd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   37.603297] V_1V5_CSI: disabling
+[   37.906075] audit: type=1130 audit(1631778475.370:110): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=modprobe@configfs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   37.930196] audit: type=1131 audit(1631778475.370:111): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=modprobe@configfs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   38.025849] audit: type=1130 audit(1631778475.490:112): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=modprobe@fuse comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   38.504681] at24 0-0051: supply vcc not found, using dummy regulator
+[   38.560794] at24 0-0051: 4096 byte 24c32 EEPROM, writable, 32 bytes/write
+[   38.777459] mc: Linux media interface: v0.10
+[   38.913057] zram0: detected capacity change from 0 to 7997440
+[   38.962985] etnaviv etnaviv: bound 38000000.gpu (ops gpu_ops [etnaviv])
+[   38.970143] etnaviv-gpu 38000000.gpu: model: GC7000, revision: 6214
+[   39.016077] [drm] Initialized etnaviv 1.3.0 20151214 for etnaviv on minor 0
+[   39.078777] kauditd_printk_skb: 1 callbacks suppressed
+[   39.078798] audit: type=1130 audit(1631778476.540:114): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-zram-setup@zram0 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   39.147600] audit: type=1130 audit(1631778476.610:115): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=lvm2-pvscan@179:3 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   39.189872] videodev: Linux video capture interface: v2.00
+[   39.233334] Adding 3998716k swap on /dev/zram0.  Priority:100 extents:1 across:3998716k SSFS
+[   39.282835] tpm_tis_spi spi1.0: 2.0 TPM (device-id 0x1B, rev-id 16)
+[   39.299156] tpm tpm0: A TPM error (256) occurred attempting the self test
+[   39.306573] tpm tpm0: starting up the TPM manually
+[   39.378770] hantro_vpu: module is from the staging directory, the quality is unknown, you have been warned.
+[   39.412156] hantro-vpu 38300000.video-codec: registered nxp,imx8mq-vpu-dec as /dev/video0
+[   39.429683] spi-nor spi0.0: mx25l12805d (16384 Kbytes)
+[   39.823483] audit: type=1130 audit(1631778477.290:116): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=lvm2-monitor comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.047152] EXT4-fs (dm-0): re-mounted. Opts: (null). Quota mode: none.
+[   40.055318] EXT4-fs (dm-0): re-mounted. Opts: (null). Quota mode: none.
+[   40.072572] audit: type=1130 audit(1631778477.530:117): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=ostree-remount comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.137795] audit: type=1130 audit(1631778477.600:118): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-fsck@dev-disk-by\x2duuid-e372bead\x2d78d4\x2d4e6e\x2d981e\x2de891598d7991 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.149314] systemd-journald[815]: Received client request to flush runtime journal.
+[   40.184106] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null). Quota mode: none.
+[   40.196232] audit: type=1130 audit(1631778477.670:119): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-random-seed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.293649] audit: type=1130 audit(1631778477.760:120): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-fsck@dev-disk-by\x2duuid-E049\x2dCBC6 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.633680] audit: type=1130 audit(1631778478.100:121): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=dracut-shutdown comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.683622] audit: type=1130 audit(1631778478.150:122): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-journal-flush comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   40.813759] audit: type=1130 audit(1631778478.280:123): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=import-state comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[   56.383557] TI DP83867 30be0000.ethernet-1:00: attached PHY driver (mii_bus:phy_addr=30be0000.ethernet-1:00, irq=POLL)
+[   60.720167] fec 30be0000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   60.729858] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
