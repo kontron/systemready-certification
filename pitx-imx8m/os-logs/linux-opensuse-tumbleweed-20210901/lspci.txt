@@ -1,0 +1,2 @@
+00:00.0 PCI bridge: Synopsys, Inc. DWC_usb3 / PCIe bridge (rev 01)
+01:00.0 Ethernet controller: Intel Corporation I210 Gigabit Network Connection (rev 03)

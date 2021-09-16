@@ -1,0 +1,2 @@
+BootOrder: 0000
+Boot0000* Fedora
