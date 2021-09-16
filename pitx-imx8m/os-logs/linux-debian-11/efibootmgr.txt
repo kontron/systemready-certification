@@ -1,0 +1,3 @@
+root@debian:~# efibootmgr 
+No BootOrder is set; firmware will attempt recovery
+
