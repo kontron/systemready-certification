@@ -78,10 +78,15 @@ system table is less than EFI_2_00_SYSTEM_TABLE_REVISION.
 
 esrt: Sanity check UEFI ESRT Table.
 --------------------------------------------------------------------------------
-Cannot find ESRT table, firmware seems not supported. Aborted.
-Aborted test, initialisation failed.
+Test 1 of 1: Sanity check UEFI ESRT Table.
+FAILED [MEDIUM] InvalidValue: Test 1, The FwResourceCount value should not be 0.
+FAILED [MEDIUM] InvalidValue: Test 1, The FwResourceCountMax value should not be
+0.
+FAILED [MEDIUM] CannotFindEntries: Test 1, Cannot find any entries on directory 
+/sys/firmware/efi/esrt/entries
+
 ================================================================================
-0 passed, 0 failed, 0 warning, 1 aborted, 0 skipped, 0 info only.
+0 passed, 3 failed, 0 warning, 0 aborted, 0 skipped, 0 info only.
 ================================================================================
 
 uefibootpath: Sanity check for UEFI Boot Path Boot####.
@@ -346,7 +351,7 @@ passed.
 ================================================================================
 
 
-8 passed, 0 failed, 0 warning, 3 aborted, 74 skipped, 0 info only.
+8 passed, 3 failed, 0 warning, 2 aborted, 74 skipped, 0 info only.
 
 Test Failure Summary
 ================================================================================
@@ -355,7 +360,10 @@ Critical failures: NONE
 
 High failures: NONE
 
-Medium failures: NONE
+Medium failures: 3
+ esrt: The FwResourceCount value should not be 0.
+ esrt: The FwResourceCountMax value should not be 0.
+ esrt: Cannot find any entries on directory /sys/firmware/efi/esrt/entries
 
 Low failures: NONE
 
@@ -363,7 +371,7 @@ Other failures: NONE
 
 Test           |Pass |Fail |Abort|Warn |Skip |Info |
 ---------------+-----+-----+-----+-----+-----+-----+
-esrt           |     |     |    1|     |     |     |
+esrt           |     |    3|     |     |     |     |
 securebootcert |     |     |    2|     |     |     |
 uefibootpath   |     |     |     |     |    1|     |
 uefirtauthvar  |     |     |     |     |   11|     |
@@ -372,5 +380,5 @@ uefirttime     |    4|     |     |     |   35|     |
 uefirtvariable |    2|     |     |     |   10|     |
 uefivarinfo    |     |     |     |     |    1|     |
 ---------------+-----+-----+-----+-----+-----+-----+
-Total:         |    8|    0|    3|    0|   74|    0|
+Total:         |    8|    3|    2|    0|   74|    0|
 ---------------+-----+-----+-----+-----+-----+-----+
