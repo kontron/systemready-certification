@@ -1,7 +1,8 @@
-From 50c117c6ab02854e40b5dd79aaf197c8e6a16519 Mon Sep 17 00:00:00 2001
+From a5d50d82ad094178c7926e5417b6a2e34338e4ce Mon Sep 17 00:00:00 2001
 From: Heiko Thiery <heiko.thiery@gmail.com>
 Date: Mon, 13 Sep 2021 16:23:21 +0200
-Subject: [PATCH] arm: dts: imx8mq-kontron-pitx-imx8m: delete vqmmc property
+Subject: [PATCH 4/4] arm: dts: imx8mq-kontron-pitx-imx8m: delete vqmmc
+ property
 
 This is needed for installation of debian 11. Currently the modules for
 the referenced regulator is not available in debian 11.
@@ -14,10 +15,10 @@ Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi b/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi
-index f0208904f8..68deff9d90 100644
+index cf649b0314..bcfe81787a 100644
 --- a/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi
 +++ b/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi
-@@ -131,6 +131,7 @@
+@@ -155,6 +155,7 @@
  
  &usdhc1 {
  	mmc-hs400-1_8v;

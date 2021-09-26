@@ -1,7 +1,7 @@
-From 056734d8edb18582068738e171f0a112114ff0b9 Mon Sep 17 00:00:00 2001
+From fd2d7a92ccc6bc0f16005248c5b277a447a7d294 Mon Sep 17 00:00:00 2001
 From: Heiko Thiery <heiko.thiery@gmail.com>
 Date: Tue, 2 Mar 2021 14:39:45 +0100
-Subject: [PATCH] board: kontron: pitx-imx8m: Add Kontron pitx-imx8m board
+Subject: [PATCH 2/4] board: kontron: pitx-imx8m: Add Kontron pitx-imx8m board
  support
 
 The Kontron pitx-imx8m is an NXP i.MX8MQ based board in the pITX
@@ -9,7 +9,7 @@ form factor.
 
 Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
 ---
- .../dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi |  139 ++
+ .../dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi |  163 ++
  arch/arm/mach-imx/imx8m/Kconfig               |    7 +
  board/kontron/pitx_imx8m/Kconfig              |   12 +
  board/kontron/pitx_imx8m/MAINTAINERS          |    7 +
@@ -19,11 +19,11 @@ Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
  board/kontron/pitx_imx8m/lpddr4_timing_4gb.c  | 1853 +++++++++++++++++
  board/kontron/pitx_imx8m/pitx_imx8m.c         |  156 ++
  board/kontron/pitx_imx8m/spl.c                |  322 +++
- configs/kontron_pitx_imx8m_defconfig          |   75 +
+ configs/kontron_pitx_imx8m_defconfig          |   80 +
  doc/board/kontron/index.rst                   |    1 +
  doc/board/kontron/pitx-imx8m.rst              |   67 +
- include/configs/kontron_pitx_imx8m.h          |  136 ++
- 14 files changed, 4641 insertions(+)
+ include/configs/kontron_pitx_imx8m.h          |  137 ++
+ 14 files changed, 4671 insertions(+)
  create mode 100644 arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi
  create mode 100644 board/kontron/pitx_imx8m/Kconfig
  create mode 100644 board/kontron/pitx_imx8m/MAINTAINERS
@@ -39,10 +39,10 @@ Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
 
 diff --git a/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi b/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi
 new file mode 100644
-index 0000000000..f0208904f8
+index 0000000000..cf649b0314
 --- /dev/null
 +++ b/arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi
-@@ -0,0 +1,139 @@
+@@ -0,0 +1,163 @@
 +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +
 +#include <config.h>
@@ -166,6 +166,30 @@ index 0000000000..f0208904f8
 +		uboot: blob-ext@2 {
 +			offset = <0x57c00>;
 +			filename = "u-boot.itb";
++		};
++	};
++
++	u-boot-update {
++		filename = "firmware-update.itb";
++
++		fit {
++			description = "Configuration for firmware update file";
++
++			images {
++				flash-bin {
++					description = "U-Boot flash image";
++					type = "firmware";
++					os = "u-boot";
++					arch = "arm";
++					compress = "none";
++					load = <0>; /* unused */
++
++					blob {
++						filename = "flash.bin";
++					};
++
++				};
++			};
 +		};
 +	};
 +};
@@ -4473,17 +4497,17 @@ index 0000000000..2309860a1b
 +}
 diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
 new file mode 100644
-index 0000000000..0fae4c8c16
+index 0000000000..f8314b9959
 --- /dev/null
 +++ b/configs/kontron_pitx_imx8m_defconfig
-@@ -0,0 +1,75 @@
+@@ -0,0 +1,80 @@
 +CONFIG_ARM=y
 +CONFIG_SPL_SYS_ICACHE_OFF=y
 +CONFIG_SPL_SYS_DCACHE_OFF=y
 +CONFIG_ARCH_IMX8M=y
 +CONFIG_SYS_TEXT_BASE=0x40200000
 +CONFIG_ENV_SIZE=0x4000
-+CONFIG_ENV_OFFSET=0x400000
++CONFIG_ENV_OFFSET=0x300000
 +CONFIG_DM_GPIO=y
 +CONFIG_DEFAULT_DEVICE_TREE="imx8mq-kontron-pitx-imx8m"
 +CONFIG_SPL_TEXT_BASE=0x7E1000
@@ -4505,6 +4529,7 @@ index 0000000000..0fae4c8c16
 +# CONFIG_CMD_IMPORTENV is not set
 +CONFIG_CMD_NVEDIT_EFI=y
 +# CONFIG_CMD_CRC32 is not set
++CONFIG_CMD_DFU=y
 +CONFIG_CMD_FUSE=y
 +CONFIG_CMD_GPIO=y
 +CONFIG_CMD_GPT=y
@@ -4525,6 +4550,7 @@ index 0000000000..0fae4c8c16
 +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 +CONFIG_SYS_MMC_ENV_DEV=1
 +CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
++CONFIG_DFU_MMC=y
 +CONFIG_DM_I2C=y
 +CONFIG_SYS_I2C_MXC=y
 +CONFIG_SUPPORT_EMMC_BOOT=y
@@ -4532,7 +4558,6 @@ index 0000000000..0fae4c8c16
 +CONFIG_PHYLIB=y
 +CONFIG_PHY_TI=y
 +CONFIG_DM_ETH=y
-+CONFIG_DM_ETH_PHY=y
 +CONFIG_PHY=y
 +CONFIG_PHY_IMX8MQ_USB=y
 +CONFIG_PINCTRL=y
@@ -4552,6 +4577,10 @@ index 0000000000..0fae4c8c16
 +CONFIG_USB_XHCI_DWC3=y
 +CONFIG_USB_DWC3=y
 +CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_IGNORE_OSINDICATIONS=y
++CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
 diff --git a/doc/board/kontron/index.rst b/doc/board/kontron/index.rst
 index 543b22e2f5..6baaf4d7a5 100644
 --- a/doc/board/kontron/index.rst
@@ -4637,10 +4666,10 @@ index 0000000000..1f64cbd9b2
 +Set the boot source selection to SD card boot and power on the board.
 diff --git a/include/configs/kontron_pitx_imx8m.h b/include/configs/kontron_pitx_imx8m.h
 new file mode 100644
-index 0000000000..6c63211548
+index 0000000000..7ace5fcb70
 --- /dev/null
 +++ b/include/configs/kontron_pitx_imx8m.h
-@@ -0,0 +1,136 @@
+@@ -0,0 +1,137 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +
 +#ifndef __KONTRON_PITX_IMX8M_H
@@ -4736,6 +4765,7 @@ index 0000000000..6c63211548
 +	"console=ttymxc2,115200\0" \
 +	"boot_fdt=try\0" \
 +	"fdtfile=freescale/imx8mq-kontron-pitx-imx8m.dtb\0" \
++	"dfu_alt_info=mmc 0=flash-bin raw 0x42 0x1000 mmcpart 1\0"\
 +	ENV_MEM_LAYOUT_SETTINGS \
 +	BOOTENV
 +

@@ -1,7 +1,8 @@
-From 743d258606fd15c48e32ce43b57ca6c2a23cc961 Mon Sep 17 00:00:00 2001
+From 3c57c02b218a8363cd9387cfb5c192be911f9757 Mon Sep 17 00:00:00 2001
 From: Heiko Thiery <heiko.thiery@gmail.com>
 Date: Wed, 8 Sep 2021 15:09:22 +0200
-Subject: [PATCH] arm: imx: imx8mq: add support to get values for more clocks
+Subject: [PATCH 3/4] arm: imx: imx8mq: add support to get values for more
+ clocks
 
 Return the root clock values for MXC_CSPI_CLK, MXC_I2C_CLK,
 MXC_UART_CLK and MXC_QSPI_CLK.
