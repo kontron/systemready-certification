@@ -14,12 +14,88 @@
 	cd u-boot
 	git am ../pending-patches/u-boot/*.patch
 	CROSS_COMPILE=aarch64-linux-gnu- make kontron_pitx_imx8m_defconfig
-	CROSS_COMPILE=aarch64-linux-gnu- make -j4
+	CROSS_COMPILE=aarch64-linux-gnu- make
 
-This will create a file named `flash.bin` wich you have to copy to the SD card
-at offset 33k.
+This will create a file named `flash.bin` and `firmware-update.itb` that will
+be used in the next steps.
 
-You can use a SD card reader on a linux host system:
+The `flash.bin` can be use to copy it to the SD card or the eMMC at offset `33k`.
 
-    dd if=flash.bin of=/dev/sd[x] bs=1k seek=33
+## Flashing and Booting from eMMC
 
+The pitx-imx8m support booting either from SD card or from onboard eMMC.
+For the tests we need to install the `flash.bin` to the eMMC boot partition.
+
+To select the boot source you have to do the DIP switch (SW2 is located near
+the MiniDP connector) setting as followed:
+
+| SW2.1 | SW2.2 | Source  |
+| ----- | ----- | ------- |
+| OFF   | OFF   | SD card |
+| OFF   | ON    | eMMC    |
+
+Install the `flash.bin` to eMMC boot partion.
+
+We assume that the `flash.bin` was copied copied into memory at `$loadaddr`.
+For example by downloading the file via tftp from a server or by copying
+from an external storage like a partion on an USB flash drive.
+
+Then you can flash the content onto the eMMC boot partiion.
+
+    => mmc dev 0 1
+    => mmc write $loadaddr 0x42 0x1000
+
+Configure the eMMC to boot from the boot partion:
+
+    => mmc partconf 0 0 1 0
+
+# Create update capsule
+
+During building the u-boot above also the `firmware-update.itb` will be created.
+
+This can be used as input to create the EFI capsule file. To verify that
+the UpdateCapsule mechanism works, 2 different firmware binaries should
+be created. To be able to distinguish them, different `BUILD_TAG`s are assigned.
+
+    # BUILD_TAG=capsule1 CROSS_COMPILE=aarch64-linux-gnu- make -j4
+    # ./tools/mkeficapsule --fit firmware-update.itb --index 1 capsule1.bin
+    # BUILD_TAG=capsule2 CROSS_COMPILE=aarch64-linux-gnu- make -j4
+    # ./tools/mkeficapsule --fit firmware-update.itb --index 1 capsule2.bin
+
+
+## Using efidebug to directly update (Testing purpose)
+
+Load the update file from storage
+
+	=> usb start
+    starting USB...
+    Bus usb@38100000: Register 2000140 NbrPorts 2
+    Starting the controller
+    USB XHCI 1.10
+    Bus usb@38200000: Register 2000140 NbrPorts 2
+    Starting the controller
+    USB XHCI 1.10
+    scanning bus usb@38100000 for devices... 1 USB Device(s) found
+    scanning bus usb@38200000 for devices... 4 USB Device(s) found
+           scanning usb for storage devices... 1 Storage Device(s) found
+    => ls usb 0:1
+                EFI/
+                grub/
+     32930304   Image
+     92389888   ramdisk-busybox.img
+          298   grub.cfg
+      1 80688   firmware-update.itb
+      1080780   capsule1.bin
+
+    5 file(s), 2 dir(s)
+
+    =>
+	=> load usb 0:1 $loadaddr capsule1.bin
+    1080780 bytes read in 18 ms (57.3 MiB/s)
+
+Do the update
+
+    => efidebug capsule update -v ${loadaddr}
+
+This will update the firmware in the eMMC boot partion and after a reset the
+new firmware version will start.
