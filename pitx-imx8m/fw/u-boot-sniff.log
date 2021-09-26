@@ -1,21 +1,3 @@
-U-Boot SPL 2021.10-rc3-00005-g739d606a30 (Sep 15 2021 - 15:27:09 +0200)
-PMIC:  PFUZE100 ID=0x10
-Normal Boot
-
-
-U-Boot 2021.10-rc3-00005-g739d606a30 (Sep 15 2021 - 15:27:09 +0200)
-
-CPU:   Freescale i.MX8MQ rev2.1 at 800 MHz
-Reset cause: POR
-Model: Kontron pITX-imx8m
-DRAM:  4 GiB
-MMC:   FSL_SDHC: 0, FSL_SDHC: 1
-Loading Environment from MMC... OK
-In:    serial
-Out:   serial
-Err:   serial
-Net:   eth0: ethernet@30be0000
-Hit any key to stop autoboot:  2  0 
 => help
 ?         - alias for 'help'
 base      - print or set address offset
@@ -120,7 +102,7 @@ usb       - USB sub-system
 usbboot   - boot from USB device
 version   - print monitor, compiler and linker version
 => version
-U-Boot 2021.10-rc3-00005-g739d606a30 (Sep 15 2021 - 15:27:09 +0200)
+U-Boot 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:20:52 +0200)
 
 aarch64-linux-gnu-gcc (Debian 8.3.0-2) 8.3.0
 GNU ld (GNU Binutils for Debian) 2.35.1
@@ -150,12 +132,13 @@ bootdelay=2
 bootm_size=0x10000000
 console=ttymxc2,115200
 cpu=armv8
+dfu_alt_info=mmc 0=flash-bin raw 0x42 0x1000 mmcpart 1
 distro_bootcmd=for target in ${boot_targets}; do run bootcmd_${target}; done
 efi_dtb_prefixes=/ /dtb/ /dtb/current/
-ethaddr=00:e0:4b:6f:dc:cd
+ethaddr=00:11:22:33:44:55
 ethprime=FEC
 fdt_addr_r=0x43000000
-fdtcontroladdr=7ed3e730
+fdtcontroladdr=7ed3f5f0
 fdtfile=freescale/imx8mq-kontron-pitx-imx8m.dtb
 image=Image
 initrd_addr=0x43800000
@@ -177,62 +160,32 @@ stdout=serial
 usb_boot=usb start; if usb dev ${devnum}; then devtype=usb; run scan_dev_for_boot_part; fi
 vendor=kontron
 
-Environment size: 3755/16380 bytes
+Environment size: 3810/16380 bytes
 => printenv -e
-7[r[999;999H[6n8Scanning disk mmc@30b40000.blk...
+Scanning disk mmc@30b40000.blk...
 ** Unrecognized filesystem type **
 Scanning disk mmc@30b50000.blk...
 Found 6 disks
-"dfu_alt_info" env variable not defined!
-Probably dfu_alt_info not defined
 PlatformLang:
     8be4df61-93ca-11d2-aa0d-00e098032b8c EFI_GLOBAL_VARIABLE_GUID
     NV|BS|RT, DataSize = 0x6
     00000000: 65 6e 2d 55 53 00                                en-US.
-SbatLevel:
-    605dab50-e046-4300-abb6-3dd810dd8b23 
-    NV|BS, DataSize = 0x12
-    00000000: 73 62 61 74 2c 31 2c 32 30 32 31 30 33 30 32 31  sbat,1,202103021
-    00000010: 38 0a                                            8.
 Boot0000:
     8be4df61-93ca-11d2-aa0d-00e098032b8c EFI_GLOBAL_VARIABLE_GUID
-    NV|BS|RT, DataSize = 0x78
-    00000000: 01 00 00 00 64 00 46 00 65 00 64 00 6f 00 72 00  ....d.F.e.d.o.r.
-    00000010: 61 00 00 00 04 01 2a 00 01 00 00 00 00 08 00 00  a.....*.........
-    00000020: 00 00 00 00 00 c0 12 00 00 00 00 00 7d 76 37 9a  ............}v7.
-    00000030: b2 7e 8e 48 8d b1 43 d3 a4 6e 1d 53 02 02 04 04  .~.H..C..n.S....
-    00000040: 36 00 5c 00 45 00 46 00 49 00 5c 00 66 00 65 00  6.\.E.F.I.\.f.e.
-    00000050: 64 00 6f 00 72 00 61 00 5c 00 73 00 68 00 69 00  d.o.r.a.\.s.h.i.
-    00000060: 6d 00 61 00 61 00 36 00 34 00 2e 00 65 00 66 00  m.a.a.6.4...e.f.
-    00000070: 69 00 00 00 7f ff 04 00                          i.......
-BootOrder:
-    8be4df61-93ca-11d2-aa0d-00e098032b8c EFI_GLOBAL_VARIABLE_GUID
-    NV|BS|RT, DataSize = 0x2
-    00000000: 00 00                                            ..
+    NV|BS|RT, DataSize = 0x82
+    00000000: 01 00 00 00 6a 00 42 00 6f 00 6f 00 74 00 30 00  ....j.B.o.o.t.0.
+    00000010: 30 00 30 00 30 00 00 00 01 04 14 00 b9 73 1d e6  0.0.0........s..
+    00000020: 84 a3 cc 4a ae ab 82 e8 28 f3 62 8b 03 1a 05 00  ...J....(.b.....
+    00000030: 01 03 1a 05 00 01 04 01 2a 00 01 00 00 00 00 40  ........*......@
+    00000040: 00 00 00 00 00 00 00 c0 03 00 00 00 00 00 00 00  ................
+    00000050: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00  ................
+    00000060: 04 04 1e 00 63 00 61 00 70 00 73 00 75 00 6c 00  ....c.a.p.s.u.l.
+    00000070: 65 00 31 00 2e 00 62 00 69 00 6e 00 00 00 7f ff  e.1...b.i.n.....
+    00000080: 04 00                                            ..
 ExitBootServicesTestVariable:
     f6fab04f-acaf-4af3-b9fa-dcf97fb4426f 
     NV|BS|RT, DataSize = 0x8
     00000000: 02 00 00 00 00 00 00 80                          ........
-TestVariable_0_0:
-    f6fab04f-acaf-4af3-b9fa-dcf97fb4426f 
-    NV|BS, DataSize = 0xa
-    00000000: 00 01 02 03 04 05 06 07 08 09                    ..........
-TestVariable_0_1:
-    f6fab04f-acaf-4af3-b9fa-dcf97fb4426f 
-    NV|BS|RT, DataSize = 0xa
-    00000000: 00 01 02 03 04 05 06 07 08 09                    ..........
-TestVariable_1_0:
-    f6fab04f-acaf-4af3-b9fa-dcf97fb4426f 
-    NV|BS, DataSize = 0xa
-    00000000: 00 01 02 03 04 05 06 07 08 09                    ..........
-TestVariable_1_1:
-    f6fab04f-acaf-4af3-b9fa-dcf97fb4426f 
-    NV|BS|RT, DataSize = 0xa
-    00000000: 00 01 02 03 04 05 06 07 08 09                    ..........
-SCT_NON_VOLATILE_TEST:
-    b110c08e-9756-4d88-b55a-4a4f603e7170 
-    NV|BS|RT, DataSize = 0x4
-    00000000: ef be ad de                                      ....
 SecureBoot:
     8be4df61-93ca-11d2-aa0d-00e098032b8c EFI_GLOBAL_VARIABLE_GUID
     BS|RT|RO, DataSize = 0x1
@@ -274,24 +227,24 @@ flashstart  = 0x0000000000000000
 flashsize   = 0x0000000000000000
 flashoffset = 0x0000000000000000
 baudrate    = 115200 bps
-relocaddr   = 0x000000007ff47000
-reloc off   = 0x000000003fd47000
+relocaddr   = 0x000000007ff48000
+reloc off   = 0x000000003fd48000
 Build       = 64-bit
 current eth = ethernet@30be0000
-ethaddr     = 00:e0:4b:6f:dc:cd
+ethaddr     = 00:11:22:33:44:55
 IP addr     = <NULL>
-fdt_blob    = 0x000000007ed3e730
-new_fdt     = 0x000000007ed3e730
-fdt_size    = 0x0000000000008680
+fdt_blob    = 0x000000007ed3f5f0
+new_fdt     = 0x000000007ed3f5f0
+fdt_size    = 0x00000000000087c0
 lmb_dump_all:
  memory.cnt  = 0x1
  memory[0]	[0x40000000-0x13fffffff], 0x100000000 bytes flags: 0
  reserved.cnt  = 0x1
- reserved[0]	[0x7ed3d2c0-0x7fffffff], 0x012c2d40 bytes flags: 0
+ reserved[0]	[0x7ed3e180-0x7fffffff], 0x012c1e80 bytes flags: 0
 arch_number = 0x0000000000000000
 TLB addr    = 0x000000007fff0000
-irq_sp      = 0x000000007ed3e720
-sp start    = 0x000000007ed3e720
+irq_sp      = 0x000000007ed3f5e0
+sp start    = 0x000000007ed3f5e0
 Early malloc usage: 948 / 2000
 => rtc list
 RTC #0 - rtc@32
@@ -306,8 +259,8 @@ Bus usb@38200000: Register 2000140 NbrPorts 2
 Starting the controller
 USB XHCI 1.10
 scanning bus usb@38100000 for devices... 1 USB Device(s) found
-scanning bus usb@38200000 for devices... 4 USB Device(s) found
-       scanning usb for storage devices... 1 Storage Device(s) found
+scanning bus usb@38200000 for devices... 3 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
 => usb info
 1: Hub,  USB Revision 3.0
  - U-Boot XHCI Host Controller 
@@ -334,7 +287,7 @@ scanning bus usb@38200000 for devices... 4 USB Device(s) found
      - Endpoint 1 In Interrupt MaxPacket 8 Interval 255ms
 
 2: Hub,  USB Revision 2.10
- -   6008206914FF
+ -   D008206914FF
  - Class: Hub
  - PacketSize: 64  Configurations: 1
  - Vendor: 0x0451  Product 0x8142 Version 1.0
@@ -356,19 +309,6 @@ scanning bus usb@38200000 for devices... 4 USB Device(s) found
      - Alternate Setting 0, Endpoints: 1
      - Class Hub
      - Endpoint 1 In Interrupt MaxPacket 2 Interval 8ms
-
-4: Mass Storage,  USB Revision 3.20
- - JetFlash Mass Storage Device 18SNCC7X2V2FTQ1Z
- - Class: (from Interface) Mass Storage
- - PacketSize: 512  Configurations: 1
- - Vendor: 0x8564  Product 0x1000 Version 17.0
-   Configuration: 1
-   - Interfaces: 1 Bus Powered 76mA
-     Interface: 0
-     - Alternate Setting 0, Endpoints: 2
-     - Class Mass Storage, Transp. SCSI, Bulk only
-     - Endpoint 1 Out Bulk MaxPacket 1024
-     - Endpoint 2 In Bulk MaxPacket 1024
 
 => mmc rescan
 => mmc list
@@ -396,108 +336,77 @@ Boot area 1 is not write protected
 => efidebug devices
 Device           Device Path
 ================ ====================
-000000007ed5f150 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)
-000000007ed6bf30 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)
-000000007ed6c2d0 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)/HD(1,GPT,9a37767d-7eb2-488e-8db1-43d3a46e1d53,0x800,0x12c000)
-000000007ed6c6f0 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)/HD(2,GPT,59317e6a-e3a7-4b0b-b4d6-1468f1f7a4bb,0x12c800,0x200000)
-000000007ed6cad0 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)/HD(3,GPT,397e5c08-d475-429b-8d57-504e9de3eca2,0x32c800,0x1a777df)
-000000007ed6d840 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(1)
-000000007ed6e060 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(1)/HD(1,GPT,714a638b-a384-4a61-a45e-40c7691c554a,0x4000,0x3c000)
-000000007ed6f090 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/MAC(00e04b6fdccd,1)
+000000007ed66d10 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)
+000000007ed6cbd0 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)
+000000007ed6cf70 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)/HD(1,GPT,c89bc521-e89c-4df2-aa5c-d45aed129734,0x800,0x100000)
+000000007ed6d390 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)/HD(2,GPT,0f6993c5-d41e-4daa-b102-064693f0ddfa,0x100800,0x1abb000)
+000000007ed6d7c0 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(0)/HD(3,GPT,e62b4a36-b762-455b-a4e2-cd09ba1efc7b,0x1bbb800,0x1e8000)
+000000007ed6e710 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(1)
+000000007ed6ece0 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(1)/HD(1,0x01,0,0x4000,0x3c000)
+000000007ed6fd50 /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/MAC(001122334455,1)
 => efidebug drivers
 Driver           Name                 Image Path
 ================ ==================== ====================
-000000007ed616d0 <NULL>               <built-in>
-=> efidebug drivers       memmap
+000000007ed69f10 <NULL>               <built-in>
+=> efidebug dh     
+Handle           Protocols
+================ ====================
+000000007ed66d10 Device Path, Device Path To Text, Device Path Utilities, Device-Tree Fixup, Unicode Collation 2, HII String, HII Database
+000000007ed67350 Simple Text Output
+000000007ed67990 Simple Text Input, Simple Text Input Ex
+000000007ed6cbd0 Device Path, Block IO
+000000007ed6cf70 Device Path, Block IO, System Partition, Simple File System
+000000007ed6d390 Device Path, Block IO, Simple File System
+000000007ed6d7c0 Device Path, Block IO
+000000007ed6e710 Device Path, Block IO
+000000007ed6ece0 Device Path, Block IO, Simple File System
+000000007ed69f10 Driver Binding
+000000007ed6a550 Firmware Management
+000000007ed6fd50 Simple Network, Device Path, PXE Base Code
+=> efidebug memmap
 Type             Start            End              Attributes
 ================ ================ ================ ==========
-CONVENTIONAL     0000000040000000-000000007dd20000 WB
-LOADER DATA      000000007dd20000-000000007dd21000 WB
-BOOT DATA        000000007dd21000-000000007dd22000 WB
-RUNTIME DATA     000000007dd22000-000000007dd23000 WB|RT
-BOOT DATA        000000007dd23000-000000007dd26000 WB
-RUNTIME DATA     000000007dd26000-000000007dd27000 WB|RT
-BOOT DATA        000000007dd27000-000000007dd29000 WB
-RUNTIME DATA     000000007dd29000-000000007dd2b000 WB|RT
-BOOT DATA        000000007dd2b000-000000007dd2c000 WB
-RUNTIME DATA     000000007dd2c000-000000007dd30000 WB|RT
-BOOT DATA        000000007dd30000-000000007dd3e000 WB
-LOADER DATA      000000007dd3e000-000000007ff40000 WB
+CONVENTIONAL     0000000040000000-000000007dd15000 WB
+BOOT DATA        000000007dd15000-000000007dd21000 WB
+LOADER DATA      000000007dd21000-000000007dd22000 WB
+BOOT DATA        000000007dd22000-000000007dd23000 WB
+RUNTIME DATA     000000007dd23000-000000007dd24000 WB|RT
+BOOT DATA        000000007dd24000-000000007dd27000 WB
+RUNTIME DATA     000000007dd27000-000000007dd28000 WB|RT
+BOOT DATA        000000007dd28000-000000007dd2a000 WB
+RUNTIME DATA     000000007dd2a000-000000007dd2c000 WB|RT
+BOOT DATA        000000007dd2c000-000000007dd2d000 WB
+RUNTIME DATA     000000007dd2d000-000000007dd31000 WB|RT
+BOOT DATA        000000007dd31000-000000007dd3f000 WB
+LOADER DATA      000000007dd3f000-000000007ff40000 WB
 RUNTIME CODE     000000007ff40000-000000007ff50000 WB|RT
 LOADER DATA      000000007ff50000-0000000080000000 WB
 BOOT DATA        0000000080000000-0000000140000000 WB
-=> efidebug memmap      dh
-Handle           Protocols
-================ ====================
-000000007ed5f150 Device Path, Device Path To Text, Device Path Utilities, Device-Tree Fixup, Unicode Collation 2, HII String, HII Database
-000000007ed5f790 Simple Text Output
-000000007ed5fdd0 Simple Text Input, Simple Text Input Ex
-000000007ed6bf30 Device Path, Block IO
-000000007ed6c2d0 Device Path, Block IO, System Partition, Simple File System
-000000007ed6c6f0 Device Path, Block IO, Simple File System
-000000007ed6cad0 Device Path, Block IO
-000000007ed6d840 Device Path, Block IO
-000000007ed6e060 Device Path, Block IO, Simple File System
-000000007ed616d0 Driver Binding
-000000007ed61d10 Firmware Management
-000000007ed6f090 Simple Network, Device Path, PXE Base Code
-=> efidebug dh  tables
+=> efidebug tables
 b122a263-3661-4f68-9929-78f8b0d62180 EFI System Resource Table
 eb66918a-7eef-402a-842e-931d21c38ae9 Runtime properties
 eb9d2d31-2d88-11d3-9a16-0090273fc14d SMBIOS table
-=> efidebug tables      boot dump
+=> efidebug boot dump
 Boot0000:
 attributes: A-- (0x00000001)
-  label: Fedora
-  file_path: /HD(1,GPT,9a37767d-7eb2-488e-8db1-43d3a46e1d53,0x800,0x12c000)/\EFI\fedora\shimaa64.efi
+  label: Boot0000
+  file_path: /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(1)/HD(1,0x01,0,0x4000,0x3c000)/capsule1.bin
   data:
-=> efidebug boot dump         bootefi hello ${fdtcontroladdr}
-efidebug - Configure UEFI environment
+=> bootefi hello $fdtcontroladdr
+bootefi - Boots an EFI payload from memory
 
 Usage:
-efidebug   - UEFI Shell-like interface to configure UEFI environment
+bootefi <image address> [fdt address]
+  - boot EFI payload stored at address <image address>.
+    If specified, the device tree located at <fdt address> gets
+    exposed as EFI configuration table.
+bootefi bootmgr [fdt address]
+  - load and boot EFI payload based on BootOrder/BootXXXX variables.
 
-efidebug boot add -b <bootid> <label> <interface> <devnum>[:<part>] <file path> -i <interface> <devnum>[:<part>] <initrd file path> -s '<optional data>'
-  - set UEFI BootXXXX variable
-    <load options> will be passed to UEFI application
-efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]
-  - delete UEFI BootXXXX variables
-efidebug boot dump
-  - dump all UEFI BootXXXX variables
-efidebug boot next <bootid>
-  - set UEFI BootNext variable
-efidebug boot order [<bootid#1> [<bootid#2> [<bootid#3> [...]]]]
-  - set/show UEFI boot order
+    If specified, the device tree located at <fdt address> gets
+    exposed as EFI configuration table.
 
-efidebug capsule update [-v] <capsule address>
-  - process a capsule
-efidebug capsule disk-update
-  - update a capsule from disk
-efidebug capsule show <capsule address>
-  - show capsule information
-efidebug capsule result [<capsule result var>]
-  - show a capsule update result
-efidebug capsule esrt
-  - print the ESRT
-
-efidebug devices
-  - show UEFI devices
-efidebug drivers
-  - show UEFI drivers
-efidebug dh
-  - show UEFI handles
-efidebug images
-  - show loaded images
-efidebug memmap
-  - show UEFI memory map
-efidebug tables
-  - show UEFI configuration tables
-efidebug test bootmgr
-  - run simple bootmgr for test
-efidebug query [-nv][-bs][-rt][-at]
-  - show size of UEFI variables store
-
-=> bootefi selftest ${fdtcontroladdr}
+=> bootefi selftest $fdtcontroladdr
 bootefi - Boots an EFI payload from memory
 
 Usage:
@@ -512,3 +421,4 @@ bootefi bootmgr [fdt address]
     exposed as EFI configuration table.
 
 => 
+

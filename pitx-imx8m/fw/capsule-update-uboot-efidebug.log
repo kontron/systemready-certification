@@ -1,0 +1,113 @@
+=> reset
+resetting ...
+
+U-Boot SPL 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:20:52 +0200)
+PMIC:  PFUZE100 ID=0x10
+Normal Boot
+
+
+U-Boot 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:20:52 +0200)
+
+CPU:   Freescale i.MX8MQLite rev2.1 at 1000 MHz
+Reset cause: POR
+Model: Kontron pITX-imx8m
+DRAM:  4 GiB
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@30be0000
+Hit any key to stop autoboot:  0 
+=> setenv autoload no
+=> dhcp
+BOOTP broadcast 1
+DHCP client bound to address 192.168.0.109 (4 ms)
+=> tftp $loadaddr 192.168.0.117:capsule1.bin
+Using ethernet@30be0000 device
+TFTP from server 192.168.0.117; our IP address is 192.168.0.109
+Filename 'capsule1.bin'.
+Load address: 0x40480000
+Loading: #################################################################
+	 #########
+	 8.3 MiB/s
+done
+Bytes transferred = 1080212 (107b94 hex)
+=> efidebug capsule update -v ${loadaddr}
+Scanning disk mmc@30b40000.blk...
+** Unrecognized filesystem type **
+Scanning disk mmc@30b50000.blk...
+Found 6 disks
+Capsule guid: 6dcbd5ed-e82d-4c44-bda1-7194199ad92a
+Capsule flags: 0x10000
+Capsule header size: 0x1c
+Capsule image size: 0x107b94
+Processing update 'flash-bin' :
+#=> reset
+resetting ...
+
+U-Boot SPL 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:21:43 +0200)
+PMIC:  PFUZE100 ID=0x10
+Normal Boot
+
+
+U-Boot 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:21:43 +0200), Build: capsule1
+
+CPU:   Freescale i.MX8MQLite rev2.1 at 1000 MHz
+Reset cause: POR
+Model: Kontron pITX-imx8m
+DRAM:  4 GiB
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@30be0000
+Hit any key to stop autoboot:  0 
+=> setenv autoload no
+=> dhcp
+BOOTP broadcast 1
+DHCP client bound to address 192.168.0.109 (4 ms)
+=> tftp $loadaddr 192.168.0.117:capsule2.bin
+Using ethernet@30be0000 device
+TFTP from server 192.168.0.117; our IP address is 192.168.0.109
+Filename 'capsule2.bin'.
+Load address: 0x40480000
+Loading: #################################################################
+	 #########
+	 9 MiB/s
+done
+Bytes transferred = 1080212 (107b94 hex)
+=> efidebug capsule update -v ${loadaddr}
+Scanning disk mmc@30b40000.blk...
+** Unrecognized filesystem type **
+Scanning disk mmc@30b50000.blk...
+Found 6 disks
+Capsule guid: 6dcbd5ed-e82d-4c44-bda1-7194199ad92a
+Capsule flags: 0x10000
+Capsule header size: 0x1c
+Capsule image size: 0x107b94
+Processing update 'flash-bin' :
+#=> reset
+resetting ...
+
+U-Boot SPL 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:21:56 +0200)
+PMIC:  PFUZE100 ID=0x10
+Normal Boot
+
+
+U-Boot 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:21:56 +0200), Build: capsule2
+
+CPU:   Freescale i.MX8MQLite rev2.1 at 1000 MHz
+Reset cause: POR
+Model: Kontron pITX-imx8m
+DRAM:  4 GiB
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@30be0000
+Hit any key to stop autoboot:  0 
+=> 
+
