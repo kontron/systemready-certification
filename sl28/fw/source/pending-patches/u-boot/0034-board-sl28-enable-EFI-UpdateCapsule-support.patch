@@ -33,7 +33,7 @@ index 8bd7d5be4b..20b4a8c40d 100644
 +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
 +CONFIG_EFI_CAPSULE_ON_DISK=y
 +CONFIG_EFI_IGNORE_OSINDICATIONS=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
 diff --git a/include/configs/kontron_sl28.h b/include/configs/kontron_sl28.h
 index bfb4e67c8f..a02b8ce2b1 100644
 --- a/include/configs/kontron_sl28.h
