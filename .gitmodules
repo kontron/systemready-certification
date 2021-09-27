@@ -1,13 +1,13 @@
-[submodule "sl28/u-boot"]
+[submodule "sl28/fw/u-boot"]
 	path = sl28/fw/source/u-boot
 	url = https://github.com/u-boot/u-boot.git
-[submodule "sl28/arm-trusted-firmware"]
+[submodule "sl28/fw/arm-trusted-firmware"]
 	path = sl28/fw/source/arm-trusted-firmware
 	url = https://github.com/kontron/arm-trusted-firmware-smarc-sal28.git
-[submodule "pitx-imx8m/u-boot"]
+[submodule "pitx-imx8m/fw/u-boot"]
 	path = pitx-imx8m/fw/source/u-boot
 	url = https://github.com/u-boot/u-boot.git
-[submodule "pitx-imx8m/arm-trusted-firmware"]
+[submodule "pitx-imx8m/fw/arm-trusted-firmware"]
 	path = pitx-imx8m/fw/source/arm-trusted-firmware
 	url = https://github.com/ARM-software/arm-trusted-firmware.git
 [submodule "sl-mx8mm/u-boot"]
