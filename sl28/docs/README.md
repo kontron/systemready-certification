@@ -23,3 +23,24 @@ In the u-boot CLI do the following:
     sf probe 0
     sf update $fileaddr 210000 $filesize
     reset
+
+# Create update capsule
+
+During building the u-boot above also the `firmware-update.itb` will be created.
+
+This can be used as input to create the EFI capsule file. To verify that
+the UpdateCapsule mechanism works, 2 different firmware binaries should
+be created. To be able to distinguish them, different `BUILD_TAG`s are assigned.
+
+    # BUILD_TAG=capsule1 CROSS_COMPILE=aarch64-linux-gnu- make -j4
+    # ./tools/mkeficapsule --fit u-boot.update --index 1 capsule1.bin
+    # BUILD_TAG=capsule2 CROSS_COMPILE=aarch64-linux-gnu- make -j4
+    # ./tools/mkeficapsule --fit u-boot.update --index 1 capsule2.bin
+
+
+## Using efidebug to directly update (Testing purpose)
+
+Load the update file to memory and do the update
+
+    => tftp $loadaddr <SERVERIP>:capsule1.bin
+    => efidebug capsule update -v ${loadaddr}
