@@ -1,0 +1,188 @@
+reset
+resetting ...
+
+U-Boot SPL 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
+Trying to boot from SPI
+NOTICE:  BL31: v1.5(release):a5d788c8
+NOTICE:  BL31: Built : 08:33:40, Sep 27 2021
+NOTICE:  Welcome to LS1028 BL31 Phase
+
+
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
+
+SoC:  LS1028A Rev1.0 (0x870b0110)
+Clock Configuration:
+       CPU0(A72):1300 MHz  CPU1(A72):1300 MHz  
+       Bus:      400  MHz  DDR:      1600 MT/s
+Reset Configuration Word (RCW):
+       00000000: 34004010 00000030 00000000 00000000
+       00000010: 00000000 008f0000 0030c000 00000000
+       00000020: 06200000 00002580 00000000 00019016
+       00000030: 00000000 00000048 00000000 00000000
+       00000040: 00000000 00000000 00000000 00000000
+       00000050: 00000000 00000000 00000000 00000000
+       00000060: 00000304 00000000 000e7000 00000000
+       00000070: bb580000 00020000
+Model: Kontron SMARC-sAL28 (Dual PHY)
+EL:    2
+DRAM:  3.9 GiB
+DDR    3.9 GiB (DDR3, 32-bit, CL=11, ECC on)
+SEC0:  RNG instantiated
+Using SERDES1 Protocol: 47960 (0xbb58)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+Loading Environment from SPIFlash... SF: Detected w25q32dw with page size 256 Bytes, erase size 64 KiB, total 4 MiB
+OK
+PCIe1: pcie@3400000 Root Complex: no link
+PCIe2: pcie@3500000 Root Complex: no link
+In:    serial@21c0500
+Out:   serial@21c0500
+Err:   serial@21c0500
+Net:   eth0: enetc-0, eth1: enetc-1
+Hit any key to stop autoboot:  3  0 
+=> date reset
+Reset RTC...
+Date: 2000-01-01 (Saturday)    Time:  0:00:00
+=> run bootcmd_usb0
+starting USB...
+Bus usb@3100000: Register 200017f NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+Bus usb@3110000: Register 200017f NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+scanning bus usb@3100000 for devices... 2 USB Device(s) found
+scanning bus usb@3110000 for devices... 3 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+
+Device 0: Vendor: JetFlash Rev: 1100 Prod: Transcend 16GB  
+            Type: Removable Hard Disk
+            Capacity: 15056.0 MB = 14.7 GB (30834688 x 512)
+... is now current device
+Scanning usb 0:1...
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+7[r[999;999H[6n8Scanning disk mmc@2140000.blk...
+** Unrecognized filesystem type **
+** Unrecognized filesystem type **
+Scanning disk mmc@2150000.blk...
+** Unrecognized filesystem type **
+Scanning disk usb_mass_storage.lun0...
+Found 11 disks
+WARNING: SEC firmware not running, no kaslr-seed
+WARNING could not find node vivante,gc: FDT_ERR_NOTFOUND.
+WARNING could not find node fsl,ls1028a-gpu: FDT_ERR_NOTFOUND.
+Loading Boot0000 'Fedora' failed
+EFI boot manager: Cannot load any image
+Found EFI removable media binary efi/boot/bootaa64.efi
+647168 bytes read in 7 ms (88.2 MiB/s)
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+WARNING: SEC firmware not running, no kaslr-seed
+WARNING could not find node vivante,gc: FDT_ERR_NOTFOUND.
+WARNING could not find node fsl,ls1028a-gpu: FDT_ERR_NOTFOUND.
+Booting /efi\boot\bootaa64.efi
+[0;30;47m[?25hWelcome to GRUB!
+
+[0;37;40m[0;37;40m[0;37;40m[?25l[0;37;40m[0;37;40m[2J[1;1H[0;37;40m[2;53HGNU GRUB  version 2.11
+
+[0;37;40m[4;2H┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐[5;2H│[5;126H│[6;2H│[6;126H│[7;2H│[7;126H│[8;2H│[8;126H│[9;2H│[9;126H│[10;2H│[10;126H│[11;2H│[11;126H│[12;2H│[12;126H│[13;2H│[13;126H│[14;2H│[14;126H│[15;2H│[15;126H│[16;2H│[16;126H│[17;2H│[17;126H│[18;2H│[18;126H│[19;2H│[19;126H│[20;2H│[20;126H│[21;2H│[21;126H│[22;2H│[22;126H│[23;2H│[23;126H│[24;2H│[24;126H│[25;2H│[25;126H│[26;2H│[26;126H│[27;2H│[27;126H│[28;2H│[28;126H│[29;2H│[29;126H│[30;2H│[30;126H│[31;2H│[31;126H│[32;2H│[32;126H│[33;2H└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘[0;37;40m[34;2H[35;2H[0;37;40m     Use the ▲ and ▼ keys to select which entry is highlighted.                                                         
+      Press enter to boot the selected OS, `e' to edit the commands before booting or `c' for a command-line.            [5;127H [0;37;40m[5;3H Linux BusyBox                                                                                                             [0;37;40m[5;125H[0;37;40m[0;30;47m[6;3H*bbr/bsa                                                                                                                   [0;37;40m[6;125H[0;37;40m[0;37;40m[7;3H                                                                                                                           [0;37;40m[7;125H[0;37;40m[0;37;40m[8;3H                                                                                                                           [0;37;40m[8;125H[0;37;40m[0;37;40m[9;3H                                                                                                                           [0;37;40m[9;125H[0;37;40m[0;37;40m[10;3H                                                                                                                           [0;37;40m[10;125H[0;37;40m[0;37;40m[11;3H                                                                                                                           [0;37;40m[11;125H[0;37;40m[0;37;40m[12;3H                                                                                                                           [0;37;40m[12;125H[0;37;40m[0;37;40m[13;3H                                                                                                                           [0;37;40m[13;125H[0;37;40m[0;37;40m[14;3H                                                                                                                           [0;37;40m[14;125H[0;37;40m[0;37;40m[15;3H                                                                                                                           [0;37;40m[15;125H[0;37;40m[0;37;40m[16;3H                                                                                                                           [0;37;40m[16;125H[0;37;40m[0;37;40m[17;3H                                                                                                                           [0;37;40m[17;125H[0;37;40m[0;37;40m[18;3H                                                                                                                           [0;37;40m[18;125H[0;37;40m[0;37;40m[19;3H                                                                                                                           [0;37;40m[19;125H[0;37;40m[0;37;40m[20;3H                                                                                                                           [0;37;40m[20;125H[0;37;40m[0;37;40m[21;3H                                                                                                                           [0;37;40m[21;125H[0;37;40m[0;37;40m[22;3H                                                                                                                           [0;37;40m[22;125H[0;37;40m[0;37;40m[23;3H                                                                                                                           [0;37;40m[23;125H[0;37;40m[0;37;40m[24;3H                                                                                                                           [0;37;40m[24;125H[0;37;40m[0;37;40m[25;3H                                                                                                                           [0;37;40m[25;125H[0;37;40m[0;37;40m[26;3H                                                                                                                           [0;37;40m[26;125H[0;37;40m[0;37;40m[27;3H                                                                                                                           [0;37;40m[27;125H[0;37;40m[0;37;40m[28;3H                                                                                                                           [0;37;40m[28;125H[0;37;40m[0;37;40m[29;3H                                                                                                                           [0;37;40m[29;125H[0;37;40m[0;37;40m[30;3H                                                                                                                           [0;37;40m[30;125H[0;37;40m[0;37;40m[31;3H                                                                                                                           [0;37;40m[31;125H[0;37;40m[0;37;40m[32;3H                                                                                                                           [0;37;40m[32;125H[0;37;40m[32;127H [6;125H[37;1H   The highlighted entry will be executed automatically in 5s.                                                                [6;125H[37;1H                                                                                                                              [38;1H                                                                                                                              [6;125H[?25h[0;37;40m[2J[1;1H[0;37;40m
+/EndEntire
+file path: /HardwareVendor(e61d73b9-a384-4acc-aeab-82e828f3628b)[0: ]/USBClass(0,0,9,0,3)/USBClass(8564,1000,0,0,0)
+/HD(1,800,fffff,b631b785b2a4f447,2,2)/File(\EFI\BOOT)/File(Shell.efi)/EndEntire
+[2J[1;1H[?25h[1;1HUEFI Interactive Shell v2.2
+[0;37;40mEDK II
+[0;37;40mUEFI v2.80 (Das U-Boot, 0x20211000)
+[0;37;40m[1;33;40mMapping table[0;37;40m
+[0;37;40m[1;33;40m      FS2:[0;37;40m [1;37;40mAlias(s):[0;37;40mHD0c:;BLK6:
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(0)/HD(2,GPT,8f34a3d1-d4d2-49da-9dda-22c682f9b885,0x1a4,0xb40)
+[0;37;40m[1;33;40m      FS0:[0;37;40m [1;37;40mAlias(s):[0;37;40mHD0b:;BLK1:
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(1)/HD(1,GPT,4f47f604-185c-489e-aa0a-67ba970e1da4,0x800,0x100000)
+[0;37;40m[1;33;40m      FS1:[0;37;40m [1;37;40mAlias(s):[0;37;40mHD0c:;BLK2:
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(1)/HD(2,GPT,e7142383-3942-4765-b3f0-252c910127fd,0x100800,0x200000)
+[0;37;40m[1;33;40m      FS3:[0;37;40m [1;37;40mAlias(s):[0;37;40mHD0b:;BLK9:
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/UsbClass(0x0,0x0,0x9,0x0,0x3)/UsbClass(0x8564,0x1000,0x0,0x0,0x0)/HD(1,GPT,85b731b6-a4b2-47f4-b1c6-aef6e0f2ce81,0x800,0xfffff)
+[0;37;40m[1;33;40m      FS4:[0;37;40m [1;37;40mAlias(s):[0;37;40mHD0c:;BLK10:
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/UsbClass(0x0,0x0,0x9,0x0,0x3)/UsbClass(0x8564,0x1000,0x0,0x0,0x0)/HD(2,GPT,ac600dc7-3160-4f3c-a824-496d00e3d007,0x100800,0x18fff)
+[0;37;40m[1;33;40m     BLK4:[0;37;40m [1;37;40mAlias(s):[0;37;40m
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(0)
+[0;37;40m[1;33;40m     BLK5:[0;37;40m [1;37;40mAlias(s):[0;37;40m
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(0)/HD(1,GPT,8f34a3d1-d4d2-49da-9dd9-22c682f9b885,0x40,0x164)
+[0;37;40m[1;33;40m     BLK7:[0;37;40m [1;37;40mAlias(s):[0;37;40m
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/SD(1)/SD(0)/HD(3,GPT,8f34a3d1-d4d2-49da-9ddb-22c682f9b885,0xce4,0x43c10)
+[0;37;40m[1;33;40m     BLK0:[0;37;40m [1;37;40mAlias(s):[0;37;40m
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(1)
+[0;37;40m[1;33;40m     BLK3:[0;37;40m [1;37;40mAlias(s):[0;37;40m
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/eMMC(0)/eMMC(1)/HD(3,GPT,7baf3a71-b257-4508-a67d-bdc1392113d2,0x300800,0x381f000)
+[0;37;40m[1;33;40m     BLK8:[0;37;40m [1;37;40mAlias(s):[0;37;40m
+          /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/UsbClass(0x0,0x0,0x9,0x0,0x3)/UsbClass(0x8564,0x1000,0x0,0x0,0x0)
+[0;37;40m[?25l[33;1H[0;37;40mPress [1;37;40mESC[0;37;40m in 5 seconds to skip [1;33;40mstartup.nsh[0;37;40m or any other key to continue.[0;37;40m
+[0;37;40m[?25h[34;1H[1;33;40mShell> [0;37;40m[0;37;40m[34;8Hf[0;37;40m[34;9H[34;9Hs[0;37;40m[34;10H[34;10H3[0;37;40m[34;11H[34;11H:[0;37;40m[34;12H[34;12H[0;37;40m
+[0;37;40m[35;1H[1;33;40mFS3:\> [0;37;40m[0;37;40m[35;8Hd[0;37;40m[35;9H[35;9Hi[0;37;40m[35;10H[35;10Hr[0;37;40m[35;11H[35;11H[0;37;40m
+[0;37;40m[36;1HDirectory of: [1;37;40mFS3:\[0;37;40m
+[0;37;40m18/27/2021  07:28           1,075,211  [0;37;40mcapsule1.bin
+[0;37;40m18/27/2021  07:28           1,075,211  [0;37;40mcapsule2.bin
+[0;37;40m14/26/2021  20:22 <DIR>             0  [0;37;40m[1;34;40mEFI[0;37;40m
+[0;37;40m14/26/2021  20:22 <DIR>             0  [0;37;40m[1;34;40mgrub[0;37;40m
+[0;37;40m14/26/2021  20:22                 298  [0;37;40mgrub.cfg
+[0;37;40m14/26/2021  20:22          31,783,424  [0;37;40mImage
+[0;37;40m14/26/2021  20:22          94,866,944  [0;37;40mramdisk-busybox.img
+[0;37;40m          5 File(s)  128,801,088 bytes
+          2 Dir(s)
+[0;37;40m[39;1H[1;33;40mFS3:\> [0;37;40m[0;37;40m[39;8H[0;37;40m
+[0;37;40m[39;1H[1;33;40mFS3:\> [0;37;40m[0;37;40m[39;8H[0;37;40m
+[0;37;40m[39;1H[1;33;40mFS3:\> [0;37;40m[0;37;40m[39;8He[0;37;40m[39;9H[39;9Hf[0;37;40m[39;10H[39;10Hi[0;37;40m[39;11H[39;11H/[0;37;40m[39;12H[39;12Hb[0;37;40m[39;13H[39;13Ho[0;37;40m[39;14H[39;14Ho[0;37;40m[39;15H[39;15Ht[0;37;40m[39;16H[39;16H/[0;37;40m[39;17H[39;17Ha[0;37;40m[39;18H[39;18Hp[0;37;40m[39;19H[39;19Hp[0;37;40m[39;20H[39;20H/[0;37;40m[39;21H[39;21Hc[0;37;40m[39;22H[39;22Ha[0;37;40m[39;23H[39;23Hp[0;37;40m[39;24H[39;24Hs[0;37;40m[39;25H[39;25Hu[0;37;40m[39;26H[39;26Hl[0;37;40m[39;27H[39;27He[0;37;40m[39;28H[39;28Ha[0;37;40m[39;29H[39;29Hp[0;37;40m[39;30H[39;30Hp[0;37;40m[39;31H[39;31H.[0;37;40m[39;32H[39;32He[0;37;40m[39;33H[39;33Hf[0;37;40m[39;34H[39;34Hi[0;37;40m[39;35H[39;35H [0;37;40m[39;36H[39;36Hc[0;37;40m[39;37H[39;37Ha[0;37;40m[39;38H[39;38Hp[0;37;40m[39;39H[39;39Hs[0;37;40m[39;40H[39;40Hu[0;37;40m[39;41H[39;41Hl[0;37;40m[39;42H[39;42He[0;37;40m[39;43H[39;43H.[0;37;40m[39;44H[39;43H [0;37;40m[39;43H[39;43H1[0;37;40m[39;44H[39;44H.[0;37;40m[39;45H[39;45Hb[0;37;40m[39;46H[39;46Hi[0;37;40m[39;47H[39;47Hn[0;37;40m[39;48H[39;48H[0;37;40m
+[0;37;40m
+ASSERT_EFI_ERROR (Status = Not Found)
+ASSERT [CapsuleApp] /home/cherat01/ATEG/OOB/arm-systemready/IR/scripts/edk2/MdePkg/Library/DxeServicesTableLib/DxeServicesTableLib.c(58): !EFI_ERROR (Status)
+ASSERT [CapsuleApp] /home/cherat01/ATEG/OOB/arm-systemready/IR/scripts/edk2/MdePkg/Library/DxeServicesTableLib/DxeServicesTableLib.c(59): gDS != ((void *) 0)
+
+ASSERT_EFI_ERROR (Status = Not Found)
+ASSERT [CapsuleApp] /home/cherat01/ATEG/OOB/arm-systemready/IR/scripts/edk2/Build/MdeModule/DEBUG_GCC5/AARCH64/MdeModulePkg/Application/CapsuleApp/CapsuleApp/DEBUG/AutoGen.c(415): !EFI_ERROR (Status)
+
+ASSERT_EFI_ERROR (Status = Not Found)
+ASSERT [CapsuleApp] /home/cherat01/ATEG/OOB/arm-systemready/IR/scripts/edk2/MdePkg/Library/DxeHobLib/HobLib.c(48): !EFI_ERROR (Status)
+ASSERT [CapsuleApp] /home/cherat01/ATEG/OOB/arm-systemready/IR/scripts/edk2/MdePkg/Library/DxeHobLib/HobLib.c(49): mHobList != ((void *) 0)
+CapsuleApp: creating capsule descriptors at 0xC0D47040
+CapsuleApp: capsule data starts          at 0xC0B43040 with size 0x10680B
+CapsuleApp: capsule block/size              0xC0B43040/0x10680B
+Processing update 'u-boot-bin' :
+#################resetting ...
+
+U-Boot SPL 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:44:33 +0200)
+Trying to boot from SPI
+NOTICE:  BL31: v1.5(release):a5d788c8
+NOTICE:  BL31: Built : 08:33:40, Sep 27 2021
+NOTICE:  Welcome to LS1028 BL31 Phase
+
+
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:44:33 +0200), Build: capsule1
+
+SoC:  LS1028A Rev1.0 (0x870b0110)
+Clock Configuration:
+       CPU0(A72):1300 MHz  CPU1(A72):1300 MHz  
+       Bus:      400  MHz  DDR:      1600 MT/s
+Reset Configuration Word (RCW):
+       00000000: 34004010 00000030 00000000 00000000
+       00000010: 00000000 008f0000 0030c000 00000000
+       00000020: 06200000 00002580 00000000 00019016
+       00000030: 00000000 00000048 00000000 00000000
+       00000040: 00000000 00000000 00000000 00000000
+       00000050: 00000000 00000000 00000000 00000000
+       00000060: 00000304 00000000 000e7000 00000000
+       00000070: bb580000 00020000
+Model: Kontron SMARC-sAL28 (Dual PHY)
+EL:    2
+DRAM:  3.9 GiB
+DDR    3.9 GiB (DDR3, 32-bit, CL=11, ECC on)
+SEC0:  RNG instantiated
+Using SERDES1 Protocol: 47960 (0xbb58)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+Loading Environment from SPIFlash... SF: Detected w25q32dw with page size 256 Bytes, erase size 64 KiB, total 4 MiB
+OK
+PCIe1: pcie@3400000 Root Complex: no link
+PCIe2: pcie@3500000 Root Complex: no link
+In:    serial@21c0500
+Out:   serial@21c0500
+Err:   serial@21c0500
+Net:   eth0: enetc-0, eth1: enetc-1
+Hit any key to stop autoboot:  3  0 
+=> 

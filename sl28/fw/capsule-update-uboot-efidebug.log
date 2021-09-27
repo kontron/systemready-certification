@@ -1,0 +1,119 @@
+=> reset
+resetting ...
+
+U-Boot SPL 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
+Trying to boot from SPI
+NOTICE:  BL31: v1.5(release):a5d788c8
+NOTICE:  BL31: Built : 08:33:40, Sep 27 2021
+NOTICE:  Welcome to LS1028 BL31 Phase
+
+
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
+
+SoC:  LS1028A Rev1.0 (0x870b0110)
+Clock Configuration:
+       CPU0(A72):1300 MHz  CPU1(A72):1300 MHz  
+       Bus:      400  MHz  DDR:      1600 MT/s
+Reset Configuration Word (RCW):
+       00000000: 34004010 00000030 00000000 00000000
+       00000010: 00000000 008f0000 0030c000 00000000
+       00000020: 06200000 00002580 00000000 00019016
+       00000030: 00000000 00000048 00000000 00000000
+       00000040: 00000000 00000000 00000000 00000000
+       00000050: 00000000 00000000 00000000 00000000
+       00000060: 00000304 00000000 000e7000 00000000
+       00000070: bb580000 00020000
+Model: Kontron SMARC-sAL28 (Dual PHY)
+EL:    2
+DRAM:  3.9 GiB
+DDR    3.9 GiB (DDR3, 32-bit, CL=11, ECC on)
+SEC0:  RNG instantiated
+Using SERDES1 Protocol: 47960 (0xbb58)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+Loading Environment from SPIFlash... SF: Detected w25q32dw with page size 256 Bytes, erase size 64 KiB, total 4 MiB
+OK
+PCIe1: pcie@3400000 Root Complex: no link
+PCIe2: pcie@3500000 Root Complex: no link
+In:    serial@21c0500
+Out:   serial@21c0500
+Err:   serial@21c0500
+Net:   eth0: enetc-0, eth1: enetc-1
+Hit any key to stop autoboot:  0 
+=> vers
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
+
+aarch64-linux-gnu-gcc (Debian 8.3.0-2) 8.3.0
+GNU ld (GNU Binutils for Debian) 2.35.1
+=> setenv autoload no 
+=> dhcp
+BOOTP broadcast 1
+DHCP client bound to address 10.228.0.7 (23 ms)
+=> tftp $loadaddr 10.228.0.4:capsule1.bin
+Using enetc-0 device
+TFTP from server 10.228.0.4; our IP address is 10.228.0.7
+Filename 'capsule1.bin'.
+Load address: 0x82000000
+Loading: #################################################################
+	 #########
+	 8.5 MiB/s
+done
+Bytes transferred = 1075211 (10680b hex)
+=> efidebug capsule update -v ${loadaddr}
+Scanning disk mmc@2140000.blk...
+** Unrecognized filesystem type **
+** Unrecognized filesystem type **
+Scanning disk mmc@2150000.blk...
+** Unrecognized filesystem type **
+Found 8 disks
+Capsule guid: 6dcbd5ed-e82d-4c44-bda1-7194199ad92a
+Capsule flags: 0x10000
+Capsule header size: 0x1c
+Capsule image size: 0x10680b
+Processing update 'u-boot-bin' :
+#################=> reset
+resetting ...
+
+U-Boot SPL 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:44:33 +0200)
+Trying to boot from SPI
+NOTICE:  BL31: v1.5(release):a5d788c8
+NOTICE:  BL31: Built : 08:33:40, Sep 27 2021
+NOTICE:  Welcome to LS1028 BL31 Phase
+
+
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:44:33 +0200), Build: capsule1
+
+SoC:  LS1028A Rev1.0 (0x870b0110)
+Clock Configuration:
+       CPU0(A72):1300 MHz  CPU1(A72):1300 MHz  
+       Bus:      400  MHz  DDR:      1600 MT/s
+Reset Configuration Word (RCW):
+       00000000: 34004010 00000030 00000000 00000000
+       00000010: 00000000 008f0000 0030c000 00000000
+       00000020: 06200000 00002580 00000000 00019016
+       00000030: 00000000 00000048 00000000 00000000
+       00000040: 00000000 00000000 00000000 00000000
+       00000050: 00000000 00000000 00000000 00000000
+       00000060: 00000304 00000000 000e7000 00000000
+       00000070: bb580000 00020000
+Model: Kontron SMARC-sAL28 (Dual PHY)
+EL:    2
+DRAM:  3.9 GiB
+DDR    3.9 GiB (DDR3, 32-bit, CL=11, ECC on)
+SEC0:  RNG instantiated
+Using SERDES1 Protocol: 47960 (0xbb58)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 0
+Loading Environment from SPIFlash... SF: Detected w25q32dw with page size 256 Bytes, erase size 64 KiB, total 4 MiB
+OK
+PCIe1: pcie@3400000 Root Complex: no link
+PCIe2: pcie@3500000 Root Complex: no link
+In:    serial@21c0500
+Out:   serial@21c0500
+Err:   serial@21c0500
+Net:   eth0: enetc-0, eth1: enetc-1
+Hit any key to stop autoboot:  0 
+=> vers
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:44:33 +0200), Build: capsule1
+
+aarch64-linux-gnu-gcc (Debian 8.3.0-2) 8.3.0
+GNU ld (GNU Binutils for Debian) 2.35.1
+=> 
