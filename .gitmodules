@@ -11,8 +11,8 @@
 	path = pitx-imx8m/fw/source/arm-trusted-firmware
 	url = https://github.com/ARM-software/arm-trusted-firmware.git
 [submodule "sl-mx8mm/u-boot"]
-	path = sl-mx8mm/u-boot
+	path = sl-mx8mm/fw/source/u-boot
 	url = https://github.com/u-boot/u-boot.git
 [submodule "sl-mx8mm/arm-trusted-firmware"]
-	path = sl-mx8mm/arm-trusted-firmware
+	path = sl-mx8mm/fw/source/arm-trusted-firmware
 	url = https://github.com/ARM-software/arm-trusted-firmware.git
