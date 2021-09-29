@@ -1,0 +1,50 @@
+From 44564a6c276b3e36728130e8d3dd5df166b062b4 Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Thu, 30 Sep 2021 15:57:22 +0200
+Subject: [PATCH 6/6] kontron-sl-mx8mm: add fixes for backward compatibility
+
+Re-add the changed 'fsl.usbphy' node to prevent older kernels from crash [1]
+
+Debian 11 has no module enabled to support the PC9450 regulator. With
+this it is not possible to probe the mmc0 because there is a reference
+to the vmmc-supply/vqmmc-supply. Since it is not required for operation
+remove this nodes to make mmc0 (eMMC) available.
+
+[1] https://lore.kernel.org/all/20210921113754.767631-1-festevam@gmail.com/
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi b/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
+index 2fb561fafc..d99bca7eca 100644
+--- a/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
+@@ -119,8 +119,23 @@
+ 	u-boot,dm-pre-reloc;
+ };
+ 
++&usbotg1 {
++	/* this is just for backward compatibity */
++	fsl,usbphy = <&usbphynop1>;
++};
++
++&usbotg2 {
++	/* this is just for backward compatibity */
++	fsl,usbphy = <&usbphynop2>;
++};
++
+ &usdhc1 {
+ 	u-boot,dm-spl;
++	/* The supply from the eMMC cannot be changed. Since e.g. Debian
++	   in version 11 does not have the module for the Rugulator PC9450,
++	   the eMMC driver cannot be tested, because there is a dependency. */
++	/delete-property/ vmmc-supply;
++	/delete-property/ vqmmc-supply;
+ };
+ 
+ &usdhc2 {
+-- 
+2.30.0
+

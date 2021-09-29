@@ -1,0 +1,69 @@
+From b58e0614ba4b523ee1e1088146ce3a9dd8204537 Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Wed, 29 Sep 2021 13:00:14 +0200
+Subject: [PATCH 5/6] kontron-sl-mx8mm: add creation of spi-flash.bin for
+ update
+
+Also the dfu_alt_info is adopted to write from page beginning.
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi | 14 ++++++++++++--
+ include/configs/kontron-sl-mx8mm.h              |  2 +-
+ 2 files changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi b/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
+index 5e368a61bc..2fb561fafc 100644
+--- a/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
+@@ -248,6 +248,16 @@
+ 		};
+ 	};
+ 
++	spi-flash-image {
++		filename = "spi-flash.bin";
++		pad-byte = <0xff>;
++
++		blob {
++			offset = <0x400>;
++			filename = "flash.bin";
++		};
++	};
++
+ 	u-boot-update {
+ 		filename = "firmware-update.itb";
+ 
+@@ -256,7 +266,7 @@
+ 
+ 			images {
+ 				flash-bin {
+-					description = "U-Boot flash image";
++					description = "U-Boot SPI flash image";
+ 					type = "firmware";
+ 					os = "u-boot";
+ 					arch = "arm";
+@@ -264,7 +274,7 @@
+ 					load = <0>; /* unused */
+ 
+ 					blob {
+-						filename = "flash.bin";
++						filename = "spi-flash.bin";
+ 					};
+ 
+ 				};
+diff --git a/include/configs/kontron-sl-mx8mm.h b/include/configs/kontron-sl-mx8mm.h
+index 4909b3679d..727995ab44 100644
+--- a/include/configs/kontron-sl-mx8mm.h
++++ b/include/configs/kontron-sl-mx8mm.h
+@@ -79,7 +79,7 @@
+ 	"ramdisk_addr_r=0x46400000\0" \
+ 	"pxefile_addr_r=0x46000000\0" \
+ 	"scriptaddr=0x46000000\0" \
+-	"dfu_alt_info=sf 0:0=flash-bin raw 0x400 0x1f0000\0" \
++	"dfu_alt_info=sf 0:0=flash-bin raw 0 0x1f0000\0" \
+ 	"bootdelay=3\0" \
+ 	"hostname=" CONFIG_HOSTNAME "\0" \
+ 	BOOTENV
+-- 
+2.30.0
+

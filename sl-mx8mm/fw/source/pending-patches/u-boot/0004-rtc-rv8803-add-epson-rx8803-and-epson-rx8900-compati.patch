@@ -1,0 +1,32 @@
+From 6e282e9e789d814befe2225dd663d9125c5d2efc Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Thu, 23 Sep 2021 09:27:29 +0200
+Subject: [PATCH 4/6] rtc: rv8803: add epson,rx8803 and epson,rx8900 compatible
+
+The RX8803 and RX8900 register layouts are compatible with the one of
+the RV8803. So add these to the compatibles.
+
+The same compatible strings are used and approved in linux kernel.
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+Reviewed-by: Michael Walle <michael@walle.cc>
+---
+ drivers/rtc/rv8803.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/rtc/rv8803.c b/drivers/rtc/rv8803.c
+index acd50c6564..5bae39d6e0 100644
+--- a/drivers/rtc/rv8803.c
++++ b/drivers/rtc/rv8803.c
+@@ -157,6 +157,8 @@ static const struct rtc_ops rv8803_rtc_ops = {
+ 
+ static const struct udevice_id rv8803_rtc_ids[] = {
+ 	{ .compatible = "microcrystal,rv8803", },
++	{ .compatible = "epson,rx8803" },
++	{ .compatible = "epson,rx8900" },
+ 	{ }
+ };
+ 
+-- 
+2.30.0
+

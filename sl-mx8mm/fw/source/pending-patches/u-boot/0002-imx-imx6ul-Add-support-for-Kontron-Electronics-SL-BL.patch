@@ -1,7 +1,7 @@
-From 6c84d79ade1926ce4db24ee67d1e82625a9bf8da Mon Sep 17 00:00:00 2001
+From ba7ffce3ac5c27341916ffadfb5e4927ef151c75 Mon Sep 17 00:00:00 2001
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
-Date: Mon, 23 Aug 2021 16:26:17 +0200
-Subject: [PATCH] imx: imx6ul: Add support for Kontron Electronics SL/BL
+Date: Thu, 7 Feb 2019 17:42:24 +0100
+Subject: [PATCH 2/6] imx: imx6ul: Add support for Kontron Electronics SL/BL
  i.MX6UL/ULL boards (N63xx/N64xx)
 
 This adds support for i.MX6UL/ULL-based evaluation kits with SoMs by
@@ -24,6 +24,37 @@ with both SoCs.
 
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 Reviewed-by: Stefano Babic <sbabic@denx.de>
+---
+Changes in v6:
+  * None
+
+Changes in v5:
+  * Comments from Tom and Michael (thanks!)
+  * Drop the common header file kontron_common.h
+  * Remove all clutter from the environment
+  * Rebase on current master
+  * Rename board files to contain sl-mx6ul
+  * Make do_board_detect() static
+  * Add simple docs
+  * Simplify and update MAINTAINERS file
+  * Use binman only to build a flash.bin with SPL and U-Boot
+  * Fix offsets for U-Boot image in SPI NOR and MMC
+  * Refresh defconfig
+  * Add missing define for CONFIG_SYS_UBOOT_BASE
+
+Changes in v4:
+  * Fix checkpatch errors/warnings
+  * Stop disabling initrd/fdt relocation
+
+Changes in v3:
+  * Guard binman nodes to fix build of other UL boards
+
+Changes in v2:
+  * Add MAINTAINERS file
+  * Rename board directory
+  * Use binman to generate FIT
+  * Support legacy images
+  * Add Stefano's R-b tag
 ---
  arch/arm/dts/Makefile                         |   4 +-
  .../dts/imx6ul-kontron-n631x-s-u-boot.dtsi    |   7 +

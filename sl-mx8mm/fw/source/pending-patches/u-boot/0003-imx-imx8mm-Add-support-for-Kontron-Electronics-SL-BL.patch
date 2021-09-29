@@ -1,7 +1,7 @@
-From 133631c57aee388c46c54d2c00732f9b9a5e06d2 Mon Sep 17 00:00:00 2001
+From 3d743442656f10ea127c8d01413fab97bdff8ad2 Mon Sep 17 00:00:00 2001
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
-Date: Mon, 23 Aug 2021 16:26:18 +0200
-Subject: [PATCH] imx: imx8mm: Add support for Kontron Electronics SL/BL
+Date: Tue, 25 May 2021 17:43:22 +0200
+Subject: [PATCH 3/6] imx: imx8mm: Add support for Kontron Electronics SL/BL
  i.MX8M-Mini boards (N801x)
 
 The Kontron SoM-Line i.MX8MM (N801x) by Kontron Electronics GmbH is a SoM
@@ -13,11 +13,50 @@ SD card, CAN, RS485 and much more.
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 Reviewed-by: Stefano Babic <sbabic@denx.de>
 ---
+Changes in v6:
+  Fixes and standard distro boot support from Heiko (thanks!):
+  * add USB to distroboot support
+  * small fixes in documentation
+  * add buck2 node-property regulator-always-on
+  * remove legacy gpio phy reset
+  * disable watchdog autostart
+  * add fdt_addr_r to environment
+  * enable config options and env for EFI support
+  * create update image for EFI capsule via binman
+  * fix env offset and size and keep env in SPI NOR only
+  * enable CONFIG_SPL_DM_SPI_FLASH
+  * increase SPI flash clock
+  * enable RTC and time support
+
+Changes in v5:
+  * Comments from Michael (thanks!)
+  * Drop the common header file kontron_common.h
+  * Remove all clutter from the environment
+  * Rebase on current master
+  * Rename board files to contain sl-mx6ul
+  * Add simple docs
+  * Adjust u-boot.itb offsets in MMC and SPI NOR to match common values
+  * Update MAINTAINERS file
+  * Fix binman build
+  * Refresh defconfig
+
+Changes in v4:
+  * Fix checkpatch errors/warnings
+
+Changes in v3:
+  * None
+
+Changes in v2:
+  * Fix header includes in spl.c
+  * Add MAINTAINERS file
+  * Rename board directory
+  * Add Stefano's R-b tag
+---
  arch/arm/dts/Makefile                         |    2 +
  arch/arm/dts/imx8mm-kontron-n801x-s-lvds.dts  |  116 ++
- .../dts/imx8mm-kontron-n801x-s-u-boot.dtsi    |  253 +++
+ .../dts/imx8mm-kontron-n801x-s-u-boot.dtsi    |  274 +++
  arch/arm/dts/imx8mm-kontron-n801x-s.dts       |  388 ++++
- arch/arm/dts/imx8mm-kontron-n801x-som.dtsi    |  298 +++
+ arch/arm/dts/imx8mm-kontron-n801x-som.dtsi    |  299 +++
  arch/arm/mach-imx/imx8m/Kconfig               |    8 +
  board/kontron/sl-mx8mm/Kconfig                |   15 +
  board/kontron/sl-mx8mm/MAINTAINERS            |    8 +
@@ -26,11 +65,11 @@ Reviewed-by: Stefano Babic <sbabic@denx.de>
  board/kontron/sl-mx8mm/lpddr4_timing.c        | 1844 +++++++++++++++++
  board/kontron/sl-mx8mm/sl-mx8mm.c             |   99 +
  board/kontron/sl-mx8mm/spl.c                  |  321 +++
- configs/kontron-sl-mx8mm_defconfig            |  122 ++
+ configs/kontron-sl-mx8mm_defconfig            |  140 ++
  doc/board/kontron/index.rst                   |    1 +
  doc/board/kontron/sl-mx8mm.rst                |   85 +
- include/configs/kontron-sl-mx8mm.h            |   84 +
- 17 files changed, 3662 insertions(+)
+ include/configs/kontron-sl-mx8mm.h            |   87 +
+ 17 files changed, 3705 insertions(+)
  create mode 100644 arch/arm/dts/imx8mm-kontron-n801x-s-lvds.dts
  create mode 100644 arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
  create mode 100644 arch/arm/dts/imx8mm-kontron-n801x-s.dts
@@ -183,10 +222,10 @@ index 0000000000..dd1addea70
 +};
 diff --git a/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi b/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
 new file mode 100644
-index 0000000000..6f90f4c738
+index 0000000000..5e368a61bc
 --- /dev/null
 +++ b/arch/arm/dts/imx8mm-kontron-n801x-s-u-boot.dtsi
-@@ -0,0 +1,253 @@
+@@ -0,0 +1,274 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2019 Kontron Electronics GmbH
@@ -220,9 +259,6 @@ index 0000000000..6f90f4c738
 +
 +&fec1 {
 +	phy-mode = "rgmii-rxid";
-+	phy-reset-gpios = <&gpio4 27 GPIO_ACTIVE_LOW>;
-+	phy-reset-duration = <100>;
-+	phy-reset-post-delay = <100>;
 +};
 +
 +&i2c1 {
@@ -437,6 +473,30 @@ index 0000000000..6f90f4c738
 +		uboot: blob-ext@2 {
 +			offset = <0x57c00>;
 +			filename = "u-boot.itb";
++		};
++	};
++
++	u-boot-update {
++		filename = "firmware-update.itb";
++
++		fit {
++			description = "Configuration for firmware update file";
++
++			images {
++				flash-bin {
++					description = "U-Boot flash image";
++					type = "firmware";
++					os = "u-boot";
++					arch = "arm";
++					compress = "none";
++					load = <0>; /* unused */
++
++					blob {
++						filename = "flash.bin";
++					};
++
++				};
++			};
 +		};
 +	};
 +};
@@ -836,10 +896,10 @@ index 0000000000..c796d144e2
 +};
 diff --git a/arch/arm/dts/imx8mm-kontron-n801x-som.dtsi b/arch/arm/dts/imx8mm-kontron-n801x-som.dtsi
 new file mode 100644
-index 0000000000..213014f59b
+index 0000000000..c3418d263e
 --- /dev/null
 +++ b/arch/arm/dts/imx8mm-kontron-n801x-som.dtsi
-@@ -0,0 +1,298 @@
+@@ -0,0 +1,299 @@
 +// SPDX-License-Identifier: GPL-2.0+ OR MIT
 +/*
 + * Copyright (C) 2019 Kontron Electronics GmbH
@@ -947,6 +1007,7 @@ index 0000000000..213014f59b
 +				regulator-min-microvolt = <850000>;
 +				regulator-max-microvolt = <950000>;
 +				regulator-boot-on;
++				regulator-always-on;
 +				regulator-ramp-delay = <3125>;
 +				nxp,dvs-run-voltage = <950000>;
 +				nxp,dvs-standby-voltage = <850000>;
@@ -3513,10 +3574,10 @@ index 0000000000..4ef03c8c17
 +}
 diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
 new file mode 100644
-index 0000000000..9d80e8f9fc
+index 0000000000..06c57b7555
 --- /dev/null
 +++ b/configs/kontron-sl-mx8mm_defconfig
-@@ -0,0 +1,122 @@
+@@ -0,0 +1,140 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_IMX8M=y
 +CONFIG_SYS_TEXT_BASE=0x40200000
@@ -3524,8 +3585,8 @@ index 0000000000..9d80e8f9fc
 +CONFIG_SPL_LIBCOMMON_SUPPORT=y
 +CONFIG_SPL_LIBGENERIC_SUPPORT=y
 +CONFIG_SYS_MALLOC_F_LEN=0x10000
-+CONFIG_ENV_SIZE=0x80000
-+CONFIG_ENV_OFFSET=0x1D0000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0x1f0000
 +CONFIG_ENV_SECT_SIZE=0x10000
 +CONFIG_DM_GPIO=y
 +CONFIG_SPL_DM_SPI=y
@@ -3552,14 +3613,17 @@ index 0000000000..9d80e8f9fc
 +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
 +# CONFIG_SPL_FIT_IMAGE_TINY is not set
 +CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_SPI_FLASH=y
 +CONFIG_SPL_POWER=y
 +CONFIG_SPL_SPI_LOAD=y
 +CONFIG_SYS_SPI_U_BOOT_OFFS=0x58000
 +CONFIG_SPL_WATCHDOG=y
 +CONFIG_SPL_ATF=y
++CONFIG_CMD_NVEDIT_EFI=y
 +# CONFIG_CMD_LZMADEC is not set
 +# CONFIG_CMD_UNZIP is not set
 +CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
 +CONFIG_CMD_FUSE=y
 +CONFIG_CMD_GPIO=y
 +CONFIG_CMD_I2C=y
@@ -3567,13 +3631,15 @@ index 0000000000..9d80e8f9fc
 +CONFIG_CMD_USB=y
 +CONFIG_CMD_WDT=y
 +CONFIG_CMD_CACHE=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
 +CONFIG_CMD_PMIC=y
 +CONFIG_CMD_REGULATOR=y
 +CONFIG_CMD_EXT4_WRITE=y
 +CONFIG_OF_CONTROL=y
 +CONFIG_SPL_OF_CONTROL=y
 +CONFIG_OF_LIST="imx8mm-kontron-n801x-s imx8mm-kontron-n801x-s-lvds"
-+CONFIG_ENV_IS_IN_MMC=y
 +CONFIG_ENV_IS_IN_SPI_FLASH=y
 +CONFIG_USE_ENV_SPI_BUS=y
 +CONFIG_ENV_SPI_BUS=0
@@ -3589,6 +3655,7 @@ index 0000000000..9d80e8f9fc
 +CONFIG_CLK_COMPOSITE_CCF=y
 +CONFIG_SPL_CLK_IMX8MM=y
 +CONFIG_CLK_IMX8MM=y
++CONFIG_DFU_SF=y
 +CONFIG_MXC_GPIO=y
 +CONFIG_DM_I2C=y
 +CONFIG_SYS_I2C_MXC=y
@@ -3601,7 +3668,9 @@ index 0000000000..9d80e8f9fc
 +CONFIG_MTD=y
 +CONFIG_DM_MTD=y
 +CONFIG_DM_SPI_FLASH=y
++CONFIG_SF_DEFAULT_SPEED=80000000
 +CONFIG_SPI_FLASH_MACRONIX=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 +CONFIG_SPI_FLASH_MTD=y
 +CONFIG_PHYLIB=y
 +CONFIG_PHY_MSCC=y
@@ -3620,6 +3689,8 @@ index 0000000000..9d80e8f9fc
 +CONFIG_DM_PMIC_PCA9450=y
 +CONFIG_SPL_DM_PMIC_PCA9450=y
 +CONFIG_DM_REGULATOR=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_RV8803=y
 +CONFIG_CONS_INDEX=2
 +CONFIG_MXC_UART=y
 +CONFIG_SPI=y
@@ -3638,7 +3709,15 @@ index 0000000000..9d80e8f9fc
 +CONFIG_USB_GADGET_VENDOR_NUM=0x0525
 +CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
 +CONFIG_CI_UDC=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
 +CONFIG_IMX_WATCHDOG=y
++# CONFIG_HEXDUMP is not set
++CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_IGNORE_OSINDICATIONS=y
++CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
 diff --git a/doc/board/kontron/index.rst b/doc/board/kontron/index.rst
 index c3fadcef76..7dfe3d9bc0 100644
 --- a/doc/board/kontron/index.rst
@@ -3650,7 +3729,7 @@ index c3fadcef76..7dfe3d9bc0 100644
 +   sl-mx8mm
 diff --git a/doc/board/kontron/sl-mx8mm.rst b/doc/board/kontron/sl-mx8mm.rst
 new file mode 100644
-index 0000000000..ac51d945e6
+index 0000000000..74ff228f20
 --- /dev/null
 +++ b/doc/board/kontron/sl-mx8mm.rst
 @@ -0,0 +1,85 @@
@@ -3699,7 +3778,7 @@ index 0000000000..ac51d945e6
 +
 +  .. code-block:: bash
 +
-+     $ make PLAT=imx8mm IMX_BOOT_UART_BASE="0x30880000" bl31
++     $ make PLAT=imx8mm CROSS_COMPILE=aarch64-linux-gnu- IMX_BOOT_UART_BASE="0x30880000" bl31
 +     $ cp build/imx8mm/release/bl31.bin $(builddir)
 +
 +Get the DDR firmware
@@ -3709,7 +3788,7 @@ index 0000000000..ac51d945e6
 +
 +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.9.bin
 +   $ chmod +x firmware-imx-8.9.bin
-+   $ ./firmware-imx-8.9
++   $ ./firmware-imx-8.9.bin
 +   $ cp firmware-imx-8.9/firmware/ddr/synopsys/lpddr4*.bin $(builddir)
 +
 +Build U-Boot
@@ -3741,10 +3820,10 @@ index 0000000000..ac51d945e6
 +Please see https://docs.kontron-electronics.de for further vendor documentation.
 diff --git a/include/configs/kontron-sl-mx8mm.h b/include/configs/kontron-sl-mx8mm.h
 new file mode 100644
-index 0000000000..9796a5dbac
+index 0000000000..4909b3679d
 --- /dev/null
 +++ b/include/configs/kontron-sl-mx8mm.h
-@@ -0,0 +1,84 @@
+@@ -0,0 +1,87 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * Copyright (C) 2019 Kontron Electronics GmbH
@@ -3792,6 +3871,7 @@ index 0000000000..9796a5dbac
 +#define BOOT_TARGET_DEVICES(func) \
 +	func(MMC, mmc, 1) \
 +	func(MMC, mmc, 0) \
++	func(USB, usb, 0) \
 +	func(PXE, pxe, na)
 +#include <config_distro_bootcmd.h>
 +/* Do not try to probe USB net adapters for net boot */
@@ -3821,9 +3901,11 @@ index 0000000000..9796a5dbac
 +
 +#define CONFIG_EXTRA_ENV_SETTINGS \
 +	"kernel_addr_r=0x42000000\0" \
++	"fdt_addr_r=0x44000000\0" \
 +	"ramdisk_addr_r=0x46400000\0" \
 +	"pxefile_addr_r=0x46000000\0" \
 +	"scriptaddr=0x46000000\0" \
++	"dfu_alt_info=sf 0:0=flash-bin raw 0x400 0x1f0000\0" \
 +	"bootdelay=3\0" \
 +	"hostname=" CONFIG_HOSTNAME "\0" \
 +	BOOTENV
