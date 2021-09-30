@@ -26,10 +26,10 @@ The `flash.bin` can be use to copy it to the SD card or the eMMC at offset `33k`
 The pitx-imx8m support booting either from SD card or from onboard eMMC.
 For the tests we need to install the `flash.bin` to the eMMC boot partition.
 
-To select the boot source you have to do the DIP switch (SW2 is located near
+To select the boot source you have to do the DIP switch (SW1 is located near
 the MiniDP connector) setting as followed:
 
-| SW2.1 | SW2.2 | Source  |
+| SW1.1 | SW1.2 | Source  |
 | ----- | ----- | ------- |
 | OFF   | OFF   | SD card |
 | OFF   | ON    | eMMC    |
@@ -37,10 +37,24 @@ the MiniDP connector) setting as followed:
 Install the `flash.bin` to eMMC boot partion.
 
 We assume that the `flash.bin` was copied copied into memory at `$loadaddr`.
-For example by downloading the file via tftp from a server or by copying
-from an external storage like a partion on an USB flash drive.
+For example by downloading the file via tftp from a server (a) or by copying
+from an external storage like a partion on an USB flash drive (b).
 
-Then you can flash the content onto the eMMC boot partiion.
+Option a) Copy the the `flash.bin` file onto a tftp server that is reachable
+from the pitx-imx8m network. Then load the file to `$loadaddr`.
+
+    => setenv autoload no
+	=> dhcp
+	=> tftp $loadaddr <TFTPSERVERIP>:flash.bin
+
+Option b) Copy the file to a partition on a USB flash drive. In the example
+we used the first partion on the flash drive. Then insert the USB flash drive
+into an USB port of the pitx-im8m and load the file to `$loadaddr`.
+
+    => usb start
+	=> load mmc 0:1 $loadaddr flash.bin
+
+Now you can flash the content in `$loadaddr` onto the eMMC boot partiion.
 
     => mmc dev 0 1
     => mmc write $loadaddr 0x42 0x1000
