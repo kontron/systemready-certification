@@ -1,0 +1,34 @@
+General information
+-------------------
+- Arm SystemReady Band: IR
+- System name: Baseboard BL i.MX8M MINI
+- Prepared by: Heiko Thiery
+- E-mail: heiko.thiery@kontron.com
+- Date: 2021-10-01
+
+System Information
+------------------
+- Company: Kontron
+- System: pITX-imx8m
+- SoC: Freescale i.MX8MMQ rev1.0
+- FW version: U-Boot 2021.10-rc3-00006-g53e49b2f50  / TF-A v2.4
+- Memory: 1 GiB
+- Storage devices / disks: 8 GiB eMMC, SD card
+- Network controllers: fecmxc
+- Other Hardware information:
+
+Test Logs and Results
+----------------------
+- ACS version used: v21.09_1.0
+- ACS URL (if pre-built binary): https://github.com/ARM-software/arm-systemready/blob/main/IR/prebuilt_images/v21.09_1.0/ir_acs_live_image.img.xz
+- Changes to ACS (if built from source):
+
+- Test Logs collected
+[x] ACS - SCT
+[x] ACS - (S)BSA - UEFI
+[x] ACS - (S)BSA - Linux
+[x] ACS - FWTS
+[x] ACS - Linux boot log
+[x] ACS - Linux dumps
+[x] ACS - UEFI Shell dumps
+
