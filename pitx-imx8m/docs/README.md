@@ -113,3 +113,79 @@ Do the update
 
 This will update the firmware in the eMMC boot partion and after a reset the
 new firmware version will start.
+
+# Errata
+
+## Error: ethernet@30be0000 address not set
+
+If the U-Boot does not has a valid MAC address set the network interface will
+not work properly.
+
+    U-Boot 2021.10-rc3-00004-g6cdd685132 (Sep 26 2021 - 07:20:52 +0200)
+    CPU:   Freescale i.MX8MQ rev2.1 at 800 MHz
+    Reset cause: POR
+    Model: Kontron pITX-imx8m
+    DRAM:  4 GiB
+    MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+    Loading Environment from MMC... OK
+    In:    serial
+    Out:   serial
+    Err:   serial
+    Net:
+    Error: ethernet@30be0000 address not set.
+
+    Error: ethernet@30be0000 address not set.
+    No ethernet found.
+
+
+To find out the assigned mac address, the I2C EEPROM can be dumped:
+
+    => i2c dev 0
+    Setting bus to 0
+    => i2c md 51 0 100
+    0000: 00 33 50 10 09 74 6e 6f 6d 6f b5 2c ff ff ff ff    .3P..tnomo.,....
+    0010: 0a 10 d0 00 18 a0 0d e2 00 4b 45 55 00 10 00 01    .........KEU....
+    0020: 02 03 30 36 2f 30 33 2f 32 30 32 30 00 4d 4d 2f    ..06/03/2020.MM/
+    0030: 44 44 2f 59 59 59 59 00 20 20 20 31 3a 41 43 00    DD/YYYY.   1:AC.
+    0040: 00 00 d0 00 30 02 0f e0 00 01 02 03 04 05 00 00    ....0...........
+    0050: ff ff ff 00 4b 6f 6e 74 72 6f 6e 20 45 75 72 6f    ....Kontron Euro
+    0060: 70 65 20 47 6d 62 48 00 20 20 20 20 20 20 20 20    pe GmbH.
+    0070: 20 20 70 49 54 58 2d 69 4d 58 38 4d 00 20 42 30      pITX-iMX8M. B0
+    0080: 30 00 55 54 44 30 38 30 30 30 32 00 20 20 20 20    0.UTD080002.
+    0090: 34 34 30 31 31 2d 30 34 30 38 2d 31 33 2d 34 00    44011-0408-13-4.
+    00a0: 00 00 d0 00 11 a4 0b e2 04 4b 45 55 00 10 01 01    .........KEU....
+    00b0: 30 30 3a 65 30 3a 34 62 3a 36 66 3a 64 63 3a 63    00:e0:4b:6f:dc:c
+    00c0: 64 00 00 00 f2 00 03 67 c5 00 00 00 81 00 00 00    d......g........
+    00d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+    00e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+    00f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+    =>
+
+Here we have the `00:e0:4b:6f:dc:cd` value as macadress.
+Set this value to the environment variable `ethaddr` and save the environment.
+
+    => setenv ethaddr 00:e0:4b:6f:dc:cd
+	=> saveenv
+
+
+## Error: the RTC has no battery connected
+
+When no battery is connected to the RTC the access to the RTC will lead to the
+following Warning message and a no valid data will be returned.
+
+    => date
+    ### Warning: temperature compensation has stopped
+    ### Warning: Voltage low, data is invalid
+    ## Get date failed
+
+To avoid this the RTC state can be reset:
+
+    => date
+    ### Warning: temperature compensation has stopped
+    ### Warning: Voltage low, data is invalid
+    ## Get date failed
+    => date reset
+    Reset RTC...
+    Date: 2000-01-01 (Saturday)    Time:  0:00:00
+    => date
+    Date: 2000-01-01 (Saturday)    Time:  0:00:05
