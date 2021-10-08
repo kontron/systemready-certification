@@ -1,3 +1,1 @@
-root@debian:~# uname -a
-Linux debian 5.10.0-8-arm64 #1 SMP Debian 5.10.46-4 (2021-08-03) aarch64 GNU/Linux
-
+Linux debian 5.10.0-8-arm64 #1 SMP Debian 5.10.46-5 (2021-09-23) aarch64 GNU/Linux

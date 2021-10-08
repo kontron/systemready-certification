@@ -1,0 +1,13 @@
+NAME                        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda                           8:0    1 14.7G  0 disk 
+mmcblk0                     179:0    0 14.8G  0 disk 
+├─mmcblk0p1                 179:1    0  600M  0 part /boot/efi
+├─mmcblk0p2                 179:2    0    1G  0 part /boot
+└─mmcblk0p3                 179:3    0 13.2G  0 part 
+  └─fedora--iot_fedora-root 253:0    0 13.2G  0 lvm  /var
+                                                     /usr
+                                                     /
+                                                     /sysroot
+mmcblk0boot0                179:8    0 31.5M  1 disk 
+mmcblk0boot1                179:16   0 31.5M  1 disk 
+zram0                       252:0    0  3.8G  0 disk [SWAP]

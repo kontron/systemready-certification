@@ -1,0 +1,1 @@
+Linux localhost 5.14.6-1-default #1 SMP Mon Sep 20 07:02:13 UTC 2021 (6131a3c) aarch64 aarch64 aarch64 GNU/Linux

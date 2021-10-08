@@ -1,4 +1,0 @@
-root@debian:~# lspci -vvv
-
-
-[Heiko Thiery: debian has no PCI_IMX6 config enabled]
