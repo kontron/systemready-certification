@@ -4,7 +4,7 @@ General information
 - System name: Kontron pITX-imx8m
 - Prepared by: Heiko Thiery
 - E-mail: heiko.thiery@kontron.com
-- Date: 2021-09-26
+- Date: 2021-10-09
 
 System Information
 ------------------
