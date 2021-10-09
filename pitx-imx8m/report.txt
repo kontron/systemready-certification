@@ -11,7 +11,7 @@ System Information
 - Company: Kontron
 - System: pITX-imx8m
 - SoC: Freescale i.MX8MQ rev2.1
-- FW version: u-boot 2021.10-rc3-00004-g6cdd685132  / TF-A v2.5
+- FW version: U-Boot 2021.10-00004-g34ac6c670f / TF-A v2.5
 - Memory: 4 GiB
 - Storage devices / disks: 16 GiB eMMC, SD card
 - Network controllers: fecmxc

@@ -189,3 +189,32 @@ To avoid this the RTC state can be reset:
     Date: 2000-01-01 (Saturday)    Time:  0:00:00
     => date
     Date: 2000-01-01 (Saturday)    Time:  0:00:05
+
+# Installing a distribution
+
+## openSUSE-tumbleweed
+
+To avoid an error during the installation disable the `Update NVRAM` boot option.
+
+    YaST2 - installation @ install
+
+      Installation Settings                                    [Release Notes...]
+      Click a headline to make changes or use the "Change..." menu below.
+      ┌──────────────────────────────────────────────────────────────────────────┐
+      │Booting                                                                   ┬
+      │                                                                          │
+      │ *  Boot Loader Type: GRUB2 EFI                                           │
+      │ *  Secure Boot: enabled (disable)                                        ┴
+      │ *  Update NVRAM: disabled (enable)                                       │
+      │                                                                          │
+      │Software                                                                  │
+      │                                                                          │
+      │ *  Product: openSUSE Tumbleweed                                          │
+      │ *  Patterns:                                                             │
+      │     +  Help and Support Documentation                                    │
+      │     +  Minimal Base System                                               │
+      │     +  Enhanced Base System                                              │
+      │     +  AppArmor                                                          │
+      └──────────────────────────────────────────────────────────────────────────┘
+                                      [Change...↓]
+     [ Help  ]              [ Back  ]              [Abort]              [Install]
