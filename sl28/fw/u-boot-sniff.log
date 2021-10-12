@@ -1,11 +1,11 @@
-U-Boot SPL 2021.10-rc3-00036-gadea187350 (Sep 13 2021 - 16:52:44 +0200)
+U-Boot SPL 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
 Trying to boot from SPI
 NOTICE:  BL31: v1.5(release):LSDK-20.04-update-290520-1-ga5d788c82
 NOTICE:  BL31: Built : 13:21:33, Sep 10 2021
 NOTICE:  Welcome to LS1028 BL31 Phase
 
 
-U-Boot 2021.10-rc3-00036-gadea187350 (Sep 13 2021 - 16:52:44 +0200)
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
 
 SoC:  LS1028A Rev1.0 (0x870b0110)
 Clock Configuration:
@@ -143,10 +143,10 @@ usb       - USB sub-system
 usbboot   - boot from USB device
 version   - print monitor, compiler and linker version
 => version
-U-Boot 2021.10-rc3-00036-gadea187350 (Sep 13 2021 - 16:52:44 +0200)
+U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
 
-aarch64-linux-gnu-gcc (Debian 10.2.1-6) 10.2.1 20210110
-GNU ld (GNU Binutils for Debian) 2.35.2
+aarch64-linux-gnu-gcc (Debian 8.3.0-2) 8.3.0
+GNU ld (GNU Binutils for Debian) 2.35.1
 => printenv
 arch=arm
 baudrate=115200

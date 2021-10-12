@@ -1,72 +1,65 @@
-[   26.055932]  PE_INFO: Number of PE detected       :    2 
-[   26.062805]  PCIE_INFO: Number of ECAM regions    :    1 
-[   26.071267]  PCIE_INFO: Number of RCiEP           :    7 
-[   26.077751]  PCIE_INFO: Number of RCEC            :    1 
-[   26.084553]  PCIE_INFO: Number of EP              :    0 
-[   26.091368]  PCIE_INFO: Number of RP              :    0 
-[   26.098164]  PCIE_INFO: Number of iEP_EP          :    0 
-[   26.104968]  PCIE_INFO: Number of iEP_RP          :    0 
-[   26.111855]  Peripheral: Num of USB controllers   :    0 
-[   26.118585]  Peripheral: Num of SATA controllers  :    0 
-[   26.125385]  Peripheral: Num of UART controllers  :    0 
-[   26.130811]  DMA_INFO: Number of DMA CTRL in PCIe :    0 
-[   26.136344]  SMMU_INFO: Number of SMMU CTRL       :    0 
-[   26.141872] 
-[   26.141872] Operating System View:
-[   26.146908]  104 : Addressability                        
-[   26.146908]        WARNING:The device with bdf=0x1f00
-[   26.146908]        doesn't support 64 bit addressing and is not
-[   26.146908]        behind SMMU. Please install driver for this
-[   26.146908]        device and test again. If driver is already
-[   26.146908]        installed, this test has failed.
-[   26.146908]        The device is of type = 1
-[   26.146908]        Failed on PE -    0
-[   26.146908]        B_MEM_03-04, B_MEM_06
-[   26.146908]        Checkpoint --  1                           : Result:  FAIL 
-[   26.200474] 
-[   26.200474]       *** One or more tests have Failed/Skipped.*** 
-[   26.209425] 
-[   26.209425] Operating System View:
-[   26.215203]  605 : Memory Attribute of DMA               
-[   26.215203]        No DMA controllers detected...    
-[   26.215203]        B_PER_09, B_PER_10
-[   26.215203]        Checkpoint --  3                           : Result:  SKIPPED 
-[   26.238225] 
-[   26.238225]       *** One or more tests have Failed/Skipped.*** 
-[   26.247190] 
-[   26.247190] Operating System View:
-[   26.253234]  801 : Check ECAM Presence                        : Result:  PASS 
-[   26.261876]  861 : PCIe Unaligned access                 
-[   26.261876]        PCI_MM_01-02, RE_BAR_2
-[   26.261876]        Checkpoint --  0                           : Result:  SKIPPED 
-[   26.280197]  862 : No extra address translation          
-[   26.280197]        No DMA controllers detected...    
-[   26.280197]        PCI_MM_05-07
-[   26.280197]        Checkpoint --  2                           : Result:  SKIPPED 
-[   26.301920]  863 : Check MSI support for PCIe dev        
-[   26.301920]        MSI should be enabled for a PCIe device 
-[   26.301920]        Failed on PE -    0
-[   26.301920]        PCI_MSI_01
-[   26.301920]        Checkpoint --  1                           : Result:  FAIL 
-[   26.326936]  864 : PCIe RC,PE - Same Inr Shareable Domain
-[   26.326936]        Skip because no PCIe RC detected  
-[   26.326936]        PCI_IC_02
-[   26.326936]        Checkpoint --  1                           : Result:  SKIPPED 
-[   26.347823]  865 : PCI legacy intr SPI ID unique         
-[   26.347823]        Unable to fetch _PRT ACPI handle
-[   26.347823]        Unable to fetch _PRT ACPI handle
-[   26.347823]        Unable to fetch _PRT ACPI handle
-[   26.347823]        Unable to fetch _PRT ACPI handle
-[   26.347823]        Unable to fetch _PRT ACPI handle
-[   26.347823]        Unable to fetch _PRT ACPI handle
-[   26.347823]        PCI_LI_01
-[   26.347823]        Checkpoint --  2                           : Result:  SKIPPED 
-[   26.393399]  866 : NP type-1 PCIe supp 32-bit only       
-[   26.393399]        Read PCIe_CFG: ECAM Base is zero 
-[   26.393399]        Read PCIe_CFG: ECAM Base is zero      : Result:  PASS 
-[   26.410655] 
-[   26.410655]       *** One or more tests have Failed/Skipped.*** 
-[   26.418171] 
-[   26.418171]      ------------------------------------------------------------
-[   26.418171]       Total Tests Run =  9, Tests Passed =  2, Tests Failed =  2 
-[   26.418171]      ------------------------------------------------------------
+[   33.300032]  PE_INFO: Number of PE detected       :    2 
+[   33.306908]  PCIE_INFO: Number of ECAM regions    :    1 
+[   33.315453]  PCIE_INFO: Number of RCiEP           :    7 
+[   33.321877]  PCIE_INFO: Number of RCEC            :    1 
+[   33.328689]  PCIE_INFO: Number of EP              :    0 
+[   33.335527]  PCIE_INFO: Number of RP              :    0 
+[   33.342321]  PCIE_INFO: Number of iEP_EP          :    0 
+[   33.349130]  PCIE_INFO: Number of iEP_RP          :    0 
+[   33.356024]  Peripheral: Num of USB controllers   :    0 
+[   33.362757]  Peripheral: Num of SATA controllers  :    0 
+[   33.369568]  Peripheral: Num of UART controllers  :    0 
+[   33.374994]  DMA_INFO: Number of DMA CTRL in PCIe :    0 
+[   33.380531]  SMMU_INFO: Number of SMMU CTRL       :    0 
+[   33.386077] 
+[   33.386077] Operating System View:
+[   33.391112]  104 : Addressability                        
+[   33.391112]        WARNING:The device with bdf=0x1f00
+[   33.391112]        doesn't support 64 bit addressing and is not
+[   33.391112]        behind SMMU. Please install driver for this
+[   33.391112]        device and test again. If driver is already
+[   33.391112]        installed, this test has failed.
+[   33.391112]        The device is of type = 1
+[   33.391112]        Failed on PE -    0
+[   33.391112]        Checkpoint --  1                           : Result:  FAIL 
+[   33.440763] 
+[   33.440763]       *** One or more tests have Failed/Skipped.*** 
+[   33.449740] 
+[   33.449740] Operating System View:
+[   33.455529]  605 : Memory Attribute of DMA               
+[   33.455529]        No DMA controllers detected...    
+[   33.455529]        Checkpoint --  3                           : Result:  SKIPPED 
+[   33.474907] 
+[   33.474907]       *** One or more tests have Failed/Skipped.*** 
+[   33.483879] 
+[   33.483879] Operating System View:
+[   33.489927]  801 : Check ECAM Presence                        : Result:  PASS 
+[   33.498572]  861 : PCIe Unaligned access                 
+[   33.498572]        Checkpoint --  0                           : Result:  SKIPPED 
+[   33.512890]  862 : No extra address translation          
+[   33.512890]        No DMA controllers detected...    
+[   33.512890]        Checkpoint --  2                           : Result:  SKIPPED 
+[   33.531473]  863 : Check MSI support for PCIe dev        
+[   33.531473]        MSI should be enabled for a PCIe device 
+[   33.531473]        Failed on PE -    0
+[   33.531473]        Checkpoint --  1                           : Result:  FAIL 
+[   33.553512]  864 : PCIe RC,PE - Same Inr Shareable Domain
+[   33.553512]        Skip because no PCIe RC detected  
+[   33.553512]        Checkpoint --  1                           : Result:  SKIPPED 
+[   33.571509]  865 : PCI legacy intr SPI ID unique         
+[   33.571509]        Unable to fetch _PRT ACPI handle
+[   33.571509]        Unable to fetch _PRT ACPI handle
+[   33.571509]        Unable to fetch _PRT ACPI handle
+[   33.571509]        Unable to fetch _PRT ACPI handle
+[   33.571509]        Unable to fetch _PRT ACPI handle
+[   33.571509]        Unable to fetch _PRT ACPI handle
+[   33.571509]        Checkpoint --  2                           : Result:  SKIPPED 
+[   33.614189]  866 : NP type-1 PCIe supp 32-bit only       
+[   33.614189]        Read PCIe_CFG: ECAM Base is zero      
+[   33.614189]        Read PCIe_CFG: ECAM Base is zero           : Result:  PASS 
+[   33.632324] 
+[   33.632324]       *** One or more tests have Failed/Skipped.*** 
+[   33.639842] 
+[   33.639842]      ------------------------------------------------------------
+[   33.639842]       Total Tests Run =  9, Tests Passed =  2, Tests Failed =  2 
+[   33.639842]      ------------------------------------------------------------

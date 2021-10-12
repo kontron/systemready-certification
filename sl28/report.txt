@@ -4,14 +4,16 @@ General information
 - System name: Kontron SMARC-sAL28
 - Prepared by: Michael Walle
 - E-mail: michael.walle@kontron.com
-- Date: 2021-09-14
+- Date: 2021-10-12
 
 System Information
 ------------------
 - Company: Kontron
 - System: SMARC-sAL28
 - SoC: LS1028A
-- FW version: u-boot 2021.10-rc3-00036-gadea187350 / TF-A LSDK-20.04-update-290520-1-ga5d788c82
+- FW version:
+    u-boot U-Boot 2021.10-rc3-00036-gb2df4857b8 (Sep 27 2021 - 08:59:58 +0200)
+    TF-A LSDK-20.04-update-290520-1-ga5d788c82
 - Memory: 4 GiB
 - Storage devices / disks: 32 GiB eMMC, SD card
 - Network controllers: enetc
@@ -19,8 +21,8 @@ System Information
 
 Test Logs and Results
 ----------------------
-- ACS version used: v21.07_0.9_BETA
-- ACS URL (if pre-built binary): https://github.com/ARM-software/arm-systemready/raw/main/IR/prebuilt_images/v21.07_0.9_BETA/ir_acs_live_image.img.xz
+- ACS version used: v21.09_1.0
+- ACS URL (if pre-built binary): https://github.com/ARM-software/arm-systemready/blob/main/IR/prebuilt_images/v21.09_1.0/ir_acs_live_image.img.xz
 - Changes to ACS (if built from source):
 
 - Test Logs collected
