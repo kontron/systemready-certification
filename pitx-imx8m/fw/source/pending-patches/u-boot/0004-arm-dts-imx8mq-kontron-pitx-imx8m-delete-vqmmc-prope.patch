@@ -1,7 +1,7 @@
-From a5d50d82ad094178c7926e5417b6a2e34338e4ce Mon Sep 17 00:00:00 2001
+From b40ab2341e5a6a71b687b3cf28e20838b2387494 Mon Sep 17 00:00:00 2001
 From: Heiko Thiery <heiko.thiery@gmail.com>
 Date: Mon, 13 Sep 2021 16:23:21 +0200
-Subject: [PATCH 4/4] arm: dts: imx8mq-kontron-pitx-imx8m: delete vqmmc
+Subject: [PATCH 4/5] arm: dts: imx8mq-kontron-pitx-imx8m: delete vqmmc
  property
 
 This is needed for installation of debian 11. Currently the modules for
@@ -27,5 +27,5 @@ index cf649b0314..bcfe81787a 100644
  
  &usdhc2 {
 -- 
-2.30.0
+2.30.2
 

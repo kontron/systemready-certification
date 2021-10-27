@@ -1,0 +1,25 @@
+From 96073e7379ae9eece880ffdf009ea4f553350070 Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Wed, 27 Oct 2021 14:48:02 +0200
+Subject: [PATCH 5/5] pitx-imx8m: store environment in emmc boot partition
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ configs/kontron_pitx_imx8m_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
+index f8314b9959..1b3cdda13e 100644
+--- a/configs/kontron_pitx_imx8m_defconfig
++++ b/configs/kontron_pitx_imx8m_defconfig
+@@ -46,6 +46,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+ CONFIG_DFU_MMC=y
+ CONFIG_DM_I2C=y
+-- 
+2.30.2
+
