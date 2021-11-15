@@ -218,3 +218,19 @@ To avoid an error during the installation disable the `Update NVRAM` boot option
       └──────────────────────────────────────────────────────────────────────────┘
                                       [Change...↓]
      [ Help  ]              [ Back  ]              [Abort]              [Install]
+
+## Debian 11
+
+Debian GRUB installation must be finalized manually. During Debian installation,
+the "Install the GRUB boot loader" step will fail and manual intervention
+is necessary to make the installed system bootable.
+
+Select "Execute a shell" and do:
+
+	# chroot /target
+	# update-grub
+	# mkdir /boot/efi/EFI/BOOT
+	# cp -v /boot/efi/EFI/debian/grubaa64.efi /boot/efi/EFI/BOOT/bootaa64.efi
+
+Exit the chroot and the shell to return to the installer and select the
+"Continue without boot loader" step to finish installation.
